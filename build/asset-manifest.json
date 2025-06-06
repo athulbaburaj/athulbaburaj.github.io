@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "//athulbaburaj.github.io/static/css/main.7c36984f.css",
-    "main.js": "//athulbaburaj.github.io/static/js/main.755758af.js",
+    "main.js": "//athulbaburaj.github.io/static/js/main.ce5d176b.js",
     "static/js/453.2143ef37.chunk.js": "//athulbaburaj.github.io/static/js/453.2143ef37.chunk.js",
     "static/media/logo.png": "//athulbaburaj.github.io/static/media/logo.afec5eac89887bb5cad3.png",
     "index.html": "//athulbaburaj.github.io/index.html",
     "main.7c36984f.css.map": "//athulbaburaj.github.io/static/css/main.7c36984f.css.map",
-    "main.755758af.js.map": "//athulbaburaj.github.io/static/js/main.755758af.js.map",
+    "main.ce5d176b.js.map": "//athulbaburaj.github.io/static/js/main.ce5d176b.js.map",
     "453.2143ef37.chunk.js.map": "//athulbaburaj.github.io/static/js/453.2143ef37.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7c36984f.css",
-    "static/js/main.755758af.js"
+    "static/js/main.ce5d176b.js"
   ]
 }
