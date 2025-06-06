@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "//athulbaburaj.github.io/static/css/main.9bc11e15.css",
-    "main.js": "//athulbaburaj.github.io/static/js/main.51ba08bb.js",
+    "main.css": "//athulbaburaj.github.io/static/css/main.e20079d2.css",
+    "main.js": "//athulbaburaj.github.io/static/js/main.2a6cced4.js",
     "static/js/453.2143ef37.chunk.js": "//athulbaburaj.github.io/static/js/453.2143ef37.chunk.js",
     "index.html": "//athulbaburaj.github.io/index.html",
-    "main.9bc11e15.css.map": "//athulbaburaj.github.io/static/css/main.9bc11e15.css.map",
-    "main.51ba08bb.js.map": "//athulbaburaj.github.io/static/js/main.51ba08bb.js.map",
+    "main.e20079d2.css.map": "//athulbaburaj.github.io/static/css/main.e20079d2.css.map",
+    "main.2a6cced4.js.map": "//athulbaburaj.github.io/static/js/main.2a6cced4.js.map",
     "453.2143ef37.chunk.js.map": "//athulbaburaj.github.io/static/js/453.2143ef37.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9bc11e15.css",
-    "static/js/main.51ba08bb.js"
+    "static/css/main.e20079d2.css",
+    "static/js/main.2a6cced4.js"
   ]
 }
