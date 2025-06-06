@@ -4,7 +4,6 @@ export const personalInfo = {
   name: "Athul Baburaj", // 
   title: "Cloud Solutions Engineer",
   email: "athulbaburajp23@gmail.com", // 
-  phone: "(+91) 9496214445", // 
   linkedin: "linkedin.com/in/athul-baburaj", // 
   github: "athulbaburaj"
 };

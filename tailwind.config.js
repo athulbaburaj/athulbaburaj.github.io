@@ -14,24 +14,17 @@ module.exports = {
       
       // Your keyframes for animations
       keyframes: {
-        swirl: {
-          '0%': { transform: 'translate(0, 0) rotate(0deg) scale(1.2)' },
-          '25%': { transform: 'translate(20px, -40px) rotate(30deg) scale(1.1)' },
-          '50%': { transform: 'translate(-30px, 20px) rotate(-10deg) scale(1.3)' },
-          '75%': { transform: 'translate(10px, 40px) rotate(20deg) scale(1.2)' },
-          '100%': { transform: 'translate(0, 0) rotate(0deg) scale(1.2)' },
-        },
-        // Adding Tailwind's standard spin animation for our test
-        spin: {
-          'to': { transform: 'rotate(360deg)' },
-        },
+      drift: {
+        '0%': { transform: 'translate(-20%, 20%) rotate(0deg)' },
+        '25%': { transform: 'translate(30%, -30%) rotate(90deg)' },
+        '50%': { transform: 'translate(80%, -10%) rotate(180deg)' },
+        '75%': { transform: 'translate(20%, 40%) rotate(270deg)' },
+        '100%': { transform: 'translate(-20%, 20%) rotate(360deg)' },
       },
-      
-      // The animation utilities, now correctly inside 'extend'
-      animation: {
-        swirl: 'swirl 25s ease-in-out infinite',
-        spin: 'spin 1s linear infinite', // The utility for our test
-      },
+    },
+    animation: {
+      drift: 'drift 40s ease-in-out infinite',
+    }
 
     },
   },

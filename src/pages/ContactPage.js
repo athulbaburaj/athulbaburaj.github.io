@@ -26,9 +26,7 @@ const ContactPage = () => {
               <a href={`mailto:${personalInfo.email}`} className="flex items-center text-lg text-gray-300 hover:text-emerald-400 transition-colors">
                 <FaEnvelope className="mr-3 text-emerald-500" size={20}/> {personalInfo.email}
               </a>
-              <a href={`tel:${personalInfo.phone}`} className="flex items-center text-lg text-gray-300 hover:text-emerald-400 transition-colors">
-                <FaPhone className="mr-3 text-emerald-500" size={20}/> {personalInfo.phone}
-              </a>
+              
               <a href={`https://www.${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="flex items-center text-lg text-gray-300 hover:text-emerald-400 transition-colors">
                 <FaLinkedin className="mr-3 text-emerald-500" size={20}/> LinkedIn Profile
               </a>
