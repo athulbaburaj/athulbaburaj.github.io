@@ -11,25 +11,6 @@ const HomePage = () => {
     <div className="bg-black text-white min-h-screen">
       <Hero />
 
-      {/* Skills Highlight Section */}
-      {/* <section className="py-16 bg-gray-850">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12 text-indigo-400">Key Skills</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {featuredSkills.map(skill => (
-              <span key={skill} className="bg-cyan-600 text-white px-4 py-2 rounded-full text-md font-medium shadow-md hover:bg-indigo-600 transition-colors">
-                {skill}
-              </span>
-            ))}
-          </div>
-           <div className="text-center mt-8">
-             <Link to="/resume#skills" className="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
-                View All Skills &rarr;
-            </Link>
-           </div>
-        </div>
-      </section> */}
-
       {/* Featured Projects Section */}
       <section className="py-16">
         <div className="container mx-auto px-6">

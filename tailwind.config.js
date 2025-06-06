@@ -20,10 +20,11 @@ module.exports = {
         '75%': { transform: 'translate(10px, 40px) rotate(20deg) scale(1.2)' },
         '100%': { transform: 'translate(0, 0) rotate(0deg) scale(1.2)' },
       },
-       },
       animation: {
-      swirl: 'swirl 25s ease-in-out infinite',
+        swirl: 'swirl 25s ease-in-out infinite',
       },
+       },
+      
     },
   },
   plugins: [],
