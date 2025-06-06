@@ -1,4 +1,5 @@
-// tailwind.config.js
+const defaultTheme = require('tailwindcss/defaultTheme'); // Import the default theme
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -6,7 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // ADD THIS WHOLE SECTION FOR THE CLOUD ANIMATIONS
+      // Set 'Inter' as the default font family
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      },
+      // Your keyframes for animations are still here
       keyframes: {
         'move-cloud-1': {
           '0%': { transform: 'translateX(100%)' },
