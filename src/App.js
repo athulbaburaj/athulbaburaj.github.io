@@ -31,7 +31,7 @@ const pageVariants = {
 const pageTransition = {
   type: "tween",
   ease: "easeInOut",
-  duration: 0.4     
+  duration: 0.3     
 };
 
 // This is the component that will wrap every page to animate it

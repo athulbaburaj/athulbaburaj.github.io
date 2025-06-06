@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
+import logo from '../assets/images/logo.png'; // <-- 1. IMPORT THE LOGO
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,11 +16,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-black text-white shadow-lg sticky top-0 z-50">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <NavLink to="/" className="text-2xl font-bold hover:text-indigo-400 transition-colors">
-          Athul Baburaj
+    <nav className="bg-black/80 backdrop-blur-sm text-white shadow-lg shadow-indigo-500/10 sticky top-0 z-50">
+      <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+        {/* 2. REPLACE THE TEXT WITH AN IMAGE TAG FOR THE LOGO */}
+        <NavLink to="/" className="hover:opacity-80 transition-opacity">
+          <img src={logo} alt="AB Logo" className="h-10 w-auto" />
         </NavLink>
+
         <div className="hidden md:flex space-x-6">
           {navLinks.map((link) => (
             <NavLink
@@ -27,7 +30,7 @@ const Navbar = () => {
               to={link.path}
               className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive ? 'bg-indigo-600 text-white' : 'hover:bg-gray-700 hover:text-cyan-300'
+                  isActive ? 'bg-indigo-600 text-white' : 'hover:bg-gray-800 hover:text-indigo-400'
                 }`
               }
             >
@@ -41,9 +44,10 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+      
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-black">
+        <div className="md:hidden bg-black/90">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
             {navLinks.map((link) => (
               <NavLink
@@ -52,7 +56,7 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
                   `block w-full text-center px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    isActive ? 'bg-indigo-600 text-white' : 'hover:bg-gray-700 hover:text-cyan-300'
+                    isActive ? 'bg-indigo-600 text-white' : 'hover:bg-gray-800 hover:text-indigo-400'
                   }`
                 }
               >
