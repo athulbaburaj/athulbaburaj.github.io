@@ -16,25 +16,22 @@ import ScrollToTop from './components/ScrollToTop';
 const pageVariants = {
   initial: {
     opacity: 0,
-    x: "-100vw",
-    scale: 0.8
+    y: 50 // Start 50px below the final position
   },
   in: {
     opacity: 1,
-    x: 0,
-    scale: 1
+    y: 0 // Animate to its natural position
   },
   out: {
     opacity: 0,
-    x: "100vw",
-    scale: 1.2
+    y: -50 // Animate 50px above the natural position
   }
 };
 
 const pageTransition = {
   type: "tween",
-  ease: "easeOut",
-  duration: 0.25
+  ease: "easeInOut",
+  duration: 0.4     
 };
 
 // This is the component that will wrap every page to animate it
