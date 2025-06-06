@@ -13,18 +13,16 @@ module.exports = {
       },
       // Your keyframes for animations are still here
       keyframes: {
-        'move-cloud-1': {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
-        'move-cloud-2': {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(-120%)' },
-        }
+      swirl: {
+        '0%': { transform: 'translate(0, 0) rotate(0deg) scale(1.2)' },
+        '25%': { transform: 'translate(20px, -40px) rotate(30deg) scale(1.1)' },
+        '50%': { transform: 'translate(-30px, 20px) rotate(-10deg) scale(1.3)' },
+        '75%': { transform: 'translate(10px, 40px) rotate(20deg) scale(1.2)' },
+        '100%': { transform: 'translate(0, 0) rotate(0deg) scale(1.2)' },
       },
+       },
       animation: {
-        'move-cloud-1': 'move-cloud-1 55s linear infinite',
-        'move-cloud-2': 'move-cloud-2 70s linear infinite',
+      swirl: 'swirl 25s ease-in-out infinite',
       }
     },
   },

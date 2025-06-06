@@ -12,7 +12,7 @@ const HomePage = () => {
       <Hero />
 
       {/* Skills Highlight Section */}
-      <section className="py-16 bg-gray-850">
+      {/* <section className="py-16 bg-gray-850">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-12 text-indigo-400">Key Skills</h2>
           <div className="flex flex-wrap justify-center gap-4">
@@ -28,7 +28,7 @@ const HomePage = () => {
             </Link>
            </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Featured Projects Section */}
       <section className="py-16">
