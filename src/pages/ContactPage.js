@@ -12,12 +12,12 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen py-12 md:py-20">
+    <div className="bg-black text-white min-h-screen py-12 md:py-20">
       <div className="container mx-auto px-6">
         <h1 className="text-4xl md:text-5xl font-bold text-center text-emerald-400 mb-12">Get In Touch</h1>
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 items-start">
           {/* Contact Information Side */}
-          <div className="bg-gray-800 p-8 rounded-lg shadow-xl hover:shadow-emerald-500/30 transition-shadow duration-300">
+          <div className="bg-black border border-gray-800 p-8 rounded-lg shadow-xl hover:shadow-emerald-500/30 transition-shadow duration-300">
             <h2 className="text-2xl font-semibold text-white mb-6">Contact Information</h2>
             <p className="text-gray-300 mb-6">
               I'm always open to discussing new projects, creative ideas, or opportunities to be part of something amazing. Feel free to reach out!
@@ -42,7 +42,7 @@ const ContactPage = () => {
           </div>
 
           {/* Contact Form Side (Demo) */}
-          <div className="bg-gray-800 p-8 rounded-lg shadow-xl hover:shadow-emerald-500/30 transition-shadow duration-300">
+          <div className="bg-black border border-gray-800 p-8 rounded-lg shadow-xl hover:shadow-emerald-500/30 transition-shadow duration-300">
             <h2 className="text-2xl font-semibold text-white mb-6">Send Me a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>

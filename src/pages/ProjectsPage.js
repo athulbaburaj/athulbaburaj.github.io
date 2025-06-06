@@ -5,7 +5,7 @@ import { projects as projectData } from '../data/resumeData'; // Renamed to avoi
 
 const ProjectsPage = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen py-12 md:py-20">
+    <div className="bg-black text-white min-h-screen py-12 md:py-20">
       <div className="container mx-auto px-6">
         <h1 className="text-4xl md:text-5xl font-bold text-center text-indigo-400 mb-16">My Projects</h1>
         {projectData.length > 0 ? (

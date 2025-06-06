@@ -4,7 +4,7 @@ import { FaLink, FaGithub } from 'react-icons/fa';
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className="bg-gray-800 rounded-lg shadow-xl p-6 flex flex-col h-full hover:shadow-indigo-500/30 transition-shadow duration-300 transform hover:-translate-y-1">
+    <div className="bg-black rounded-lg shadow-xl p-6 flex flex-col h-full hover:shadow-indigo-500/30 transition-shadow duration-300 transform hover:-translate-y-1">
       <h3 className="text-xl font-semibold text-indigo-400 mb-2">{project.title}</h3>
       <p className="text-gray-300 mb-3 flex-grow">{project.description}</p>
       {project.tech && project.tech.length > 0 && (

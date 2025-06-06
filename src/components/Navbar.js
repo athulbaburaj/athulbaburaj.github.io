@@ -15,9 +15,9 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-gray-900 text-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-black text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <NavLink to="/" className="text-2xl font-bold hover:text-cyan-400 transition-colors">
+        <NavLink to="/" className="text-2xl font-bold hover:text-indigo-400 transition-colors">
           Athul Baburaj
         </NavLink>
         <div className="hidden md:flex space-x-6">
@@ -27,7 +27,7 @@ const Navbar = () => {
               to={link.path}
               className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive ? 'bg-cyan-500 text-white' : 'hover:bg-gray-700 hover:text-cyan-300'
+                  isActive ? 'bg-indigo-600 text-white' : 'hover:bg-gray-700 hover:text-cyan-300'
                 }`
               }
             >
@@ -43,7 +43,7 @@ const Navbar = () => {
       </div>
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-900">
+        <div className="md:hidden bg-black">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
             {navLinks.map((link) => (
               <NavLink
@@ -52,7 +52,7 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
                   `block w-full text-center px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    isActive ? 'bg-cyan-500 text-white' : 'hover:bg-gray-700 hover:text-cyan-300'
+                    isActive ? 'bg-indigo-600 text-white' : 'hover:bg-gray-700 hover:text-cyan-300'
                   }`
                 }
               >
