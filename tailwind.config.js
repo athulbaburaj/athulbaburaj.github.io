@@ -23,7 +23,7 @@ module.exports = {
        },
       animation: {
       swirl: 'swirl 25s ease-in-out infinite',
-      }
+      },
     },
   },
   plugins: [],
