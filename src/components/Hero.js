@@ -1,7 +1,6 @@
 // src/components/Hero.js
 import React from 'react';
-import { personalInfo } from '../data/resumeData'; // Assuming this contains name, title, email, etc.
-import { certifications } from '../data/siteData';
+import { personalInfo } from '../data/resumeData';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 import { GoVerified } from 'react-icons/go';
 
@@ -28,23 +27,11 @@ const Hero = () => {
         <p className="text-xl md:text-3xl font-medium text-indigo-400 mb-6">
           {personalInfo.title}
         </p>
-        
-        {/* Certifications Section */}
-        <div className="flex flex-col items-center gap-3 mb-8">
-          {certifications.map((cert, index) => (
-            <div
-              key={cert.id}
-              className="inline-flex items-center justify-center bg-gray-900/80 border border-indigo-500/50 text-indigo-300 px-4 py-2 rounded-full text-sm shadow-lg shadow-indigo-500/10 opacity-0 animate-fadeInUp"
-              style={{
-                animationDelay: `${index * 0.2}s`,
-              }}
-            >
-              <GoVerified className="mr-2 text-indigo-400" />
-              {cert.name}
-            </div>
-          ))}
+        <div className="inline-flex items-center justify-center bg-gray-900/80 border border-indigo-500/50 text-indigo-300 px-4 py-2 rounded-full text-sm mb-8 shadow-lg shadow-indigo-500/10">
+          <GoVerified className="mr-2 text-indigo-400" />
+          Google Cloud Certified - Associate Cloud Engineer
         </div>
-
+        {/* Reduced margin bottom on this paragraph from mb-10 to mb-8 */}
         <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
           Passionate about leveraging cloud technologies and software development to build scalable, efficient solutions and drive innovation.
         </p>
