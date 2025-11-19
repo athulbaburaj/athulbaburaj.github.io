@@ -2,27 +2,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
-import { skills } from '../data/resumeData';
+import TechStack from '../components/TechStack';
 
 const HomePage = () => {
-  const featuredSkills = skills.programming.slice(0,3).concat(skills.cloudDevOps.slice(0,3));
-
   return (
-    <div className="bg-black text-white min-h-screen">
-      <Hero />
+    <div className="text-white min-h-screen pt-10 relative overflow-hidden">
+      {/* Subtle Background Grid */}
+      <div className="absolute inset-0 bg-grid-subtle opacity-20 pointer-events-none"></div>
 
-      {/* Featured Projects Section */}
-      <section className="py-16">
+      <Hero />
+      <TechStack />
+
+      <section className="py-20 relative">
         <div className="container mx-auto px-6">
-            <h2 className="text-3xl font-bold text-center mb-12 text-indigo-400">Featured Projects</h2>
-            <p className="text-center text-gray-400 max-w-2xl mx-auto">
-              I've worked on a variety of projects, from reinforcement learning controllers to full-stack applications and retro games. Explore them all in the projects section.
-            </p>
-            <div className="text-center mt-12">
-              <Link to="/projects" className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-                Explore All Projects
-              </Link>
-            </div>
+          <div className="flex items-center justify-center mb-12">
+            <div className="h-px w-16 bg-ops-green/50"></div>
+            <h2 className="text-3xl font-bold text-center px-4 text-white tracking-widest uppercase drop-shadow-[0_0_5px_rgba(0,255,65,0.5)]">
+              Mission_Log: Featured
+            </h2>
+            <div className="h-px w-16 bg-ops-green/50"></div>
+          </div>
+
+          <p className="text-center text-ops-green/70 max-w-2xl mx-auto font-mono mb-12">
+            &gt;&gt; Accessing classified project files...
+            <br />
+            &gt;&gt; Displaying recent operations in reinforcement learning and full-stack development.
+          </p>
+
+          <div className="text-center mt-12">
+            <Link to="/projects" className="btn-ops group inline-block">
+              Initialize All Projects
+            </Link>
+          </div>
         </div>
       </section>
     </div>

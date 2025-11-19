@@ -3,48 +3,61 @@ import React from 'react';
 import { personalInfo } from '../data/resumeData';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 import { GoVerified } from 'react-icons/go';
+import HeroTerminal from './HeroTerminal';
 
 const Hero = () => {
   return (
-    // REMOVED min-h-screen and adjusted padding (py-28 md:py-40)
-    <section className="relative bg-black text-white flex items-center justify-center py-28 md:py-40 overflow-hidden">
-      {/* Animated Background Shapes/Clouds */}
+    <section className="relative flex items-center justify-center pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden">
+      {/* Background Grid & Effects */}
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute -top-20 -left-20 w-3/5 h-3/5 md:w-2/5 md:h-2/5 bg-indigo-900 rounded-full opacity-50 blur-3xl animate-drift"
-        />
-        <div 
-          className="absolute -bottom-20 -right-10 w-3/5 h-3/5 md:w-2/5 md:h-2/5 bg-purple-900 rounded-full opacity-30 blur-3xl animate-drift"
-          style={{ animationDelay: '-18s', animationDirection: 'reverse' }}
-        />
+        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ops-black via-transparent to-ops-black"></div>
       </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-6 text-center relative z-10 max-w-5xl">
-        <h1 className="text-5xl md:text-7xl font-extrabold mb-4">
-          Hi, I'm Athul Baburaj
-        </h1>
-        <p className="text-xl md:text-3xl font-medium text-indigo-400 mb-6">
-          {personalInfo.title}
-        </p>
-        <div className="inline-flex items-center justify-center bg-gray-900/80 border border-indigo-500/50 text-indigo-300 px-4 py-2 rounded-full text-sm mb-8 shadow-lg shadow-indigo-500/10">
-          <GoVerified className="mr-2 text-indigo-400" />
-          Google Cloud Certified - Associate Cloud Engineer
-        </div>
-        {/* Reduced margin bottom on this paragraph from mb-10 to mb-8 */}
-        <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-          Passionate about leveraging cloud technologies and software development to build scalable, efficient solutions and drive innovation.
-        </p>
-        <div className="flex justify-center space-x-6">
-          <a href={`https://www.${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-white transition-colors transform hover:scale-110" aria-label="LinkedIn Profile">
-            <FaLinkedin size={32} />
-          </a>
-          <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-white transition-colors transform hover:scale-110" aria-label="GitHub Profile">
-            <FaGithub size={32} />
-          </a>
-          <a href={`mailto:${personalInfo.email}`} className="text-indigo-400 hover:text-white transition-colors transform hover:scale-110" aria-label="Send Email">
-            <FaEnvelope size={32} />
-          </a>
+      {/* Content Container */}
+      <div className="container mx-auto px-6 relative z-10 max-w-7xl w-full">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+
+          {/* Left Column: Text Content */}
+          <div className="flex-1 text-center lg:text-left">
+            <div className="mb-8 relative inline-block">
+              <div className="absolute -inset-1 bg-ops-green/20 blur-sm rounded-full animate-pulse"></div>
+              <h1 className="relative text-5xl md:text-7xl font-bold tracking-tighter text-white mb-2 drop-shadow-[0_0_10px_rgba(0,255,65,0.5)]">
+                ATHUL_BABURAJ
+              </h1>
+            </div>
+
+            <p className="text-xl md:text-3xl font-mono text-ops-green mb-8 tracking-widest uppercase">
+              {personalInfo.title}
+            </p>
+
+            <div className="inline-flex items-center justify-center lg:justify-start bg-ops-black border border-ops-green/50 text-ops-green px-6 py-2 text-sm mb-10 shadow-[0_0_15px_rgba(0,255,65,0.15)] tracking-wider">
+              <GoVerified className="mr-2 text-ops-green animate-pulse" />
+              <span className="font-mono">STATUS: GOOGLE_CLOUD_CERTIFIED</span>
+            </div>
+
+            <p className="text-lg text-ops-green/80 max-w-2xl mx-auto lg:mx-0 mb-12 font-mono leading-relaxed border-l-2 border-ops-green/30 pl-4 text-left md:text-center lg:text-left md:border-l-0 md:pl-0 lg:border-l-2 lg:pl-4">
+              Passionate about leveraging cloud technologies and software development to build scalable, efficient solutions and drive innovation.
+            </p>
+
+            <div className="flex justify-center lg:justify-start space-x-8">
+              <a href={`https://www.${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" aria-label="LinkedIn Profile">
+                <FaLinkedin size={32} />
+              </a>
+              <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" aria-label="GitHub Profile">
+                <FaGithub size={32} />
+              </a>
+              <a href={`mailto:${personalInfo.email}`} className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" aria-label="Send Email">
+                <FaEnvelope size={32} />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Hero Terminal */}
+          <div className="flex-1 w-full max-w-lg lg:max-w-xl lg:ml-auto">
+            <HeroTerminal />
+          </div>
+
         </div>
       </div>
     </section>

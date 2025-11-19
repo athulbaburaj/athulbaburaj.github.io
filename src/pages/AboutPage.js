@@ -1,52 +1,70 @@
 // src/pages/AboutPage.js
 import React from 'react';
-import { personalInfo, skills, leadership } from '../data/resumeData';
-// import profilePic from '../assets/images/your-profile-pic.jpg'; // Optional: Add a profile picture
+import { skills, leadership } from '../data/resumeData';
 
 const AboutPage = () => {
   return (
-    <div className="bg-black text-white min-h-screen py-12 md:py-20">
-      <div className="container mx-auto px-6">
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-indigo-400 mb-12">About Me</h1>
-
-        <div className="bg-black border border-gray-800 shadow-xl rounded-lg p-8 md:p-10 max-w-3xl mx-auto mb-12 transform transition-all duration-500 hover:scale-105">
-          {/* Optional: Profile Picture */}
-          {/* <img src={profilePic} alt={personalInfo.name} className="w-32 h-32 rounded-full mx-auto mb-6 ring-4 ring-cyan-500"/> */}
-          <h2 className="text-3xl font-semibold text-center text-white mb-2">{personalInfo.name}</h2>
-          <p className="text-xl text-center text-cyan-500 mb-6">{personalInfo.title}</p>
-          <p className="text-lg text-gray-300 leading-relaxed text-center">
-            I am a {personalInfo.title} with a strong foundation in cloud computing, DevOps practices, and software development.
-            My experience at American Express involved spearheading service migrations to OpenShift 4.12, developing Python automation tools for CI/CD, and contributing to cloud solution architecture. [cite: 1, 2, 4]
-            I thrive in dynamic environments, applying my skills in rapid prototyping and technical communication to deliver impactful solutions.
-          </p>
+    <div className="min-h-screen py-12 md:py-20 pt-10 relative">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex items-center justify-center mb-16">
+          <div className="h-px w-20 bg-ops-green/50"></div>
+          <h1 className="text-4xl md:text-5xl font-bold text-center text-white px-6 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(0,255,65,0.5)]">
+            Personnel_File
+          </h1>
+          <div className="h-px w-20 bg-ops-green/50"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
-            {/* Soft Skills Section */}
-            <div className="bg-black border border-gray-800 shadow-xl rounded-lg p-8 transform transition-all duration-500 hover:shadow-cyan-500/40">
-                <h2 className="text-2xl font-semibold text-indigo-400 mb-6">Core Competencies</h2>
-                <ul className="space-y-3">
-                {skills.softSkills.map((skill) => (
-                    <li key={skill} className="text-gray-300 text-lg flex items-center">
-                    <span className="bg-indigo-600 w-2 h-2 rounded-full mr-3 shrink-0"></span>
-                    {skill} {/* [cite: 1] */}
-                    </li>
-                ))}
-                </ul>
-            </div>
+        <div className="bg-ops-black/80 border border-ops-green/30 p-8 md:p-10 max-w-4xl mx-auto mb-16 relative overflow-hidden group">
+          {/* Decorative corners */}
+          <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-ops-green"></div>
+          <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-ops-green"></div>
+          <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-ops-green"></div>
+          <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-ops-green"></div>
 
-            {/* Leadership & Extracurriculars Section */}
-            <div className="bg-black border border-gray-800 shadow-xl rounded-lg p-8 transform transition-all duration-500 hover:shadow-cyan-500/40">
-                <h2 className="text-2xl font-semibold text-indigo-400 mb-6">Leadership & Initiatives</h2>
-                <ul className="space-y-4">
-                {leadership.map((item) => (
-                    <li key={item.role} className="text-gray-300">
-                    <h3 className="font-semibold text-lg text-white">{item.role}</h3> {/* [cite: 13, 14, 15] */}
-                    <p className="text-sm">{item.description}</p> {/* [cite: 13, 14, 15] */}
-                    </li>
-                ))}
-                </ul>
-            </div>
+          {/* Stats / ID Card style element */}
+          <div className="w-full md:w-64 border border-ops-green/20 bg-ops-green/5 p-4 font-mono text-sm text-ops-green/70">
+            <div className="mb-2 border-b border-ops-green/20 pb-1">ID: AB-2025-DEV</div>
+            <div className="mb-2 border-b border-ops-green/20 pb-1">CLEARANCE: LEVEL 5</div>
+            <div className="mb-2 border-b border-ops-green/20 pb-1">STATUS: ACTIVE</div>
+            <div className="mb-2">LOC: BENGALURU</div>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+          {/* Soft Skills Section */}
+          <div className="bg-ops-black/60 border border-ops-green/30 p-8 relative hover:border-ops-green transition-colors">
+            <h2 className="text-2xl font-bold text-white mb-6 font-mono uppercase tracking-widest border-b border-ops-green/30 pb-2">
+              Core_Competencies
+            </h2>
+            <ul className="space-y-3">
+              {skills.softSkills.map((skill, idx) => (
+                <li key={skill} className="text-ops-green/80 text-lg flex items-center font-mono">
+                  <span className="text-ops-green mr-3 opacity-50">[{idx < 9 ? `0${idx + 1}` : idx + 1}]</span>
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Leadership & Extracurriculars Section */}
+          <div className="bg-ops-black/60 border border-ops-green/30 p-8 relative hover:border-ops-green transition-colors">
+            <h2 className="text-2xl font-bold text-white mb-6 font-mono uppercase tracking-widest border-b border-ops-green/30 pb-2">
+              Leadership_Log
+            </h2>
+            <ul className="space-y-6">
+              {leadership.map((item, idx) => (
+                <li key={item.role} className="text-gray-300">
+                  <h3 className="font-bold text-lg text-white font-mono mb-1 flex items-center">
+                    <span className="w-2 h-2 bg-ops-green mr-2 rounded-full animate-pulse"></span>
+                    {item.role}
+                  </h3>
+                  <p className="text-sm text-ops-green/60 font-mono pl-4 border-l border-ops-green/20">
+                    {item.description}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
       </div>

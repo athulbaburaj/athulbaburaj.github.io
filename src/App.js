@@ -12,6 +12,7 @@ import ResumePage from './pages/ResumePage';
 import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
+import Terminal from './components/Terminal';
 
 const pageVariants = {
   initial: {
@@ -31,7 +32,7 @@ const pageVariants = {
 const pageTransition = {
   type: "tween",
   ease: "easeInOut",
-  duration: 0.3     
+  duration: 0.3
 };
 
 // This is the component that will wrap every page to animate it
@@ -66,13 +67,54 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-black text-white">
+      <div
+        className="flex flex-col min-h-screen bg-ops-black text-ops-green font-sans relative overflow-hidden selection:bg-ops-green selection:text-ops-black"
+        onMouseMove={(e) => {
+          const x = e.clientX;
+          const y = e.clientY;
+          document.documentElement.style.setProperty('--cursor-x', `${x}px`);
+          document.documentElement.style.setProperty('--cursor-y', `${y}px`);
+        }}
+      >
+        {/* Global Effects */}
+        <div className="scanline-overlay"></div>
+        <div className="crt-flicker"></div>
+        <div className="vignette"></div>
+
+        {/* Interactive Grid Background */}
+        <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+        <div
+          className="fixed inset-0 bg-grid-pattern opacity-30 pointer-events-none transition-opacity duration-300"
+          style={{
+            maskImage: `radial-gradient(circle 250px at var(--cursor-x, 50%) var(--cursor-y, 50%), black, transparent)`,
+            WebkitMaskImage: `radial-gradient(circle 250px at var(--cursor-x, 50%) var(--cursor-y, 50%), black, transparent)`
+          }}
+        ></div>
+
         <ScrollToTop />
-        <Navbar />
-        <main className="flex-grow overflow-hidden"> {/* overflow-hidden helps prevent scrollbars during transition */}
-          <AppRoutes />
-        </main>
-        <Footer />
+
+        {/* HUD Container */}
+        <div className="relative z-10 flex flex-col min-h-screen p-2 md:p-6">
+          <div className="flex-grow border border-ops-green/20 relative bg-ops-black/80 shadow-[0_0_20px_rgba(0,255,65,0.1)] flex flex-col">
+            {/* Corner Brackets */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-ops-green z-[60]"></div>
+            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-ops-green z-[60]"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-ops-green z-[60]"></div>
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-ops-green z-[60]"></div>
+
+            {/* Top Status Line */}
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-ops-black px-4 text-xs font-mono tracking-widest text-ops-green/50 z-[60] border border-ops-green/20 shadow-none drop-shadow-none">
+              SYSTEM_READY // OPS_GREEN_ACTIVE
+            </div>
+
+            <Navbar />
+            <Terminal />
+            <main className="flex-grow overflow-hidden relative">
+              <AppRoutes />
+            </main>
+            <Footer />
+          </div>
+        </div>
       </div>
     </Router>
   );

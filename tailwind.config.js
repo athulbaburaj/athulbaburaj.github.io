@@ -1,5 +1,3 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,25 +5,39 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Set 'Inter' as the default font family
+      colors: {
+        'ops-green': {
+          DEFAULT: '#00ff41', // Classic terminal green - keeping for accents
+          dim: '#008f11',
+          glow: '#00ff41',
+          dark: '#0a0a0a', // Darker, cleaner black
+          light: '#e5ffe5', // Very light green for text
+        },
+        'ops-black': '#050505', // Deep black
+        'ops-gray': '#121212', // Slightly lighter black for cards
+      },
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'], // Clean sans-serif for body
+        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'], // Sharp mono for code/accents
+        display: ['"Share Tech Mono"', 'monospace'], // Tech font ONLY for headers
       },
-      
-      // Your keyframes for animations
-      keyframes: {
-      drift: {
-        '0%': { transform: 'translate(-20%, 20%) rotate(0deg)' },
-        '25%': { transform: 'translate(30%, -30%) rotate(90deg)' },
-        '50%': { transform: 'translate(80%, -10%) rotate(180deg)' },
-        '75%': { transform: 'translate(20%, 40%) rotate(270deg)' },
-        '100%': { transform: 'translate(-20%, 20%) rotate(360deg)' },
+      fontSize: {
+        'xs': '0.875rem',   // 14px
+        'sm': '1rem',       // 16px
+        'base': '1.125rem', // 18px
+        'lg': '1.25rem',    // 20px
+        'xl': '1.5rem',     // 24px
+        '2xl': '1.875rem',  // 30px
+        '3xl': '2.25rem',   // 36px
+        '4xl': '3rem',      // 48px
+        '5xl': '3.75rem',   // 60px
       },
-    },
-    animation: {
-      drift: 'drift 40s ease-in-out infinite',
-    }
-
+      backgroundImage: {
+        'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
+      },
+      backgroundSize: {
+        'grid-pattern': '40px 40px',
+      },
     },
   },
   plugins: [],

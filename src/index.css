@@ -1,3 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&family=Share+Tech+Mono&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-ops-black text-gray-300 font-sans overflow-x-hidden antialiased leading-relaxed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display text-white tracking-wide;
+  }
+
+  /* Custom Scrollbar - Minimalist */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-ops-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-800 rounded-full hover:bg-ops-green/50 transition-colors;
+  }
+}
+
+@layer components {
+  .btn-ops {
+    @apply px-8 py-3 border border-ops-green/30 text-ops-green font-mono font-bold uppercase tracking-widest text-sm hover:bg-ops-green hover:text-black transition-all duration-300 relative overflow-hidden rounded-sm;
+  }
+
+  /* Clean Card Style */
+  .tech-card {
+    @apply bg-ops-gray border border-white/5 p-6 hover:border-ops-green/30 transition-all duration-300;
+  }
+}
+
+/* Subtle Grid Background */
+.bg-grid-subtle {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
