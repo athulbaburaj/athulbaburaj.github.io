@@ -21,9 +21,14 @@ module.exports = {
         '75%': { transform: 'translate(20%, 40%) rotate(270deg)' },
         '100%': { transform: 'translate(-20%, 20%) rotate(360deg)' },
       },
+      fadeInUp: {
+        '0%': { opacity: '0', transform: 'translateY(20px)' },
+        '100%': { opacity: '1', transform: 'translateY(0)' },
+      }
     },
     animation: {
       drift: 'drift 40s ease-in-out infinite',
+      fadeInUp: 'fadeInUp 1s ease-out forwards',
     }
 
     },

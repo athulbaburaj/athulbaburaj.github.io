@@ -1,4 +1,5 @@
 // src/data/resumeData.js
+import { FaCloud, FaCogs, FaServer } from 'react-icons/fa';
 
 export const personalInfo = {
   name: "Athul Baburaj", // 
@@ -18,6 +19,7 @@ export const skills = {
 };
 
 export const certifications = [
+  "GCP Professional Cloud Architect", //
   "GCP Associate Cloud Engineer", // 
   "ML Specialization (Andrew Ng)", // 
   "Game Dev (Michigan)" // 
@@ -110,4 +112,23 @@ export const leadership = [
     role: "Joint Secretary, IEEE CS", // 
     description: "Launched Unity game dev workshop series; mentored 50+ students; hosted monthly tech events." // 
   }
+];
+
+export const highlightedSkills = [
+  {
+    name: 'Cloud & DevOps',
+    icon: <FaCloud className="h-12 w-12 mx-auto mb-4 text-indigo-400" />,
+    description: 'Spearheaded the migration of over 70 services from OCP 3.11 to 4.12, dramatically improving uptime by 20%. Proficient with GCP, AWS, Kubernetes, and Terraform.' //
+  },
+  {
+    name: 'Automation Engineering',
+    icon: <FaCogs className="h-12 w-12 mx-auto mb-4 text-indigo-400" />,
+    description: 'Built and maintained critical Python automation services, including Code/Helm validators and a code migration tool to enhance deployment workflows and operational efficiency.' //
+  },
+  {
+    name: 'Database Optimization',
+    icon: <FaServer className="h-12 w-12 mx-auto mb-4 text-indigo-400" />,
+    description: 'Optimized Cassandra data modeling for query-intensive applications, achieving a significant 30% reduction in latency in real-world use cases.' //
+  },
+  // To add a new skill, just copy and paste one of these objects and change the content!
 ];

@@ -1,19 +1,12 @@
 // src/components/Navbar.js
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { navLinks } from '../data/siteData';
 import { HiMenu, HiX } from 'react-icons/hi';
 import logo from '../assets/images/logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/resume', label: 'Resume' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/contact', label: 'Contact' },
-  ];
 
   return (
     <nav className="bg-black/80 backdrop-blur-sm text-white shadow-lg shadow-indigo-500/10 sticky top-0 z-50">
@@ -27,19 +20,14 @@ const Navbar = () => {
             <NavLink
               key={link.label}
               to={link.path}
-              className={({ isActive }) =>
-                `relative text-sm font-medium transition-colors hover:text-indigo-300 ${isActive ? 'text-indigo-400' : 'text-gray-300'}`
-              }
+              className={({ isActive }) => `relative text-sm font-medium transition-colors hover:text-indigo-300 ${isActive ? 'text-indigo-400' : 'text-gray-300'}`}
             >
-              {({ isActive }) => (
-                <>
-                  {link.label}
-                  {/* The animated underline */}
-                  <span
-                    className={`absolute bottom-[-4px] left-0 h-[2px] bg-indigo-500 transition-all duration-300 ease-in-out ${isActive ? 'w-full' : 'w-0'}`}
-                  ></span>
-                </>
-              )}
+              {link.label}
+              {/* The animated underline */}
+              <span
+                className="absolute bottom-[-4px] left-0 h-[2px] bg-indigo-500 transition-all duration-300 ease-in-out"
+                style={{ width: 'var(--nav-link-underline-width, 0)' }}
+              ></span>
             </NavLink>
           ))}
         </div>
