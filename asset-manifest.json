@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "//athulbaburaj.github.io/static/css/main.9ff13121.css",
-    "main.js": "//athulbaburaj.github.io/static/js/main.39b94011.js",
-    "static/js/453.2143ef37.chunk.js": "//athulbaburaj.github.io/static/js/453.2143ef37.chunk.js",
-    "static/media/logo.png": "//athulbaburaj.github.io/static/media/logo.afec5eac89887bb5cad3.png",
-    "index.html": "//athulbaburaj.github.io/index.html",
-    "main.9ff13121.css.map": "//athulbaburaj.github.io/static/css/main.9ff13121.css.map",
-    "main.39b94011.js.map": "//athulbaburaj.github.io/static/js/main.39b94011.js.map",
-    "453.2143ef37.chunk.js.map": "//athulbaburaj.github.io/static/js/453.2143ef37.chunk.js.map"
+    "main.css": "/static/css/main.07491ee0.css",
+    "main.js": "/static/js/main.3c1e5acb.js",
+    "static/js/453.2143ef37.chunk.js": "/static/js/453.2143ef37.chunk.js",
+    "index.html": "/index.html",
+    "main.07491ee0.css.map": "/static/css/main.07491ee0.css.map",
+    "main.3c1e5acb.js.map": "/static/js/main.3c1e5acb.js.map",
+    "453.2143ef37.chunk.js.map": "/static/js/453.2143ef37.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9ff13121.css",
-    "static/js/main.39b94011.js"
+    "static/css/main.07491ee0.css",
+    "static/js/main.3c1e5acb.js"
   ]
 }
