@@ -18,7 +18,7 @@ const ResumePage = () => {
   return (
     <div className="text-gray-300 min-h-screen py-10 md:py-16 pt-10 relative overflow-hidden">
       {/* Subtle Background Grid */}
-      <div className="absolute inset-0 bg-grid-subtle opacity-20 pointer-events-none"></div>
+      {/* Global background shows through */}
 
       <div className="container mx-auto px-6 max-w-5xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-white/10 pb-6">

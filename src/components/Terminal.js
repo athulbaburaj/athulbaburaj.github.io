@@ -17,6 +17,9 @@ const Terminal = () => {
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
+    const [commandHistory, setCommandHistory] = useState([]);
+    const [historyIndex, setHistoryIndex] = useState(-1);
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -27,7 +30,13 @@ const Terminal = () => {
 
     const handleCommand = (cmd) => {
         const command = cmd.trim().toLowerCase();
+        if (!command) return;
+
         const newOutput = [...output, { type: 'user', content: `> ${cmd}` }];
+
+        // Add to command history
+        setCommandHistory(prev => [...prev, cmd]);
+        setHistoryIndex(-1);
 
         switch (command) {
             case 'help':
@@ -69,8 +78,6 @@ const Terminal = () => {
                 newOutput.push({ type: 'system', content: 'TERMINATING SESSION...' });
                 setTimeout(() => setIsVisible(false), 800);
                 break;
-            case '':
-                break;
             default:
                 newOutput.push({ type: 'error', content: `COMMAND NOT RECOGNIZED: "${command}". Type "help" for assistance.` });
         }
@@ -81,7 +88,34 @@ const Terminal = () => {
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
+            e.preventDefault();
             handleCommand(input);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (commandHistory.length > 0) {
+                const newIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
+                setHistoryIndex(newIndex);
+                setInput(commandHistory[newIndex]);
+            }
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (historyIndex !== -1) {
+                const newIndex = historyIndex + 1;
+                if (newIndex < commandHistory.length) {
+                    setHistoryIndex(newIndex);
+                    setInput(commandHistory[newIndex]);
+                } else {
+                    setHistoryIndex(-1);
+                    setInput('');
+                }
+            }
+        } else if (e.key === 'Tab') {
+            e.preventDefault();
+            const commands = ['about', 'projects', 'resume', 'contact', 'clear', 'whoami', 'exit', 'help'];
+            const matchingCommands = commands.filter(cmd => cmd.startsWith(input.toLowerCase()));
+            if (matchingCommands.length === 1) {
+                setInput(matchingCommands[0]);
+            }
         }
     };
 

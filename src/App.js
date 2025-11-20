@@ -12,10 +12,12 @@ import ResumePage from './pages/ResumePage';
 import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
+import ArchitectPage from './pages/ArchitectPage';
 import ScrollToTop from './components/ScrollToTop';
 import Terminal from './components/Terminal';
 import SystemStatus from './components/SystemStatus';
 import Cyberdeck from './components/Cyberdeck';
+import ConsultingModal from './components/ConsultingModal';
 
 const pageVariants = {
   initial: {
@@ -52,16 +54,17 @@ const AnimatedPage = ({ children }) => (
 );
 
 // We need a component to handle the routes so we can use the useLocation hook
-const AppRoutes = ({ openGame }) => {
+const AppRoutes = ({ openGame, toggleConsulting }) => {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<AnimatedPage><HomePage openGame={openGame} /></AnimatedPage>} />
+        <Route path="/" element={<AnimatedPage><HomePage openGame={openGame} toggleConsulting={toggleConsulting} /></AnimatedPage>} />
         <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
         <Route path="/resume" element={<AnimatedPage><ResumePage /></AnimatedPage>} />
         <Route path="/projects" element={<AnimatedPage><ProjectsPage /></AnimatedPage>} />
         <Route path="/blog" element={<AnimatedPage><BlogPage /></AnimatedPage>} />
+        <Route path="/simulation" element={<AnimatedPage><ArchitectPage /></AnimatedPage>} />
         <Route path="/contact" element={<AnimatedPage><ContactPage /></AnimatedPage>} />
       </Routes>
     </AnimatePresence>
@@ -71,9 +74,14 @@ const AppRoutes = ({ openGame }) => {
 const App = () => {
   const [isStatusOpen, setIsStatusOpen] = useState(false);
   const [isGameOpen, setIsGameOpen] = useState(false);
+  const [isConsultingOpen, setIsConsultingOpen] = useState(false);
 
   const toggleStatus = () => {
     setIsStatusOpen(!isStatusOpen);
+  };
+
+  const toggleConsulting = () => {
+    setIsConsultingOpen(!isConsultingOpen);
   };
 
   const openGame = () => {
@@ -83,8 +91,12 @@ const App = () => {
   // Listen for game trigger event
   useEffect(() => {
     const handleOpenGame = () => setIsGameOpen(true);
+
     window.addEventListener('openGame', handleOpenGame);
-    return () => window.removeEventListener('openGame', handleOpenGame);
+
+    return () => {
+      window.removeEventListener('openGame', handleOpenGame);
+    };
   }, []);
 
   return (
@@ -104,9 +116,9 @@ const App = () => {
         <div className="vignette"></div>
 
         {/* Interactive Grid Background */}
-        <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+        <div className="fixed inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
         <div
-          className="fixed inset-0 bg-grid-pattern opacity-30 pointer-events-none transition-opacity duration-300"
+          className="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none transition-opacity duration-300"
           style={{
             maskImage: `radial-gradient(circle 250px at var(--cursor-x, 50%) var(--cursor-y, 50%), black, transparent)`,
             WebkitMaskImage: `radial-gradient(circle 250px at var(--cursor-x, 50%) var(--cursor-y, 50%), black, transparent)`
@@ -132,12 +144,13 @@ const App = () => {
               SYSTEM_READY // OPS_GREEN_ACTIVE
             </div>
 
-            <Navbar />
+            <Navbar toggleConsulting={toggleConsulting} />
             <SystemStatus isOpen={isStatusOpen} onClose={() => setIsStatusOpen(false)} />
             <Cyberdeck isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
+            <ConsultingModal isOpen={isConsultingOpen} onClose={() => setIsConsultingOpen(false)} />
             <Terminal />
             <main className="flex-grow overflow-hidden relative">
-              <AppRoutes openGame={openGame} />
+              <AppRoutes openGame={openGame} toggleConsulting={toggleConsulting} />
             </main>
             <Footer />
           </div>

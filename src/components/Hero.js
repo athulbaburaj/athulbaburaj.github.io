@@ -5,13 +5,12 @@ import { personalInfo } from '../data/resumeData';
 import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt } from 'react-icons/fa';
 import HeroTerminal from './HeroTerminal';
 
-const Hero = ({ openGame }) => {
+const Hero = ({ openGame, toggleConsulting }) => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center pt-4 pb-10 overflow-hidden">
-      {/* Background Grid & Effects */}
+      {/* Background Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ops-black via-transparent to-ops-black"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ops-black/40 via-transparent to-ops-black/40"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -41,11 +40,17 @@ const Hero = ({ openGame }) => {
                 View Projects
                 <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
               </Link>
-              <Link to="/contact" className="px-8 py-3 border border-gray-700 text-gray-300 font-mono hover:border-ops-green hover:text-ops-green transition-all duration-300">
-                Contact Me
-              </Link>
-              <Link to="/resume" className="px-8 py-3 border border-ops-green text-ops-green font-mono hover:bg-ops-green hover:text-ops-black transition-all duration-300 inline-flex items-center gap-2 group">
-                <FaFileAlt className="group-hover:scale-110 transition-transform" /> Access Resume
+
+              <button
+                onClick={toggleConsulting}
+                className="px-8 py-3 border border-ops-green text-ops-green font-mono tracking-widest hover:bg-ops-green hover:text-ops-black transition-all duration-300 flex items-center gap-2 group"
+              >
+                <span className="w-2 h-2 bg-ops-green rounded-full animate-pulse group-hover:bg-ops-black"></span>
+                CONSULTING
+              </button>
+
+              <Link to="/resume" className="px-8 py-3 border border-gray-700 text-gray-300 font-mono hover:border-ops-green hover:text-ops-green transition-all duration-300 inline-flex items-center gap-2 group">
+                <FaFileAlt className="group-hover:scale-110 transition-transform" /> Resume
               </Link>
             </div>
 

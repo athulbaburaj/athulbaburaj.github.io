@@ -15,7 +15,7 @@ const ContactPage = () => {
     <div className="text-white min-h-screen py-12 md:py-20 pt-10 relative overflow-hidden">
       {/* Background Grid & Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ops-black via-transparent to-ops-black"></div>
       </div>
 

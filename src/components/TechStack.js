@@ -32,7 +32,7 @@ const TechStack = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-ops-black/50 border border-ops-green/20 p-6 relative group hover:border-ops-green/50 transition-colors duration-300"
+                            className="bg-ops-black/20 border border-ops-green/20 p-6 relative group hover:border-ops-green/50 transition-colors duration-300"
                         >
                             {/* Corner Accents */}
                             <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-ops-green/50"></div>

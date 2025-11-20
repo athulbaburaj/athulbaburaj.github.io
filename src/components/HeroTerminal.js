@@ -43,6 +43,9 @@ const HeroTerminal = ({ openGame }) => {
     const terminalBodyRef = useRef(null);
     const navigate = useNavigate();
 
+    const [commandHistory, setCommandHistory] = useState([]);
+    const [historyIndex, setHistoryIndex] = useState(-1);
+
     useEffect(() => {
         if (terminalBodyRef.current) {
             terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
@@ -51,11 +54,17 @@ const HeroTerminal = ({ openGame }) => {
 
     const handleCommand = (cmd) => {
         const command = cmd.trim();
+        if (!command) return;
+
         const parts = command.split(' ');
         const action = parts[0].toLowerCase();
         const arg = parts[1];
 
         const newHistory = [...history, { type: 'user', content: `user@system:~/${currentDir === 'root' ? '' : currentDir}$ ${command}` }];
+
+        // Add to command history
+        setCommandHistory(prev => [...prev, command]);
+        setHistoryIndex(-1);
 
         switch (action) {
             case 'help':
@@ -107,14 +116,45 @@ const HeroTerminal = ({ openGame }) => {
                     newHistory.push({ type: 'error', content: 'ERROR: CYBERDECK MODULE NOT FOUND.' });
                 }
                 break;
-            case '':
-                break;
             default:
                 newHistory.push({ type: 'error', content: `Command not found: ${action}` });
         }
 
         setHistory(newHistory);
         setInput('');
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleCommand(input);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (commandHistory.length > 0) {
+                const newIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
+                setHistoryIndex(newIndex);
+                setInput(commandHistory[newIndex]);
+            }
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (historyIndex !== -1) {
+                const newIndex = historyIndex + 1;
+                if (newIndex < commandHistory.length) {
+                    setHistoryIndex(newIndex);
+                    setInput(commandHistory[newIndex]);
+                } else {
+                    setHistoryIndex(-1);
+                    setInput('');
+                }
+            }
+        } else if (e.key === 'Tab') {
+            e.preventDefault();
+            const commands = ['help', 'ls', 'cd', 'cat', 'open', 'clear', 'start_sim'];
+            const matchingCommands = commands.filter(cmd => cmd.startsWith(input.toLowerCase()));
+            if (matchingCommands.length === 1) {
+                setInput(matchingCommands[0]);
+            }
+        }
     };
 
     return (
@@ -156,12 +196,7 @@ const HeroTerminal = ({ openGame }) => {
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                                e.preventDefault();
-                                handleCommand(input);
-                            }
-                        }}
+                        onKeyDown={handleKeyDown}
                         className="bg-transparent border-none outline-none text-white flex-grow min-w-0"
                         autoComplete="off"
                     />

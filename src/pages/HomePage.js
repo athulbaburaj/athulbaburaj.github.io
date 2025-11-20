@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
 import TechStack from '../components/TechStack';
 
-const HomePage = ({ openGame }) => {
+const HomePage = ({ openGame, toggleConsulting }) => {
   return (
     <div className="text-white min-h-screen relative overflow-hidden">
       {/* Subtle Background Grid */}
-      <div className="absolute inset-0 bg-grid-subtle opacity-20 pointer-events-none"></div>
+      {/* Prominent Background Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
 
-      <Hero openGame={openGame} />
+      <Hero openGame={openGame} toggleConsulting={toggleConsulting} />
       <TechStack />
 
       <section className="py-20 relative">
