@@ -1,5 +1,5 @@
 // src/App.js
-import React from 'react';
+import React, { useState } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -13,6 +13,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 import Terminal from './components/Terminal';
+import SystemStatus from './components/SystemStatus';
 
 const pageVariants = {
   initial: {
@@ -65,6 +66,12 @@ const AppRoutes = () => {
 };
 
 const App = () => {
+  const [isStatusOpen, setIsStatusOpen] = useState(false);
+
+  const toggleStatus = () => {
+    setIsStatusOpen(!isStatusOpen);
+  };
+
   return (
     <Router>
       <div
@@ -103,11 +110,15 @@ const App = () => {
             <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-ops-green z-[60]"></div>
 
             {/* Top Status Line */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-ops-black px-4 text-xs font-mono tracking-widest text-ops-green/50 z-[60] border border-ops-green/20 shadow-none drop-shadow-none">
+            <div
+              onClick={toggleStatus}
+              className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-ops-black px-4 text-xs font-mono tracking-widest text-ops-green z-[60] border border-ops-green/50 shadow-[0_0_10px_rgba(0,255,65,0.3)] cursor-pointer hover:shadow-[0_0_20px_rgba(0,255,65,0.6)] hover:text-ops-green hover:border-ops-green transition-all duration-300 animate-pulse"
+            >
               SYSTEM_READY // OPS_GREEN_ACTIVE
             </div>
 
             <Navbar />
+            <SystemStatus isOpen={isStatusOpen} onClose={() => setIsStatusOpen(false)} />
             <Terminal />
             <main className="flex-grow overflow-hidden relative">
               <AppRoutes />

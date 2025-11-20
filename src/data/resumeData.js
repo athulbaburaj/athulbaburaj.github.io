@@ -88,7 +88,7 @@ export const projects = [
   },
   {
     title: "Full Stack Dev (MUN, Web3, Finance Tracker)",
-    category: "Professional",
+    category: "Academic",
     description: "Delivered 3 full-stack apps including a Django finance tracker, an Ethereum-based voting dApp, and a React event portal.",
     tech: ["Django", "Ethereum", "React", "Full Stack"],
     link: "https://github.com/athulbaburaj?tab=repositories"
