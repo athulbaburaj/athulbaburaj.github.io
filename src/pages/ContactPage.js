@@ -12,8 +12,14 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="text-white min-h-screen py-12 md:py-20 pt-10">
-      <div className="container mx-auto px-6">
+    <div className="text-white min-h-screen py-12 md:py-20 pt-10 relative overflow-hidden">
+      {/* Background Grid & Effects */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ops-black via-transparent to-ops-black"></div>
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
         <div className="flex items-center justify-center mb-16">
           <div className="h-px w-20 bg-ops-green/50"></div>
           <h1 className="text-4xl md:text-5xl font-bold text-center text-white px-6 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(0,255,65,0.5)]">

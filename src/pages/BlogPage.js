@@ -46,7 +46,7 @@ const BlogPage = () => {
     return (
         <div className="min-h-screen pt-24 pb-20 px-6 container mx-auto text-white relative overflow-hidden">
             {/* Background Elements */}
-            <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
 
             <div className="relative z-10">
                 {/* Header */}

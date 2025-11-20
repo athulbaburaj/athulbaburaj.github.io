@@ -124,7 +124,7 @@ const SystemStatus = ({ isOpen, onClose }) => {
                                         <FaGlobeAsia className="mr-3" />
                                         <span>SERVER_REGION</span>
                                     </div>
-                                    <span className="text-white whitespace-nowrap">ASIA-SOUTH1 (BLR)</span>
+                                    <span className="text-white whitespace-nowrap">ASIA-SOUTH1</span>
                                 </div>
 
                                 {/* Database Status */}

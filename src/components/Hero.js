@@ -2,12 +2,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { personalInfo } from '../data/resumeData';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt } from 'react-icons/fa';
 import HeroTerminal from './HeroTerminal';
 
 const Hero = ({ openGame }) => {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-12 pb-10 overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-4 pb-10 overflow-hidden">
       {/* Background Grid & Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
@@ -43,6 +43,9 @@ const Hero = ({ openGame }) => {
               </Link>
               <Link to="/contact" className="px-8 py-3 border border-gray-700 text-gray-300 font-mono hover:border-ops-green hover:text-ops-green transition-all duration-300">
                 Contact Me
+              </Link>
+              <Link to="/resume" className="px-8 py-3 border border-ops-green text-ops-green font-mono hover:bg-ops-green hover:text-ops-black transition-all duration-300 inline-flex items-center gap-2 group">
+                <FaFileAlt className="group-hover:scale-110 transition-transform" /> Access Resume
               </Link>
             </div>
 
