@@ -11,6 +11,7 @@ import AboutPage from './pages/AboutPage';
 import ResumePage from './pages/ResumePage';
 import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
+import BlogPage from './pages/BlogPage';
 import ScrollToTop from './components/ScrollToTop';
 import Terminal from './components/Terminal';
 import SystemStatus from './components/SystemStatus';
@@ -60,6 +61,7 @@ const AppRoutes = ({ openGame }) => {
         <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
         <Route path="/resume" element={<AnimatedPage><ResumePage /></AnimatedPage>} />
         <Route path="/projects" element={<AnimatedPage><ProjectsPage /></AnimatedPage>} />
+        <Route path="/blog" element={<AnimatedPage><BlogPage /></AnimatedPage>} />
         <Route path="/contact" element={<AnimatedPage><ContactPage /></AnimatedPage>} />
       </Routes>
     </AnimatePresence>

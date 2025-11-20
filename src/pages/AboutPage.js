@@ -1,10 +1,12 @@
 // src/pages/AboutPage.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { skills, leadership } from '../data/resumeData';
 import NeuralNetwork from '../components/NeuralNetwork';
-import { FaBrain } from 'react-icons/fa';
+import { FaBrain, FaFileAlt } from 'react-icons/fa';
 
 const AboutPage = () => {
+  const navigate = useNavigate();
   const [trainingMode, setTrainingMode] = useState(false);
 
   return (
@@ -28,7 +30,7 @@ const AboutPage = () => {
           <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-ops-green"></div>
           <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-ops-green"></div>
 
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             {/* Stats / ID Card style element */}
             <div className="w-full md:w-64 border border-ops-green/20 bg-ops-green/5 p-4 font-mono text-sm text-ops-green/70">
               <div className="mb-2 border-b border-ops-green/20 pb-1">ID: AB-2025-DEV</div>
@@ -37,19 +39,29 @@ const AboutPage = () => {
               <div className="mb-2">LOC: BENGALURU</div>
             </div>
 
+            {/* Resume Access Button - Center */}
+            <button
+              onClick={() => navigate('/resume')}
+              className="flex flex-col items-center justify-center px-6 py-4 bg-ops-green text-ops-black font-bold font-mono tracking-widest hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,255,65,0.4)] hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] group min-w-[200px]"
+            >
+              <FaFileAlt className="text-2xl mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-xs">ACCESS_FULL</span>
+              <span className="text-sm">DOSSIER</span>
+            </button>
+
             {/* Neural Network Controls */}
             <div className="flex flex-col items-end">
               <button
                 onClick={() => setTrainingMode(!trainingMode)}
                 className={`flex items-center px-6 py-3 border font-mono tracking-widest transition-all duration-300 ${trainingMode
-                    ? 'bg-ops-green text-black border-ops-green shadow-[0_0_15px_rgba(0,255,65,0.6)]'
-                    : 'bg-transparent text-ops-green border-ops-green/50 hover:bg-ops-green/10 hover:border-ops-green'
+                  ? 'bg-ops-green/20 text-ops-green border-ops-green shadow-[0_0_15px_rgba(0,255,65,0.3)]'
+                  : 'bg-transparent text-ops-green/60 border-ops-green/30 hover:bg-ops-green/10 hover:border-ops-green/60 hover:text-ops-green'
                   }`}
               >
                 <FaBrain className={`mr-3 ${trainingMode ? 'animate-pulse' : ''}`} />
                 {trainingMode ? 'TRAINING_ACTIVE' : 'INIT_TRAINING'}
               </button>
-              <span className="text-xs font-mono text-ops-green/50 mt-2">
+              <span className="text-xs font-mono text-ops-green/40 mt-2">
                 {trainingMode ? '>> OPTIMIZING NEURAL PATHWAYS...' : '>> NETWORK IDLE. AWAITING INPUT.'}
               </span>
             </div>
