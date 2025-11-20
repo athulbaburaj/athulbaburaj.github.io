@@ -61,8 +61,8 @@ const NeuralNetwork = ({ trainingMode }) => {
             update() {
                 if (trainingMode) {
                     // Move towards center/target
-                    const dx = (canvas.width / 2) + (this.baseX - canvas.width / 2) * 0.5 - this.x;
-                    const dy = (canvas.height / 2) + (this.baseY - canvas.height / 2) * 0.5 - this.y;
+                    const dx = (canvas.width / 2) + (this.baseX - canvas.width / 2) * 0.85 - this.x;
+                    const dy = (canvas.height / 2) + (this.baseY - canvas.height / 2) * 0.85 - this.y;
                     this.x += dx * 0.05;
                     this.y += dy * 0.05;
                 } else {
