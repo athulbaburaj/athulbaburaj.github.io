@@ -31,11 +31,12 @@ const fileSystem = {
     }
 };
 
-const HeroTerminal = () => {
+const HeroTerminal = ({ openGame }) => {
     const [history, setHistory] = useState([
         { type: 'system', content: 'MOUNTING ROOT FILESYSTEM...' },
         { type: 'system', content: 'ACCESS GRANTED. WELCOME, USER.' },
-        { type: 'info', content: 'Type "help" for available commands.' }
+        { type: 'info', content: 'Type "help" for available commands.' },
+        { type: 'info', content: 'Type "start_sim" to launch training simulation.' }
     ]);
     const [currentDir, setCurrentDir] = useState('root');
     const [input, setInput] = useState('');
@@ -58,7 +59,7 @@ const HeroTerminal = () => {
 
         switch (action) {
             case 'help':
-                newHistory.push({ type: 'info', content: 'COMMANDS: ls, cd [dir], cat [file], open [page], clear' });
+                newHistory.push({ type: 'info', content: 'COMMANDS: ls, cd [dir], cat [file], open [page], clear, start_sim' });
                 break;
             case 'ls':
                 const dirContent = currentDir === 'root' ? fileSystem.root.children : fileSystem[currentDir].children;
@@ -96,6 +97,16 @@ const HeroTerminal = () => {
                 setHistory([]);
                 setInput('');
                 return;
+            case 'start_sim':
+            case 'run_game':
+            case 'play':
+                newHistory.push({ type: 'system', content: 'INITIALIZING CYBERDECK...' });
+                if (openGame) {
+                    setTimeout(() => openGame(), 1000);
+                } else {
+                    newHistory.push({ type: 'error', content: 'ERROR: CYBERDECK MODULE NOT FOUND.' });
+                }
+                break;
             case '':
                 break;
             default:

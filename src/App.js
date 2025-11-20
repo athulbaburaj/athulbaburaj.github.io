@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -14,6 +14,7 @@ import ContactPage from './pages/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 import Terminal from './components/Terminal';
 import SystemStatus from './components/SystemStatus';
+import Cyberdeck from './components/Cyberdeck';
 
 const pageVariants = {
   initial: {
@@ -50,12 +51,12 @@ const AnimatedPage = ({ children }) => (
 );
 
 // We need a component to handle the routes so we can use the useLocation hook
-const AppRoutes = () => {
+const AppRoutes = ({ openGame }) => {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<AnimatedPage><HomePage /></AnimatedPage>} />
+        <Route path="/" element={<AnimatedPage><HomePage openGame={openGame} /></AnimatedPage>} />
         <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
         <Route path="/resume" element={<AnimatedPage><ResumePage /></AnimatedPage>} />
         <Route path="/projects" element={<AnimatedPage><ProjectsPage /></AnimatedPage>} />
@@ -67,10 +68,22 @@ const AppRoutes = () => {
 
 const App = () => {
   const [isStatusOpen, setIsStatusOpen] = useState(false);
+  const [isGameOpen, setIsGameOpen] = useState(false);
 
   const toggleStatus = () => {
     setIsStatusOpen(!isStatusOpen);
   };
+
+  const openGame = () => {
+    setIsGameOpen(true);
+  };
+
+  // Listen for game trigger event
+  useEffect(() => {
+    const handleOpenGame = () => setIsGameOpen(true);
+    window.addEventListener('openGame', handleOpenGame);
+    return () => window.removeEventListener('openGame', handleOpenGame);
+  }, []);
 
   return (
     <Router>
@@ -119,9 +132,10 @@ const App = () => {
 
             <Navbar />
             <SystemStatus isOpen={isStatusOpen} onClose={() => setIsStatusOpen(false)} />
+            <Cyberdeck isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
             <Terminal />
             <main className="flex-grow overflow-hidden relative">
-              <AppRoutes />
+              <AppRoutes openGame={openGame} />
             </main>
             <Footer />
           </div>

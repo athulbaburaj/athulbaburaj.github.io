@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-6 w-full z-50 transition-all duration-300 mb-8 mt-6 ${scrolled
+      className={`sticky top-6 w-full z-50 transition-all duration-300 mb-1 mt-6 ${scrolled
         ? 'bg-ops-black/90 backdrop-blur-md shadow-lg py-3'
         : 'bg-transparent backdrop-blur-sm py-6'
         }`}
