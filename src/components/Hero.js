@@ -24,7 +24,7 @@ const Hero = ({ openGame, toggleConsulting }) => {
 
             <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-none">
               ATHUL <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-ops-green to-emerald-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-ops-green to-blue-600">
                 BABURAJ
               </span>
             </h1>
@@ -55,13 +55,13 @@ const Hero = ({ openGame, toggleConsulting }) => {
             </div>
 
             <div className="flex justify-center lg:justify-start space-x-8 pt-6">
-              <a href={`https://www.${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" aria-label="LinkedIn Profile">
+              <a href={`https://www.${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" aria-label="LinkedIn Profile">
                 <FaLinkedin size={32} />
               </a>
-              <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" aria-label="GitHub Profile">
+              <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" aria-label="GitHub Profile">
                 <FaGithub size={32} />
               </a>
-              <a href={`mailto:${personalInfo.email}`} className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]" aria-label="Send Email">
+              <a href={`mailto:${personalInfo.email}`} className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" aria-label="Send Email">
                 <FaEnvelope size={32} />
               </a>
             </div>

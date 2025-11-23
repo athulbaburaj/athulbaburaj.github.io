@@ -94,7 +94,7 @@ const NeuralNetwork = ({ trainingMode }) => {
             }
 
             draw() {
-                ctx.fillStyle = '#00ff41';
+                ctx.fillStyle = '#00e5ff';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -123,7 +123,7 @@ const NeuralNetwork = ({ trainingMode }) => {
 
                     if (distance < connectionDistance) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(0, 255, 65, ${1 - distance / connectionDistance})`;
+                        ctx.strokeStyle = `rgba(0, 229, 255, ${1 - distance / connectionDistance})`;
                         ctx.lineWidth = 1;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);

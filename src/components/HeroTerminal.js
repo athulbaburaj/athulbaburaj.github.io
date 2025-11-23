@@ -158,14 +158,14 @@ const HeroTerminal = ({ openGame }) => {
     };
 
     return (
-        <div className="w-full max-w-lg h-64 md:h-80 bg-black/80 border border-ops-green/30 rounded-sm backdrop-blur-sm flex flex-col font-mono text-xs md:text-sm shadow-[0_0_15px_rgba(0,255,65,0.1)] overflow-hidden relative group">
+        <div className="w-full max-w-lg h-64 md:h-80 bg-transparent border border-ops-green/50 rounded-sm backdrop-blur-sm flex flex-col font-mono text-xs md:text-sm shadow-[0_0_20px_rgba(0,229,255,0.2)] overflow-hidden relative group">
             {/* Header */}
             <div className="bg-ops-green/10 border-b border-ops-green/30 px-3 py-1 flex justify-between items-center">
-                <span className="text-ops-green/70">root@system:~</span>
+                <span className="text-ops-green tracking-widest">DATA_STREAM // READOUT</span>
                 <div className="flex space-x-1">
-                    <div className="w-2 h-2 rounded-full bg-red-500/50"></div>
-                    <div className="w-2 h-2 rounded-full bg-yellow-500/50"></div>
-                    <div className="w-2 h-2 rounded-full bg-green-500/50"></div>
+                    <div className="w-1.5 h-1.5 bg-ops-green/50"></div>
+                    <div className="w-1.5 h-1.5 bg-ops-green/50"></div>
+                    <div className="w-1.5 h-1.5 bg-ops-green/50"></div>
                 </div>
             </div>
 
@@ -178,19 +178,19 @@ const HeroTerminal = ({ openGame }) => {
                 {history.map((line, i) => (
                     <div key={i} className="mb-1 break-words">
                         {line.type === 'user' ? (
-                            <span className="text-ops-green/80">{line.content}</span>
+                            <span className="text-ops-green/80">user@sys: {line.content}</span>
                         ) : line.isHtml ? (
                             <div dangerouslySetInnerHTML={{ __html: line.content }} />
                         ) : (
                             <span className={`${line.type === 'error' ? 'text-red-400' :
-                                line.type === 'info' ? 'text-blue-400' :
+                                line.type === 'info' ? 'text-blue-300' :
                                     'text-white/90'
                                 }`}>{line.content}</span>
                         )}
                     </div>
                 ))}
                 <div className="flex items-center mt-2">
-                    <span className="text-ops-green mr-2">user@system:~/{currentDir === 'root' ? '' : currentDir}$</span>
+                    <span className="text-ops-green mr-2">user@sys:</span>
                     <input
                         id="hero-input"
                         type="text"
@@ -202,9 +202,6 @@ const HeroTerminal = ({ openGame }) => {
                     />
                 </div>
             </div>
-
-            {/* Scanline Effect */}
-            <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_2px,3px_100%] opacity-20"></div>
         </div>
     );
 };

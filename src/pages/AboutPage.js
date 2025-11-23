@@ -17,7 +17,7 @@ const AboutPage = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex items-center justify-center mb-16">
           <div className="h-px w-20 bg-ops-green/50"></div>
-          <h1 className="text-4xl md:text-5xl font-bold text-center text-white px-6 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(0,255,65,0.5)]">
+          <h1 className="text-4xl md:text-5xl font-bold text-center text-white px-6 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]">
             Personnel_File
           </h1>
           <div className="h-px w-20 bg-ops-green/50"></div>
@@ -42,7 +42,7 @@ const AboutPage = () => {
             {/* Resume Access Button - Center */}
             <button
               onClick={() => navigate('/resume')}
-              className="flex flex-col items-center justify-center px-6 py-4 bg-ops-green text-ops-black font-bold font-mono tracking-widest hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,255,65,0.4)] hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] group min-w-[200px]"
+              className="flex flex-col items-center justify-center px-6 py-4 bg-ops-green text-ops-black font-bold font-mono tracking-widest hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] group min-w-[200px]"
             >
               <FaFileAlt className="text-2xl mb-2 group-hover:scale-110 transition-transform" />
               <span className="text-xs">ACCESS_FULL</span>
@@ -54,7 +54,7 @@ const AboutPage = () => {
               <button
                 onClick={() => setTrainingMode(!trainingMode)}
                 className={`flex items-center px-6 py-3 border font-mono tracking-widest transition-all duration-300 ${trainingMode
-                  ? 'bg-ops-green/20 text-ops-green border-ops-green shadow-[0_0_15px_rgba(0,255,65,0.3)]'
+                  ? 'bg-ops-green/20 text-ops-green border-ops-green shadow-[0_0_15px_rgba(0,229,255,0.3)]'
                   : 'bg-transparent text-ops-green/60 border-ops-green/30 hover:bg-ops-green/10 hover:border-ops-green/60 hover:text-ops-green'
                   }`}
               >

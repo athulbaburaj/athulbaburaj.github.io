@@ -18,6 +18,7 @@ import Terminal from './components/Terminal';
 import SystemStatus from './components/SystemStatus';
 import Cyberdeck from './components/Cyberdeck';
 import ConsultingModal from './components/ConsultingModal';
+import TacticalBorder from './components/TacticalBorder';
 
 const pageVariants = {
   initial: {
@@ -111,52 +112,56 @@ const App = () => {
         }}
       >
         {/* Global Effects */}
-        <div className="scanline-overlay"></div>
-        <div className="crt-flicker"></div>
-        <div className="vignette"></div>
+        <div className="schematic-noise"></div>
+        <div className="scanline-overlay opacity-50"></div>
+        <div className="vignette opacity-80"></div>
 
         {/* Interactive Grid Background */}
-        <div className="fixed inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
-        <div
-          className="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none transition-opacity duration-300"
-          style={{
-            maskImage: `radial-gradient(circle 250px at var(--cursor-x, 50%) var(--cursor-y, 50%), black, transparent)`,
-            WebkitMaskImage: `radial-gradient(circle 250px at var(--cursor-x, 50%) var(--cursor-y, 50%), black, transparent)`
-          }}
-        ></div>
+        <div className="fixed inset-0 bg-grid-subtle opacity-30 pointer-events-none"></div>
+
+        {/* Static Technical Background Elements */}
+        <div className="fixed inset-0 pointer-events-none z-0">
+          <svg className="w-full h-full opacity-20">
+            {/* Large Circle */}
+            <circle cx="85%" cy="50%" r="300" fill="none" stroke="#00e5ff" strokeWidth="1" strokeDasharray="10 20" className="animate-spin-slow" />
+            <circle cx="85%" cy="50%" r="280" fill="none" stroke="#00e5ff" strokeWidth="0.5" />
+            {/* Measurement Lines */}
+            <line x1="10%" y1="10%" x2="90%" y2="10%" stroke="#00e5ff" strokeWidth="0.5" strokeDasharray="5 5" />
+            <line x1="10%" y1="90%" x2="90%" y2="90%" stroke="#00e5ff" strokeWidth="0.5" strokeDasharray="5 5" />
+            <line x1="10%" y1="10%" x2="10%" y2="90%" stroke="#00e5ff" strokeWidth="0.5" strokeDasharray="5 5" />
+            <line x1="90%" y1="10%" x2="90%" y2="90%" stroke="#00e5ff" strokeWidth="0.5" strokeDasharray="5 5" />
+          </svg>
+        </div>
 
         <ScrollToTop />
 
+        {/* Modals and Fixed Elements (Outside TacticalBorder to avoid clipping/positioning issues) */}
+        <SystemStatus isOpen={isStatusOpen} onClose={() => setIsStatusOpen(false)} />
+        <Cyberdeck isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
+        <ConsultingModal isOpen={isConsultingOpen} onClose={() => setIsConsultingOpen(false)} />
+        <Terminal />
+
         {/* HUD Container */}
         <div className="relative z-10 flex flex-col min-h-screen p-2 md:p-6">
-          <div className="flex-grow border border-ops-green/20 relative bg-ops-black/80 shadow-[0_0_20px_rgba(0,255,65,0.1)] flex flex-col">
-            {/* Corner Brackets */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-ops-green z-[60]"></div>
-            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-ops-green z-[60]"></div>
-            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-ops-green z-[60]"></div>
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-ops-green z-[60]"></div>
+          <TacticalBorder className="flex-grow flex flex-col bg-ops-black/90 shadow-[0_0_30px_rgba(0,229,255,0.1)] backdrop-blur-sm">
 
             {/* Top Status Line */}
             <div
               onClick={toggleStatus}
-              className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-ops-black px-4 text-xs font-mono tracking-widest text-ops-green z-[60] border border-ops-green/50 shadow-[0_0_10px_rgba(0,255,65,0.3)] cursor-pointer hover:shadow-[0_0_20px_rgba(0,255,65,0.6)] hover:text-ops-green hover:border-ops-green transition-all duration-300 animate-pulse"
+              className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-ops-black px-4 text-xs font-mono tracking-widest text-ops-green z-[60] border border-ops-green/50 shadow-[0_0_10px_rgba(0,229,255,0.3)] cursor-pointer hover:shadow-[0_0_20px_rgba(0,229,255,0.6)] hover:text-ops-green hover:border-ops-green transition-all duration-300"
             >
-              SYSTEM_READY // OPS_GREEN_ACTIVE
+              TACTICAL_HUD // V.3.0 // ONLINE
             </div>
 
             <Navbar toggleConsulting={toggleConsulting} />
-            <SystemStatus isOpen={isStatusOpen} onClose={() => setIsStatusOpen(false)} />
-            <Cyberdeck isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
-            <ConsultingModal isOpen={isConsultingOpen} onClose={() => setIsConsultingOpen(false)} />
-            <Terminal />
             <main className="flex-grow overflow-hidden relative">
               <AppRoutes openGame={openGame} toggleConsulting={toggleConsulting} />
             </main>
             <Footer />
-          </div>
+          </TacticalBorder>
         </div>
-      </div>
-    </Router>
+      </div >
+    </Router >
   );
 };
 

@@ -76,29 +76,91 @@ export const projects = [
     title: "DC-DC Converter Reinforcement Learning",
     category: "Academic",
     description: "Engineered an RL controller for boost converters using DDPG to handle CPLs; improved voltage stability under load shifts.",
-    tech: ["Python", "Reinforcement Learning", "DDPG"],
-    link: "#"
+    details: "This project focused on stabilizing DC-DC boost converters feeding Constant Power Loads (CPLs), which are notoriously unstable. I implemented a Deep Deterministic Policy Gradient (DDPG) agent in Python using PyTorch. The agent was trained to regulate output voltage dynamically against load transients, outperforming traditional PID controllers in simulation tests.",
+    tech: ["Python", "Reinforcement Learning", "DDPG", "PyTorch", "Power Electronics"],
+    link: "#",
+    status: "CLASSIFIED // COMPLETED",
+    classification: "TOP SECRET",
+    date: "2023",
+    images: [
+      "https://placehold.co/600x400/05080f/00e5ff?text=RL+Training+Graph",
+      "https://placehold.co/600x400/05080f/00e5ff?text=Circuit+Schematic"
+    ]
   },
   {
     title: "Knight Day Fantasy (Retro Game)",
     category: "Professional",
     description: "Designed and released a Unity-based platformer on itch.io with custom mechanics and retro pixel art; 2000+ plays recorded.",
-    tech: ["Unity", "C#", "Game Development"],
-    link: "YOUR_ITCH_IO_GAME_LINK_HERE"
+    details: "A 2D pixel-art platformer developed in Unity (C#). Features include a custom physics engine for tight movement controls, a dynamic day-night cycle that affects gameplay mechanics, and original sprite work. The game achieved over 2000 plays on itch.io and received positive community feedback for its level design.",
+    tech: ["Unity", "C#", "Game Development", "Pixel Art", "Aseprite"],
+    link: "YOUR_ITCH_IO_GAME_LINK_HERE",
+    status: "PUBLIC // DEPLOYED",
+    classification: "UNCLASSIFIED",
+    date: "2021",
+    images: [
+      "https://placehold.co/600x400/05080f/00e5ff?text=Gameplay+Screenshot",
+      "https://placehold.co/600x400/05080f/00e5ff?text=Level+Design"
+    ]
   },
   {
-    title: "Full Stack Dev (MUN, Web3, Finance Tracker)",
-    category: "Academic",
-    description: "Delivered 3 full-stack apps including a Django finance tracker, an Ethereum-based voting dApp, and a React event portal.",
-    tech: ["Django", "Ethereum", "React", "Full Stack"],
-    link: "https://github.com/athulbaburaj?tab=repositories"
+    title: "Personal Finance Tracker",
+    category: "Personal",
+    description: "Django-based application with data visualization for tracking personal expenses and budgeting.",
+    details: "Developed a comprehensive finance tracking application using Django. Features include expense categorization, monthly budget setting, and interactive charts for visualizing spending habits. Implemented user authentication and data persistence with PostgreSQL.",
+    tech: ["Django", "Python", "PostgreSQL", "Chart.js", "Bootstrap"],
+    link: "https://github.com/athulbaburaj?tab=repositories",
+    status: "ARCHIVED // COMPLETED",
+    classification: "RESTRICTED",
+    date: "2020",
+    images: [
+      "https://placehold.co/600x400/05080f/00e5ff?text=Finance+Dashboard",
+      "https://placehold.co/600x400/05080f/00e5ff?text=Expense+Charts"
+    ]
+  },
+  {
+    title: "Decentralized Voting System",
+    category: "Personal",
+    description: "Ethereum-based dApp using Solidity smart contracts for secure, transparent, and tamper-proof voting.",
+    details: "Built a decentralized application (dApp) for voting on the Ethereum blockchain. Wrote smart contracts in Solidity to handle vote casting and tallying, ensuring immutability and transparency. The frontend interacts with the blockchain via Web3.js.",
+    tech: ["Ethereum", "Solidity", "Web3.js", "React", "Blockchain"],
+    link: "https://github.com/athulbaburaj?tab=repositories",
+    status: "ARCHIVED // DEPLOYED",
+    classification: "CONFIDENTIAL",
+    date: "2021",
+    images: [
+      "https://placehold.co/600x400/05080f/00e5ff?text=Voting+Interface",
+      "https://placehold.co/600x400/05080f/00e5ff?text=Smart+Contract"
+    ]
+  },
+  {
+    title: "MUN Event Portal",
+    category: "Personal",
+    description: "React & Node.js platform for managing Model United Nations events, handling registrations, and scheduling.",
+    details: "A full-stack web platform designed to streamline the organization of Model United Nations conferences. Features include delegate registration, committee allocation, dynamic scheduling, and an admin dashboard for event management.",
+    tech: ["React", "Node.js", "Express", "MongoDB", "Redux"],
+    link: "https://github.com/athulbaburaj?tab=repositories",
+    status: "ARCHIVED // COMPLETED",
+    classification: "UNCLASSIFIED",
+    date: "2022",
+    images: [
+      "https://placehold.co/600x400/05080f/00e5ff?text=Event+Dashboard",
+      "https://placehold.co/600x400/05080f/00e5ff?text=Registration+Flow"
+    ]
   },
   {
     title: "Arduino Smart Freshener (Tathva'19)",
     category: "Academic",
     description: "Built IoT-based automation prototype featured at Tathva Expo; introduced custom sensor trigger logic.",
-    tech: ["Arduino", "IoT", "Sensors"],
-    link: "#"
+    details: "An IoT prototype designed for smart home automation. Used Arduino Uno with ultrasonic and IR sensors to detect room occupancy and trigger air freshener sprays intelligently. The system included a custom delay logic to conserve refill usage and was showcased at the Tathva '19 technical exhibition.",
+    tech: ["Arduino", "IoT", "C++", "Sensors", "Prototyping"],
+    link: "#",
+    status: "PROTOTYPE // DEMO",
+    classification: "INTERNAL",
+    date: "2019",
+    images: [
+      "https://placehold.co/600x400/05080f/00e5ff?text=Hardware+Setup",
+      "https://placehold.co/600x400/05080f/00e5ff?text=Expo+Demo"
+    ]
   }
 ];
 

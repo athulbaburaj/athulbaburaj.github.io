@@ -1,23 +1,43 @@
 // src/pages/ProjectsPage.js
 import React, { useState } from 'react';
 import ProjectCard from '../components/ProjectCard';
+import ProjectDetailsModal from '../components/ProjectDetailsModal';
 import { projects as projectData } from '../data/resumeData';
 
 const ProjectsPage = () => {
   const [activeTab, setActiveTab] = useState('Professional');
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredProjects = projectData.filter(project => {
     if (activeTab === 'Professional') return project.category === 'Professional';
     if (activeTab === 'Academic') return project.category === 'Academic';
+    if (activeTab === 'Personal') return project.category === 'Personal';
     return true;
   });
 
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedProject(null), 300); // Wait for animation
+  };
+
   return (
     <div className="text-white min-h-screen pt-10">
+      <ProjectDetailsModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
+
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-center mb-12">
           <div className="h-px w-20 bg-ops-green/50"></div>
-          <h1 className="text-4xl md:text-5xl font-bold text-center text-white px-6 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(0,255,65,0.5)]">
+          <h1 className="text-4xl md:text-5xl font-bold text-center text-white px-6 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]">
             Mission_Log
           </h1>
           <div className="h-px w-20 bg-ops-green/50"></div>
@@ -25,12 +45,12 @@ const ProjectsPage = () => {
 
         {/* Tabs */}
         <div className="flex justify-center mb-12 space-x-6">
-          {['Professional', 'Academic'].map((tab) => (
+          {['Professional', 'Academic', 'Personal'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-6 py-2 font-mono text-sm tracking-widest uppercase transition-all duration-300 border ${activeTab === tab
-                ? 'bg-ops-green text-black border-ops-green shadow-[0_0_15px_rgba(0,255,65,0.4)]'
+                ? 'bg-ops-green text-black border-ops-green shadow-[0_0_15px_rgba(0,229,255,0.4)]'
                 : 'bg-transparent text-ops-green border-ops-green/30 hover:border-ops-green hover:text-white'
                 }`}
             >
@@ -42,7 +62,9 @@ const ProjectsPage = () => {
         {filteredProjects.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredProjects.map((project, index) => (
-              <ProjectCard key={index} project={project} index={index} />
+              <div key={index} onClick={() => handleProjectClick(project)} className="cursor-pointer">
+                <ProjectCard project={project} index={index} />
+              </div>
             ))}
           </div>
         ) : (

@@ -7,14 +7,14 @@ module.exports = {
     extend: {
       colors: {
         'ops-green': {
-          DEFAULT: '#00ff41', // Classic terminal green - keeping for accents
-          dim: '#008f11',
-          glow: '#00ff41',
-          dark: '#0a0a0a', // Darker, cleaner black
-          light: '#e5ffe5', // Very light green for text
+          DEFAULT: '#00e5ff', // Electric Cyan
+          dim: '#008f99',
+          glow: '#00e5ff',
+          dark: '#05080f', // Deep Blue-Gray
+          light: '#e5ffff', // Very light cyan for text
         },
-        'ops-black': '#050505', // Deep black
-        'ops-gray': '#121212', // Slightly lighter black for cards
+        'ops-black': '#05080f', // Deep Blue-Gray
+        'ops-gray': '#0a1120', // Slightly lighter blue-gray for cards
       },
       fontFamily: {
         sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'], // Clean sans-serif for body

@@ -1,11 +1,10 @@
 // src/components/ProjectCard.js
 import React from 'react';
-import { FaLink, FaGithub } from 'react-icons/fa';
 
 const ProjectCard = ({ project, index }) => {
   return (
     <div
-      className="group bg-ops-black border border-ops-green/30 p-6 flex flex-col h-full relative overflow-hidden transition-all duration-300 hover:border-ops-green hover:shadow-[0_0_20px_rgba(0,255,65,0.15)]"
+      className="group bg-ops-black border border-ops-green/30 p-6 flex flex-col h-full relative overflow-hidden transition-all duration-300 hover:border-ops-green hover:shadow-[0_0_20px_rgba(0,229,255,0.15)]"
       style={{ animationDelay: `${index * 100}ms` }}
     >
       {/* Card Decor */}
@@ -33,26 +32,10 @@ const ProjectCard = ({ project, index }) => {
         </div>
       )}
 
-      {(project.link && project.link !== "#" && project.link !== "YOUR_ITCH_IO_GAME_LINK_HERE") || (project.title.includes("Full Stack Dev")) ? (
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center text-ops-green hover:text-white font-bold tracking-wider transition-colors mt-auto group/link"
-        >
-          {project.title.includes("Full Stack Dev") || project.link.includes("github.com") ?
-            <FaGithub className="mr-2 group-hover/link:animate-pulse" /> :
-            <FaLink className="mr-2 group-hover/link:animate-pulse" />
-          }
-          <span className="border-b border-transparent group-hover/link:border-ops-green transition-all">
-            INITIATE_LINK
-          </span>
-        </a>
-      ) : project.link === "YOUR_ITCH_IO_GAME_LINK_HERE" ? (
-        <p className="text-xs text-ops-green/40 mt-auto font-mono">&gt;&gt; LINK_PENDING_AUTHORIZATION</p>
-      ) : (
-        <p className="text-xs text-ops-green/40 mt-auto font-mono">&gt;&gt; ACCESS_DENIED</p>
-      )}
+      <div className="mt-auto pt-4 border-t border-ops-green/10 flex items-center justify-between text-xs font-mono text-ops-green/60 group-hover:text-ops-green transition-colors">
+        <span>&gt;&gt; CLICK_TO_VIEW_INTEL</span>
+        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">[OPEN_FILE]</span>
+      </div>
     </div>
   );
 };
