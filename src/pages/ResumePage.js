@@ -2,142 +2,139 @@
 import React from 'react';
 import { skills, certifications, experience, education } from '../data/resumeData';
 import { FaDownload, FaBriefcase, FaGraduationCap, FaStar, FaTools } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
-// Path to your resume PDF in the public folder
 const resumePdfPath = '/resume/Athul_Baburaj_Resume.pdf';
 
 const ResumePage = () => {
-  const skillCategories = [
-    { title: "Programming", items: skills.programming, icon: <FaTools className="mr-2 text-ops-green" /> },
-    { title: "Cloud & DevOps", items: skills.cloudDevOps, icon: <FaTools className="mr-2 text-ops-green" /> },
-    { title: "Databases", items: skills.databases, icon: <FaTools className="mr-2 text-ops-green" /> },
-    { title: "Machine Learning", items: skills.machineLearning, icon: <FaTools className="mr-2 text-ops-green" /> },
-    { title: "Tools & Frameworks", items: skills.toolsFrameworks, icon: <FaTools className="mr-2 text-ops-green" /> }
-  ];
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
 
   return (
-    <div className="text-gray-300 min-h-screen py-10 md:py-16 pt-10 relative overflow-hidden">
-      {/* Subtle Background Grid */}
-      {/* Global background shows through */}
-
-      <div className="container mx-auto px-6 max-w-5xl">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-white/10 pb-6">
+    <div className="min-h-screen py-12 relative">
+      <motion.div
+        className="container mx-auto px-6 max-w-screen-2xl"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        {/* Header */}
+        <motion.div variants={itemVariants} className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-6">
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
-              Resume
+            <h1 className="text-4xl md:text-5xl font-hero font-bold text-white tracking-tighter leading-[0.9] mb-2">
+              Professional <br /> History.
             </h1>
-            <p className="text-ops-green font-mono text-sm tracking-widest uppercase">Professional Experience & Skills</p>
+            <p className="text-gray-400 text-xs font-mono tracking-widest uppercase">
+              Experience_Log // Credentials
+            </p>
           </div>
-
           <a
             href={resumePdfPath}
             download="Athul_Baburaj_Resume.pdf"
-            className="mt-6 md:mt-0 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-ops-green text-white font-medium py-2 px-5 rounded-sm transition-all duration-300 flex items-center group"
+            className="group flex items-center gap-3 px-4 py-2 border border-white/20 bg-white/5 hover:bg-white hover:text-black transition-all duration-300 text-sm font-bold tracking-wider mt-6 md:mt-0"
           >
-            <FaDownload className="mr-3 text-ops-green group-hover:translate-y-0.5 transition-transform" />
-            <span>Download PDF</span>
+            <FaDownload className="text-electric-violet group-hover:text-black transition-colors" />
+            DOWNLOAD PDF
           </a>
-        </div>
+        </motion.div>
 
-        {/* Professional Experience Section */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white mb-8 flex items-center tracking-wide">
-            <FaBriefcase className="mr-4 text-ops-green" />
-            Experience
-          </h2>
-          <div className="space-y-10">
-            {experience.map((exp, index) => (
-              <div key={index} className="relative pl-8 border-l border-white/10 hover:border-ops-green/50 transition-colors duration-300">
-                {/* Timeline Dot */}
-                <div className="absolute top-0 left-[-5px] w-2.5 h-2.5 bg-ops-black border border-ops-green rounded-full"></div>
+        <div className="grid lg:grid-cols-3 gap-8">
 
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline mb-3">
-                  <div>
-                    <h3 className="text-xl font-bold text-white">{exp.role}</h3>
-                    <p className="text-base text-gray-400 mt-0.5">{exp.company} <span className="text-gray-600 mx-2">|</span> {exp.location}</p>
+          {/* Left Col: Experience (Variable Width) */}
+          <motion.div variants={itemVariants} className="lg:col-span-2 space-y-8">
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+              <FaBriefcase className="text-electric-violet" /> Experience
+            </h3>
+
+            <div className="relative border-l border-white/10 ml-3 space-y-10 pb-6">
+              {experience.map((exp, index) => (
+                <div key={index} className="relative pl-8 group">
+                  {/* Dot */}
+                  <div className="absolute top-1.5 left-[-4px] w-2 h-2 bg-obsidian border border-gray-600 group-hover:border-electric-violet group-hover:bg-electric-violet rounded-full transition-all duration-300"></div>
+
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-baseline mb-2">
+                    <h4 className="text-xl font-bold text-white group-hover:text-electric-violet transition-colors">{exp.role}</h4>
+                    <span className="font-mono text-[10px] text-gray-400 border border-white/10 px-2 py-0.5 rounded-sm bg-white/5">{exp.period}</span>
                   </div>
-                  <span className="mt-2 md:mt-0 font-mono text-xs text-ops-green bg-ops-green/5 px-2 py-1 rounded-sm border border-ops-green/20">
-                    {exp.period}
-                  </span>
+                  <div className="text-sm text-gray-400 mb-3 font-medium">{exp.company} • {exp.location}</div>
+                  <ul className="space-y-1">
+                    {exp.points.map((point, i) => (
+                      <li key={i} className="text-xs md:text-sm text-gray-500 leading-relaxed flex items-start">
+                        <span className="mr-2 text-electric-violet opacity-60">-</span>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+              ))}
+            </div>
+          </motion.div>
 
-                <ul className="space-y-2 text-gray-300 text-sm leading-relaxed max-w-4xl">
-                  {exp.points.map((point, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="text-ops-green mr-3 mt-1.5 text-[10px]">●</span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <div className="grid md:grid-cols-2 gap-10 mb-16">
-          {/* Education Section */}
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center tracking-wide">
-              <FaGraduationCap className="mr-4 text-ops-green" />
-              Education
-            </h2>
-            <div className="space-y-6">
+          {/* Right Col: Skills & Education */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            {/* Education */}
+            <div>
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                <FaGraduationCap className="text-electric-violet" /> Education
+              </h3>
               {education.map((edu, index) => (
-                <div key={index} className="tech-card p-5">
-                  <h3 className="text-lg font-bold text-white mb-1">{edu.institution}</h3>
-                  <p className="text-gray-400 mb-1 text-sm">{edu.degree}</p>
-                  <div className="flex justify-between items-center text-xs text-gray-500 font-mono mt-3 pt-3 border-t border-white/5">
+                <div key={index} className="bg-white/5 border border-white/10 p-5 mb-4 backdrop-blur-sm">
+                  <h4 className="text-white font-bold">{edu.institution}</h4>
+                  <div className="text-xs text-electric-violet mt-1">{edu.degree}</div>
+                  <div className="text-[10px] text-gray-500 mt-2 font-mono flex justify-between uppercase">
                     <span>{edu.period}</span>
-                    <span className="text-ops-green">{edu.grade}</span>
+                    <span>{edu.grade}</span>
                   </div>
-                  {edu.notes && <p className="text-xs text-gray-500 mt-2 leading-relaxed">{edu.notes}</p>}
                 </div>
               ))}
             </div>
-          </section>
 
-          {/* Certifications Section */}
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center tracking-wide">
-              <FaStar className="mr-4 text-ops-green" />
-              Certifications
-            </h2>
-            <div className="space-y-3">
-              {certifications.map((cert, index) => (
-                <div key={index} className="flex items-center p-3 bg-white/5 border border-white/5 rounded-sm hover:border-ops-green/30 transition-colors">
-                  <div className="w-1.5 h-1.5 bg-ops-green mr-3 rounded-full"></div>
-                  <p className="text-gray-200 font-medium text-sm">{cert}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        {/* Skills Section */}
-        <section id="skills" className="mb-12">
-          <h2 className="text-2xl font-bold text-white mb-8 tracking-wide">
-            Technical Skills
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {skillCategories.map(category => (
-              <div key={category.title} className="tech-card p-5">
-                <h3 className="text-base font-bold text-white mb-3 flex items-center border-b border-white/5 pb-2">
-                  {category.icon}
-                  <span className="ml-2">{category.title}</span>
-                </h3>
-                <ul className="space-y-1.5">
-                  {category.items.map(skill => (
-                    <li key={skill} className="text-gray-400 text-xs flex items-center">
-                      <span className="w-1 h-1 bg-gray-600 mr-2 rounded-full"></span>
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
+            {/* Certs */}
+            <div>
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                <FaStar className="text-electric-violet" /> Certifications
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {certifications.map((cert, index) => (
+                  <div key={index} className="text-[10px] font-bold text-gray-400 border border-white/10 px-3 py-2 bg-white/5 rounded-sm hover:border-electric-violet/50 transition-colors cursor-default">
+                    {cert}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
-      </div>
+            </div>
+
+            {/* Technical Skills Condensed */}
+            <div>
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                <FaTools className="text-electric-violet" /> Tech Arsenal
+              </h3>
+              <div className="space-y-4">
+                {Object.entries(skills).map(([key, list]) => (
+                  <div key={key}>
+                    <div className="text-[10px] text-gray-600 uppercase mb-2 font-bold tracking-wider">{key.replace(/([A-Z])/g, ' $1').trim()}</div>
+                    <div className="flex flex-wrap gap-1">
+                      {list.slice(0, 8).map(skill => (
+                        <span key={skill} className="text-[10px] text-gray-400 bg-white/5 px-2 py-1 rounded-sm">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </motion.div>
+
+        </div>
+      </motion.div>
     </div>
   );
 };

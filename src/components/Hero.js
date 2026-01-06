@@ -1,80 +1,73 @@
 // src/components/Hero.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { personalInfo } from '../data/resumeData';
-import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt } from 'react-icons/fa';
-import HeroTerminal from './HeroTerminal';
+import { FaArrowRight } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
-const Hero = ({ openGame, toggleConsulting }) => {
+const Hero = ({ toggleConsulting }) => {
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 100, damping: 10 }
+    }
+  };
+
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-4 pb-10 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ops-black/40 via-transparent to-ops-black/40"></div>
-      </div>
+    <motion.section
+      className="flex flex-col justify-center relative z-10"
+      style={{ minHeight: '40vh' }}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Massive Typography - Scaled Down for Dashboard Feel */}
+      <motion.div className="mb-4">
+        <motion.h1 variants={itemVariants} className="font-hero text-4xl md:text-5xl text-ghost-white tracking-tighter leading-[0.9]">
+          ARCHITECTING
+        </motion.h1>
+        <motion.h1 variants={itemVariants} className="font-hero text-4xl md:text-5xl text-ghost-white tracking-tighter leading-[0.9]">
+          AT SCALE<span className="text-electric-violet">.</span>
+        </motion.h1>
+      </motion.div>
 
-          {/* Left Column: Text Content */}
-          <div className="space-y-8 text-center lg:text-left">
-            <div className="inline-block px-3 py-1 border border-ops-green/30 bg-ops-green/5 text-ops-green font-mono text-sm tracking-widest mb-4">
-              STATUS: ONLINE
-            </div>
+      <motion.div
+        className="flex flex-col md:flex-row md:items-end justify-between gap-12"
+      >
+        <motion.div variants={itemVariants} className="max-w-xl">
+          <p className="text-lg md:text-xl text-gray-400 font-light leading-relaxed">
+            I craft scalable digital infrastructure and high-performance applications.
+            Merging <span className="text-white font-medium">computer science</span> with <span className="text-white font-medium">architectural precision</span>.
+          </p>
+        </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-none">
-              ATHUL <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-ops-green to-blue-600">
-                BABURAJ
-              </span>
-            </h1>
+        <motion.div variants={itemVariants} className="flex flex-col space-y-4 min-w-[200px]">
+          <Link to="/projects" className="group flex items-center justify-between text-lg text-white border-b border-white/20 pb-2 hover:border-electric-violet hover:text-electric-violet transition-all duration-300">
+            <span>View Work</span>
+            <FaArrowRight className="transform -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+          </Link>
+          <button onClick={toggleConsulting} className="group flex items-center justify-between text-lg text-gray-400 border-b border-white/10 pb-2 hover:border-electric-violet hover:text-white transition-all duration-300">
+            <span>Services</span>
+            <FaArrowRight className="transform -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+          </button>
+        </motion.div>
+      </motion.div>
 
-            <p className="text-xl text-gray-400 max-w-lg leading-relaxed mx-auto lg:mx-0">
-              Full-Stack Developer & AI Enthusiast building digital experiences that merge
-              <span className="text-ops-green font-mono mx-2">&lt;code&gt;</span>
-              with creativity.
-            </p>
-
-            <div className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start">
-              <Link to="/projects" className="btn-ops group">
-                View Projects
-                <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
-              </Link>
-
-              <button
-                onClick={toggleConsulting}
-                className="px-8 py-3 border border-ops-green text-ops-green font-mono tracking-widest hover:bg-ops-green hover:text-ops-black transition-all duration-300 flex items-center gap-2 group"
-              >
-                <span className="w-2 h-2 bg-ops-green rounded-full animate-pulse group-hover:bg-ops-black"></span>
-                CONSULTING
-              </button>
-
-              <Link to="/resume" className="px-8 py-3 border border-gray-700 text-gray-300 font-mono hover:border-ops-green hover:text-ops-green transition-all duration-300 inline-flex items-center gap-2 group">
-                <FaFileAlt className="group-hover:scale-110 transition-transform" /> Resume
-              </Link>
-            </div>
-
-            <div className="flex justify-center lg:justify-start space-x-8 pt-6">
-              <a href={`https://www.${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" aria-label="LinkedIn Profile">
-                <FaLinkedin size={32} />
-              </a>
-              <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" aria-label="GitHub Profile">
-                <FaGithub size={32} />
-              </a>
-              <a href={`mailto:${personalInfo.email}`} className="text-ops-green/70 hover:text-ops-green transition-all transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" aria-label="Send Email">
-                <FaEnvelope size={32} />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Hero Terminal */}
-          <div className="lg:ml-auto w-full max-w-xl">
-            <HeroTerminal openGame={openGame} />
-          </div>
-
-        </div>
-      </div>
-    </section>
+    </motion.section >
   );
 };
 

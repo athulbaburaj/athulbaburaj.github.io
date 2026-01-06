@@ -75,6 +75,7 @@ export const projects = [
   {
     title: "DC-DC Converter Reinforcement Learning",
     category: "Academic",
+    featured: true,
     description: "Engineered an RL controller for boost converters using DDPG to handle CPLs; improved voltage stability under load shifts.",
     details: "This project focused on stabilizing DC-DC boost converters feeding Constant Power Loads (CPLs), which are notoriously unstable. I implemented a Deep Deterministic Policy Gradient (DDPG) agent in Python using PyTorch. The agent was trained to regulate output voltage dynamically against load transients, outperforming traditional PID controllers in simulation tests.",
     tech: ["Python", "Reinforcement Learning", "DDPG", "PyTorch", "Power Electronics"],
@@ -83,25 +84,11 @@ export const projects = [
     classification: "TOP SECRET",
     date: "2023",
     images: [
-      "https://placehold.co/600x400/05080f/00e5ff?text=RL+Training+Graph",
-      "https://placehold.co/600x400/05080f/00e5ff?text=Circuit+Schematic"
+      "/images/rl-dc-dc/rl-dc-dc-1-diagram.png",
+      "/images/rl-dc-dc/rl-dc-dc-diagram.png"
     ]
   },
-  {
-    title: "Knight Day Fantasy (Retro Game)",
-    category: "Professional",
-    description: "Designed and released a Unity-based platformer on itch.io with custom mechanics and retro pixel art; 2000+ plays recorded.",
-    details: "A 2D pixel-art platformer developed in Unity (C#). Features include a custom physics engine for tight movement controls, a dynamic day-night cycle that affects gameplay mechanics, and original sprite work. The game achieved over 2000 plays on itch.io and received positive community feedback for its level design.",
-    tech: ["Unity", "C#", "Game Development", "Pixel Art", "Aseprite"],
-    link: "YOUR_ITCH_IO_GAME_LINK_HERE",
-    status: "PUBLIC // DEPLOYED",
-    classification: "UNCLASSIFIED",
-    date: "2021",
-    images: [
-      "https://placehold.co/600x400/05080f/00e5ff?text=Gameplay+Screenshot",
-      "https://placehold.co/600x400/05080f/00e5ff?text=Level+Design"
-    ]
-  },
+
   {
     title: "Personal Finance Tracker",
     category: "Personal",
@@ -115,6 +102,22 @@ export const projects = [
     images: [
       "https://placehold.co/600x400/05080f/00e5ff?text=Finance+Dashboard",
       "https://placehold.co/600x400/05080f/00e5ff?text=Expense+Charts"
+    ]
+  },
+  {
+    title: "Distributed Orchestrator (Nomad-Zero)",
+    category: "Personal",
+    featured: true,
+    description: "A distributed OS-level process orchestrator using Linux Namespaces and Cgroups v2 for resource isolation.",
+    details: "Built 'Nomad-Zero', a custom orchestration engine from scratch in Go. Implements OS-level isolation using Linux namespaces (PID, Mount) and Cgroups v2 for memory limits. Features a gRPC-based control plane with a Leader-Worker architecture and 'Least-Loaded' scheduling logic, demonstrating eventual consistency in distributed systems.",
+    tech: ["Go", "gRPC", "Linux Kernel", "Protobuf", "Distributed Systems"],
+    link: "https://github.com/athulbaburaj/distributed-computing",
+    status: "PROTOTYPE // ACTIVE",
+    classification: "OPEN SOURCE",
+    date: "2024",
+    images: [
+      "/images/nomad/cover.jpg",
+      "/images/nomad/terminal-demo.png"
     ]
   },
   {
@@ -160,6 +163,22 @@ export const projects = [
     images: [
       "https://placehold.co/600x400/05080f/00e5ff?text=Hardware+Setup",
       "https://placehold.co/600x400/05080f/00e5ff?text=Expo+Demo"
+    ]
+  },
+  {
+    title: "Knight Day Fantasy (Retro Game)",
+    category: "Professional",
+    featured: true,
+    description: "Designed and released a Unity-based platformer on itch.io with custom mechanics and retro pixel art; 2000+ plays recorded.",
+    details: "A 2D pixel-art platformer developed in Unity (C#). Features include a custom physics engine for tight movement controls, a dynamic day-night cycle that affects gameplay mechanics, and original sprite work. The game achieved over 2000 plays on itch.io and received positive community feedback for its level design.",
+    tech: ["Unity", "C#", "Game Development", "Pixel Art", "Aseprite"],
+    link: "YOUR_ITCH_IO_GAME_LINK_HERE",
+    status: "PUBLIC // DEPLOYED",
+    classification: "UNCLASSIFIED",
+    date: "2021",
+    images: [
+      "/images/knightday/cover-art.png",
+      "/images/knightday/level-design.png"
     ]
   }
 ];

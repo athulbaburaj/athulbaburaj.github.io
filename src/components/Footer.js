@@ -1,24 +1,32 @@
 // src/components/Footer.js
 import React from 'react';
-import { personalInfo } from '../data/resumeData';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-ops-black border-t border-ops-green/20 py-8 mt-auto relative z-10">
-      <div className="container mx-auto px-6 text-center">
-        <div className="flex justify-center space-x-6 mb-6">
-          <a href={`https://www.${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/60 hover:text-ops-green hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.8)] transition-all transform hover:scale-110"><FaLinkedin size={24} /></a>
-          <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="text-ops-green/60 hover:text-ops-green hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.8)] transition-all transform hover:scale-110"><FaGithub size={24} /></a>
-          <a href={`mailto:${personalInfo.email}`} className="text-ops-green/60 hover:text-ops-green hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.8)] transition-all transform hover:scale-110"><FaEnvelope size={24} /></a>
+    <footer className="w-full py-12 bg-obsidian border-t border-white/5">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between items-center">
+
+        <div className="mb-6 md:mb-0">
+          <p className="text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} Athul Baburaj. All rights reserved.
+          </p>
+          <p className="text-xs text-gray-700 mt-2">
+            Designed with Typography-First Principles.
+          </p>
         </div>
-        <p className="text-ops-green/40 font-mono text-sm mb-2">
-          &copy; {new Date().getFullYear()} {personalInfo.name.toUpperCase()}. ALL_RIGHTS_RESERVED.
-        </p>
-        <p className="text-ops-green/20 text-xs font-mono">
-          {/* // SYSTEM_STATUS: ONLINE // REACT_CORE_ACTIVE */}
-          SYSTEM_STATUS: ONLINE // REACT_CORE_ACTIVE
-        </p>
+
+        <div className="flex space-x-6">
+          <a href="https://github.com/athulbaburaj" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
+            <FaGithub size={20} />
+          </a>
+          <a href="https://linkedin.com/in/athulbaburaj" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
+            <FaLinkedin size={20} />
+          </a>
+          <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
+            <FaTwitter size={20} />
+          </a>
+        </div>
       </div>
     </footer>
   );

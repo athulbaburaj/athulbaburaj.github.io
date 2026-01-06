@@ -1,129 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-ops-black text-gray-300 font-sans overflow-x-hidden antialiased leading-relaxed;
-  }
+    html {
+        /* Critical Fix: Always allow scrolling but hide the bar to prevent layout shifts */
+        overflow-y: scroll;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
+    }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-display text-white tracking-wide;
-  }
+    html::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, Opera */
+    }
 
-  /* Custom Scrollbar - Minimalist */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
+    body {
+        @apply bg-obsidian text-ghost-white font-sans antialiased selection:bg-electric-violet selection:text-white;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+    }
 
-  ::-webkit-scrollbar-track {
-    @apply bg-ops-black;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-ops-green/30 rounded-full hover:bg-ops-green/60 transition-colors;
-  }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-bold tracking-tight text-white;
+    }
 }
 
-@layer components {
-  .btn-ops {
-    @apply px-8 py-3 border border-ops-green/30 text-ops-green font-mono font-bold uppercase tracking-widest text-sm hover:bg-ops-green hover:text-black transition-all duration-300 relative overflow-hidden rounded-sm;
-  }
-
-  /* Clean Card Style */
-  .tech-card {
-    @apply bg-ops-gray border border-white/5 p-6 hover:border-ops-green/30 transition-all duration-300;
-  }
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
 }
 
-/* Subtle Grid Background - Cyan Blueprint */
-.bg-grid-subtle {
-  background-size: 40px 40px;
-  background-image: linear-gradient(to right, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
-  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+/* Subtle architectural grid */
+.bg-grid-architectural {
+    background-size: 80px 80px;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
-/* Schematic Noise Texture */
-.schematic-noise {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 5;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* Scanline Text Fill */
-.scanline-text {
-  background: linear-gradient(to bottom, #ffffff 50%, #00e5ff 50%);
-  background-size: 100% 4px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: scanText 6s linear infinite;
-}
-
-@keyframes scanText {
-  0% {
-    background-position: 0 0;
-  }
-
-  100% {
-    background-position: 0 100%;
-  }
-}
-
-/* Draw-on Animation for SVG Paths */
-.draw-path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: drawOn 2s ease-out forwards;
-}
-
-@keyframes drawOn {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Scan Reveal Animation */
-.scan-reveal {
-  position: relative;
-  overflow: hidden;
-}
-
-.scan-reveal::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #00e5ff;
-  transform: translateX(-100%);
-  animation: scanReveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-}
-
-@keyframes scanReveal {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  50% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
+/* Utility for the "Hero" text weight */
+.font-hero {
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
 }

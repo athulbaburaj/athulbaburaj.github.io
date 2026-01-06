@@ -1,105 +1,80 @@
 // src/pages/ContactPage.js
 import React from 'react';
-import { personalInfo } from '../data/resumeData';
-import { FaEnvelope, FaLinkedin, FaGithub, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const ContactPage = () => {
-  // Basic form handling (consider a service like Formspree for static sites if you want to receive emails from a form)
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(">> TRANSMISSION RECEIVED. STAND BY FOR RESPONSE.");
-    // Here you would typically handle form submission, e.g., send data to a backend or email service.
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
   };
 
   return (
-    <div className="text-white min-h-screen py-12 md:py-20 pt-10 relative overflow-hidden">
-      {/* Background Grid & Effects */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ops-black via-transparent to-ops-black"></div>
-      </div>
+    <div className="min-h-screen py-12 flex flex-col justify-center">
+      <motion.div
+        className="container mx-auto px-6 max-w-screen-xl"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex items-center justify-center mb-16">
-          <div className="h-px w-20 bg-ops-green/50"></div>
-          <h1 className="text-4xl md:text-5xl font-bold text-center text-white px-6 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(0,255,65,0.5)]">
-            Establish_Comms
-          </h1>
-          <div className="h-px w-20 bg-ops-green/50"></div>
-        </div>
-
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-          {/* Contact Information Side */}
-          <div className="bg-ops-black/60 border border-ops-green/30 p-8 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-2">
-              <div className="w-2 h-2 bg-ops-green rounded-full animate-ping"></div>
-            </div>
-
-            <h2 className="text-2xl font-bold text-white mb-6 font-mono uppercase tracking-widest border-b border-ops-green/30 pb-2">
-              Comms_Channels
-            </h2>
-            <p className="text-ops-green/70 mb-8 font-mono text-sm">
-              &gt;&gt; Open to secure channels for project discussions and mission briefings.
+        <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-16 md:gap-32">
+          {/* Left: Info */}
+          <div>
+            <h1 className="text-4xl md:text-5xl font-hero font-bold text-white tracking-tighter leading-[0.9] mb-8">
+              LET'S <br /> TALK.
+            </h1>
+            <p className="text-lg text-gray-400 font-light leading-relaxed mb-12 max-w-sm">
+              Open for high-performance architecture and AI system collaboration.
             </p>
 
             <div className="space-y-6">
-              <a href={`mailto:${personalInfo.email}`} className="flex items-center text-lg text-ops-green/80 hover:text-ops-green transition-colors group/item">
-                <div className="w-10 h-10 border border-ops-green/30 flex items-center justify-center mr-4 group-hover/item:bg-ops-green/10 transition-colors">
-                  <FaEnvelope size={18} />
-                </div>
-                <span className="font-mono">{personalInfo.email}</span>
-              </a>
+              <div>
+                <div className="text-xs text-gray-500 uppercase tracking-widest mb-1">Email</div>
+                <a href="mailto:athulbaburaj@example.com" className="text-xl text-electric-violet hover:text-white transition-colors font-mono">
+                  athulbaburaj@example.com
+                </a>
+              </div>
 
-              <a href={`https://www.${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="flex items-center text-lg text-ops-green/80 hover:text-ops-green transition-colors group/item">
-                <div className="w-10 h-10 border border-ops-green/30 flex items-center justify-center mr-4 group-hover/item:bg-ops-green/10 transition-colors">
-                  <FaLinkedin size={18} />
+              <div>
+                <div className="text-xs text-gray-500 uppercase tracking-widest mb-2">Network Uplink</div>
+                <div className="flex space-x-6">
+                  <a href="https://github.com/athulbaburaj" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><FaGithub size={24} /></a>
+                  <a href="https://linkedin.com/in/athulbaburaj" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><FaLinkedin size={24} /></a>
+                  <a href="https://twitter.com/athulbaburaj" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><FaTwitter size={24} /></a>
                 </div>
-                <span className="font-mono">LINKEDIN_UPLINK</span>
-              </a>
-
-              <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="flex items-center text-lg text-ops-green/80 hover:text-ops-green transition-colors group/item">
-                <div className="w-10 h-10 border border-ops-green/30 flex items-center justify-center mr-4 group-hover/item:bg-ops-green/10 transition-colors">
-                  <FaGithub size={18} />
-                </div>
-                <span className="font-mono">GITHUB_REPO</span>
-              </a>
-
-              <div className="flex items-center text-lg text-ops-green/80">
-                <div className="w-10 h-10 border border-ops-green/30 flex items-center justify-center mr-4">
-                  <FaMapMarkerAlt size={18} />
-                </div>
-                <span className="font-mono">LOC: BENGALURU, INDIA</span>
               </div>
             </div>
           </div>
 
-          {/* Contact Form Side (Demo) */}
-          <div className="bg-ops-black/60 border border-ops-green/30 p-8 relative">
-            <h2 className="text-2xl font-bold text-white mb-6 font-mono uppercase tracking-widest border-b border-ops-green/30 pb-2">
-              Send_Transmission
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-xs font-bold text-ops-green mb-2 uppercase tracking-wider">Identity</label>
-                <input type="text" name="name" id="name" required className="w-full bg-ops-black border border-ops-green/30 text-ops-green p-3 focus:outline-none focus:border-ops-green focus:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all font-mono placeholder-ops-green/30" placeholder="ENTER_NAME" />
+          {/* Right: Form */}
+          <motion.div variants={itemVariants} className="bg-white/5 border border-white/10 p-8 md:p-10 backdrop-blur-sm">
+            <form className="space-y-8">
+              <div className="group">
+                <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-electric-violet transition-colors">Name</label>
+                <input type="text" className="w-full bg-transparent border-b border-white/20 py-2 text-white text-sm outline-none focus:border-electric-violet transition-colors" placeholder="Name" />
               </div>
-              <div>
-                <label htmlFor="email" className="block text-xs font-bold text-ops-green mb-2 uppercase tracking-wider">Contact_Freq</label>
-                <input type="email" name="email" id="email" required className="w-full bg-ops-black border border-ops-green/30 text-ops-green p-3 focus:outline-none focus:border-ops-green focus:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all font-mono placeholder-ops-green/30" placeholder="ENTER_EMAIL" />
+              <div className="group">
+                <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-electric-violet transition-colors">Email</label>
+                <input type="email" className="w-full bg-transparent border-b border-white/20 py-2 text-white text-sm outline-none focus:border-electric-violet transition-colors" placeholder="Email Address" />
               </div>
-              <div>
-                <label htmlFor="message" className="block text-xs font-bold text-ops-green mb-2 uppercase tracking-wider">Payload</label>
-                <textarea name="message" id="message" rows="4" required className="w-full bg-ops-black border border-ops-green/30 text-ops-green p-3 focus:outline-none focus:border-ops-green focus:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all font-mono placeholder-ops-green/30" placeholder="ENTER_MESSAGE_CONTENT..."></textarea>
+              <div className="group">
+                <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-electric-violet transition-colors">Message</label>
+                <textarea rows="4" className="w-full bg-transparent border-b border-white/20 py-2 text-white text-sm outline-none focus:border-electric-violet transition-colors resize-none" placeholder="How can we collaborate?"></textarea>
               </div>
-              <div>
-                <button type="submit" className="w-full btn-ops group">
-                  Initiate_Transmission
-                </button>
-              </div>
+
+              <button className="w-full py-4 bg-white text-black font-bold tracking-widest hover:bg-electric-violet hover:text-white transition-all duration-300 text-xs">
+                SEND MESSAGE
+              </button>
             </form>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

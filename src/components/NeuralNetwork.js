@@ -1,155 +1,111 @@
-// src/components/NeuralNetwork.js
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const NeuralNetwork = ({ trainingMode }) => {
     const canvasRef = useRef(null);
-    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
-    useEffect(() => {
-        const handleResize = () => {
-            setDimensions({
-                width: window.innerWidth,
-                height: window.innerHeight
-            });
-        };
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         let animationFrameId;
-        let particles = [];
 
-        // Configuration
-        const particleCount = 80;
-        const connectionDistance = 150;
-        const mouseDistance = 200;
-
-        // Mouse position
-        let mouse = { x: null, y: null };
-
-        const handleMouseMove = (event) => {
-            const rect = canvas.getBoundingClientRect();
-            mouse.x = event.clientX - rect.left;
-            mouse.y = event.clientY - rect.top;
+        // Resize handling
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         };
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        window.addEventListener('mousemove', handleMouseMove);
+        // Node configuration
+        const nodeCount = 40;
+        const connectionDistance = 150;
+        const nodes = [];
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 1.5;
-                this.vy = (Math.random() - 0.5) * 1.5;
-                this.size = Math.random() * 2 + 1;
-                this.baseX = this.x;
-                this.baseY = this.y;
-                this.density = (Math.random() * 30) + 1;
-
-                // Target position for training mode (forming "AI" roughly)
-                // Simple grid formation for "AI" text simulation or just a cluster
-                this.targetX = Math.random() * canvas.width;
-                this.targetY = Math.random() * canvas.height;
-            }
-
-            update() {
-                if (trainingMode) {
-                    // Move towards center/target
-                    const dx = (canvas.width / 2) + (this.baseX - canvas.width / 2) * 0.85 - this.x;
-                    const dy = (canvas.height / 2) + (this.baseY - canvas.height / 2) * 0.85 - this.y;
-                    this.x += dx * 0.05;
-                    this.y += dy * 0.05;
-                } else {
-                    // Normal movement
-                    this.x += this.vx;
-                    this.y += this.vy;
-
-                    // Mouse interaction
-                    if (mouse.x != null) {
-                        let dx = mouse.x - this.x;
-                        let dy = mouse.y - this.y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < mouseDistance) {
-                            const forceDirectionX = dx / distance;
-                            const forceDirectionY = dy / distance;
-                            const maxDistance = mouseDistance;
-                            const force = (maxDistance - distance) / maxDistance;
-                            const directionX = forceDirectionX * force * this.density;
-                            const directionY = forceDirectionY * force * this.density;
-                            this.x -= directionX;
-                            this.y -= directionY;
-                        }
-                    }
-
-                    // Bounce off edges
-                    if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
-                    if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
-                }
-            }
-
-            draw() {
-                ctx.fillStyle = '#00e5ff';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        // Initialize Nodes
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * (trainingMode ? 1.5 : 0.5), // Faster in training mode
+                vy: (Math.random() - 0.5) * (trainingMode ? 1.5 : 0.5),
+                radius: Math.random() * 2 + 1,
+            });
         }
 
-        const init = () => {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+        const draw = () => {
+            // Trails effect if training mode, otherwise clear
+            if (trainingMode) {
+                ctx.fillStyle = 'rgba(5, 5, 5, 0.2)'; // Minimal trail
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
-        };
 
-        const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const activeColor = '139, 92, 246'; // Electric Violet RGB
 
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+            // Update and Draw Nodes
+            nodes.forEach((node, i) => {
+                // Movement
+                node.x += node.vx * (trainingMode ? 2 : 1);
+                node.y += node.vy * (trainingMode ? 2 : 1);
 
-                // Draw connections
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                // Bounce
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
 
-                    if (distance < connectionDistance) {
+                // Draw Node
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${activeColor}, ${trainingMode ? 0.8 : 0.5})`;
+                ctx.fill();
+
+                // Draw Connections
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const other = nodes[j];
+                    const dx = node.x - other.x;
+                    const dy = node.y - other.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDistance) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(0, 229, 255, ${1 - distance / connectionDistance})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(${activeColor}, ${1 - dist / connectionDistance})`;
+                        ctx.lineWidth = trainingMode ? 0.8 : 0.4;
+                        ctx.moveTo(node.x, node.y);
+                        ctx.lineTo(other.x, other.y);
                         ctx.stroke();
+
+                        // Active pulse packet in training mode
+                        if (trainingMode && Math.random() > 0.95) {
+                            const packetX = node.x + (other.x - node.x) * 0.5;
+                            const packetY = node.y + (other.y - node.y) * 0.5;
+                            ctx.beginPath();
+                            ctx.fillStyle = '#fff';
+                            ctx.arc(packetX, packetY, 2, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
                     }
                 }
-            }
-            animationFrameId = requestAnimationFrame(animate);
+            });
+
+            animationFrameId = requestAnimationFrame(draw);
         };
 
-        canvas.width = dimensions.width;
-        canvas.height = dimensions.height;
-        init();
-        animate();
+        draw();
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('resize', resizeCanvas);
             cancelAnimationFrame(animationFrameId);
         };
-    }, [dimensions, trainingMode]);
+    }, [trainingMode]);
 
     return (
-        <canvas
+        <motion.canvas
             ref={canvasRef}
-            className="absolute inset-0 z-0 pointer-events-none"
-            style={{ opacity: 0.4 }}
+            className="absolute inset-0 z-0 pointer-events-none opacity-40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ duration: 1 }}
         />
     );
 };
