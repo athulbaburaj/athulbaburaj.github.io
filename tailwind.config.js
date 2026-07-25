@@ -6,35 +6,27 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'obsidian': '#050505',
-        'ghost-white': '#EBE4F2',
-        'electric-violet': '#8B5CF6',
-        'subtle-gray': '#1A1A1A',
+        ground:    '#0B0B0B',
+        surface:   '#131313',
+        primary:   '#D8D8D4',
+        secondary: '#9A9A95',
+        muted:     '#7E7E79',
+        faint:     '#55554F',
+        accent:    '#8C7CDB',
+        hairline:  'rgba(255,255,255,0.07)',
+      },
+      borderColor: {
+        hairline: 'rgba(255,255,255,0.07)',
+        edge:     'rgba(255,255,255,0.14)',
       },
       fontFamily: {
-        sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
-        display: ['"Inter"', 'sans-serif'], // Display is now just bold Inter
+        sans: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
       fontSize: {
-        'xs': '0.75rem',
-        'sm': '0.875rem',
-        'base': '1rem',
-        'lg': '1.125rem',
-        'xl': '1.25rem',
-        '2xl': '1.5rem',
-        '3xl': '2rem',
-        '4xl': '3rem',
-        '5xl': '4.5rem',
-        '6xl': '6rem',
-        '7xl': '8rem', // Massive headers
-      },
-      backgroundImage: {
-        // Minimalist grid, very subtle
-        'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
-      },
-      backgroundSize: {
-        'grid-pattern': '80px 80px', // Larger grid for architectural feel
+        xs: '0.6875rem', sm: '0.8125rem', base: '0.9375rem', lg: '1.0625rem',
+        xl: '1.1875rem', '2xl': '1.375rem', '3xl': '1.625rem', '4xl': '2rem',
+        '5xl': '2.5rem', '6xl': '3rem', '7xl': '3.5rem',
       },
     },
   },

@@ -120,11 +120,19 @@ export const COMPONENTS = [
 export const calculateResult = (scenario, selectedComponentIds) => {
     const selected = COMPONENTS.filter(c => selectedComponentIds.includes(c.id));
 
+    if (selected.length === 0) {
+        return {
+            success: false,
+            message: 'NO_COMPONENTS_SELECTED',
+            stats: { cost: 0, capacity: 0, reliability: '0.0000', latency: '200' }
+        };
+    }
+
     let totalCost = 0;
     let totalCapacity = 0;
     let totalReliability = 1;
-    let baseLatency = 200; // Baseline system latency
-    let latencyImprovement = 0;
+    let addedLatency = 0;       // components that ADD latency — accumulated, not averaged
+    let latencyImprovement = 0; // components that REDUCE latency (e.g. CDN)
     let hasConsistencyViolation = false;
 
     selected.forEach(comp => {
@@ -135,16 +143,16 @@ export const calculateResult = (scenario, selectedComponentIds) => {
         if (comp.stats.latency < 0) {
             latencyImprovement += Math.abs(comp.stats.latency);
         } else {
-            baseLatency = (baseLatency + comp.stats.latency) / 2;
+            addedLatency += comp.stats.latency;
         }
 
-        // Check Consistency
         if (scenario.requirements.consistency === 'strong' && comp.stats.consistency === 'eventual') {
             hasConsistencyViolation = true;
         }
     });
 
-    const finalLatency = Math.max(1, baseLatency - latencyImprovement);
+    // 200ms baseline + accumulated component latencies - CDN-style reductions
+    const finalLatency = Math.max(1, 200 + addedLatency - latencyImprovement);
 
     // Check Constraints
     const costPass = totalCost <= scenario.budget;

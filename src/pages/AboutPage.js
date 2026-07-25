@@ -1,99 +1,75 @@
 // src/pages/AboutPage.js
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { skills, leadership } from '../data/resumeData';
-import NeuralNetwork from '../components/NeuralNetwork';
+import { Link } from 'react-router-dom';
+import { skills, leadership, personalInfo } from '../data/resumeData';
+import Seo from '../components/Seo';
 import { FaArrowRight } from 'react-icons/fa';
-import { motion } from 'framer-motion';
 
 const AboutPage = () => {
-  const navigate = useNavigate();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
-
   return (
-    <div className="min-h-screen pt-24 pb-12 relative overflow-hidden flex flex-col">
-      <NeuralNetwork />
+    <div className="min-h-screen pt-24 pb-12 flex flex-col">
+      <Seo
+        title="About"
+        description="How Athul Baburaj approaches solutions engineering: embedding with teams that own a hard problem, from distributed systems migrations to agentic AI, and shipping it to production."
+        path="/about"
+      />
 
-      <motion.div
-        className="container mx-auto px-6 relative z-10 max-w-screen-2xl"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
+      <div className="container mx-auto px-6 max-w-screen-2xl">
         {/* Header */}
-        <motion.div variants={itemVariants} className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-hero font-bold text-white tracking-tighter uppercase leading-[0.9]">
+        <div className="mb-12 pb-6 border-b border-hairline">
+          <h1 className="text-4xl md:text-5xl font-hero font-bold text-primary leading-[0.9]">
             Beyond <br /> The Code.
           </h1>
-        </motion.div>
+        </div>
 
-        {/* Dashboard Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-col">
 
-          {/* 1. Profile Card */}
-          <motion.div variants={itemVariants} className="bg-white/5 border border-white/10 p-6 backdrop-blur-sm">
-            <h3 className="text-xs font-bold text-gray-500 mb-4 tracking-widest uppercase">Profile</h3>
-            <div className="text-2xl font-bold text-white mb-1">Athul Baburaj</div>
-            <div className="text-electric-violet font-medium">Solutions Architect</div>
-            <div className="text-gray-400 text-sm mt-1">American Express • Bengaluru</div>
-          </motion.div>
-
-          {/* 2. Resume Action */}
-          <motion.button
-            variants={itemVariants}
-            onClick={() => navigate('/resume')}
-            className="group flex flex-col justify-between p-6 border border-white/20 bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-left"
-          >
-            <div className="flex justify-between w-full">
-              <span className="tracking-widest font-bold text-sm">ACCESS RESUME</span>
-              <FaArrowRight className="-rotate-45 group-hover:rotate-0 transition-transform text-lg" />
+          {/* Profile */}
+          <div className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-6 border-b border-hairline">
+            <h3 className="text-xs font-bold text-muted tracking-widest uppercase">Profile</h3>
+            <div>
+              <div className="text-xl font-bold text-primary mb-1">{personalInfo.name}</div>
+              <div className="text-secondary">{personalInfo.title}</div>
+              <div className="text-secondary text-sm mt-1">{personalInfo.company} &bull; {personalInfo.location}</div>
             </div>
-            <div className="text-xs opacity-60 mt-4 group-hover:opacity-100">
-              View full professional history and credentials.
-            </div>
-          </motion.button>
+          </div>
 
-          {/* 3. Core Competencies */}
-          <motion.div variants={itemVariants} className="bg-white/5 border border-white/10 p-6 backdrop-blur-sm lg:row-span-2">
-            <h3 className="text-xs font-bold text-gray-500 mb-4 tracking-widest uppercase">Expertise</h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.softSkills.map(skill => (
-                <span key={skill} className="px-3 py-1 bg-white/5 border border-white/10 text-xs text-gray-300 rounded-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+          {/* Resume link */}
+          <div className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-6 border-b border-hairline">
+            <h3 className="text-xs font-bold text-muted tracking-widest uppercase">Resume</h3>
+            <Link
+              to="/resume"
+              className="group flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-primary underline decoration-faint underline-offset-4 hover:text-accent hover:decoration-accent transition-colors duration-300 w-fit"
+            >
+              Access resume
+              <FaArrowRight className="text-xs transform -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+            </Link>
+          </div>
 
-          {/* 4. Leadership (Spans 2 cols on md) */}
-          <motion.div variants={itemVariants} className="bg-white/5 border border-white/10 p-6 backdrop-blur-sm md:col-span-2 lg:col-span-2">
-            <h3 className="text-xs font-bold text-gray-500 mb-4 tracking-widest uppercase">Leadership</h3>
-            <div className="grid md:grid-cols-2 gap-6">
+          {/* Expertise */}
+          <div className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-6 border-b border-hairline">
+            <h3 className="text-xs font-bold text-muted tracking-widest uppercase">Expertise</h3>
+            <p className="text-secondary text-sm leading-relaxed measure">
+              {skills.softSkills.join(' · ')}
+            </p>
+          </div>
+
+          {/* Leadership */}
+          <div className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-6 py-6 border-b border-hairline">
+            <h3 className="text-xs font-bold text-muted tracking-widest uppercase">Leadership</h3>
+            <div className="grid md:grid-cols-2 gap-8">
               {leadership.map((item, idx) => (
                 <div key={idx}>
-                  <h4 className="font-bold text-white text-sm mb-1">{item.role}</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed border-l-2 border-electric-violet/30 pl-3">
+                  <h4 className="font-bold text-primary text-sm mb-1">{item.role}</h4>
+                  <p className="text-xs text-secondary leading-relaxed measure">
                     {item.description}
                   </p>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

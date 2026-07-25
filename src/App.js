@@ -1,22 +1,31 @@
 // src/App.js
-import React, { useState } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Import your components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ResumePage from './pages/ResumePage';
-import ProjectsPage from './pages/ProjectsPage';
-import ContactPage from './pages/ContactPage';
-import BlogPage from './pages/BlogPage';
-import ArchitectPage from './pages/ArchitectPage'; // Rename/Re-purpose if needed
-import SecretDocPage from './pages/SecretDocPage';
-import ConsultingModal from './components/ConsultingModal';
-import InteractiveGrid from './components/InteractiveGrid';
 import ScrollProgress from './components/ScrollProgress';
+import ErrorBoundary from './components/ErrorBoundary';
+
+// Route pages are code-split — each becomes its own chunk, fetched on demand.
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ResumePage = lazy(() => import('./pages/ResumePage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const SecretDocPage = lazy(() => import('./pages/SecretDocPage'));
+
+// Quiet, on-brand fallback shown while a route chunk loads
+const RouteFallback = () => (
+  <div className="min-h-[60vh] flex items-center justify-center">
+    <span className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase">
+      Loading
+    </span>
+  </div>
+);
 
 // Simplified page transitions for a "sharp" feel
 const pageVariants = {
@@ -44,47 +53,41 @@ const AnimatedPage = ({ children }) => (
   </motion.div>
 );
 
-const AppRoutes = ({ toggleConsulting }) => {
+const AppRoutes = () => {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<AnimatedPage><HomePage toggleConsulting={toggleConsulting} /></AnimatedPage>} />
-        <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
-        <Route path="/resume" element={<AnimatedPage><ResumePage /></AnimatedPage>} />
-        <Route path="/projects" element={<AnimatedPage><ProjectsPage /></AnimatedPage>} />
-        <Route path="/blog" element={<AnimatedPage><BlogPage /></AnimatedPage>} />
-        <Route path="/simulation" element={<AnimatedPage><ArchitectPage /></AnimatedPage>} />
-        <Route path="/contact" element={<AnimatedPage><ContactPage /></AnimatedPage>} />
-        <Route path="/course-description" element={<AnimatedPage><SecretDocPage /></AnimatedPage>} />
-      </Routes>
-    </AnimatePresence>
+    <Suspense fallback={<RouteFallback />}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<AnimatedPage><HomePage /></AnimatedPage>} />
+          <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
+          <Route path="/resume" element={<AnimatedPage><ResumePage /></AnimatedPage>} />
+          <Route path="/projects" element={<AnimatedPage><ProjectsPage /></AnimatedPage>} />
+          <Route path="/blog" element={<AnimatedPage><BlogPage /></AnimatedPage>} />
+          <Route path="/contact" element={<AnimatedPage><ContactPage /></AnimatedPage>} />
+          <Route path="/course-description" element={<AnimatedPage><SecretDocPage /></AnimatedPage>} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AnimatePresence>
+    </Suspense>
   );
 };
 
 const App = () => {
-  const [isConsultingOpen, setIsConsultingOpen] = useState(false);
-
-  const toggleConsulting = () => {
-    setIsConsultingOpen(!isConsultingOpen);
-  };
-
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-obsidian text-ghost-white font-sans selection:bg-electric-violet selection:text-white overflow-x-hidden">
+      <div className="flex flex-col min-h-screen bg-ground text-primary font-sans overflow-x-hidden">
 
-        {/* Interactive Grid Background */}
-        <InteractiveGrid />
         <ScrollProgress />
-
-        <ConsultingModal isOpen={isConsultingOpen} onClose={() => setIsConsultingOpen(false)} />
 
         {/* Main Content Wrapper */}
         <div className="relative z-10 flex flex-col min-h-screen max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24">
-          <Navbar toggleConsulting={toggleConsulting} />
+          <Navbar />
 
           <main className="flex-grow flex flex-col pt-20 pb-32">
-            <AppRoutes toggleConsulting={toggleConsulting} />
+            <ErrorBoundary>
+              <AppRoutes />
+            </ErrorBoundary>
           </main>
 
           <Footer />

@@ -1,92 +1,72 @@
-// src/components/Philosophy.js
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaLayerGroup, FaNetworkWired, FaBolt } from 'react-icons/fa';
+import { FaUsers, FaBolt, FaCubes } from 'react-icons/fa';
 
 const Philosophy = () => {
     const pillars = [
         {
-            icon: <FaLayerGroup />,
-            title: "Holistic Design",
-            desc: "Architecture isn't just about code. It's about how data flows, how systems fail, and how components evolve independently."
-        },
-        {
-            icon: <FaNetworkWired />,
-            title: "Scalable Systems",
-            desc: "Building for today's 100 users and tomorrow's 1 million. I prioritize stateless services, horizontal scaling, and efficient caching strategies."
+            icon: <FaUsers />,
+            title: "Closest to the Problem",
+            desc: "The best spec comes from sitting with the people who have the problem. I've been solutions architect across internal service mergers — absorbing constraints from teams that didn't agree yet, and turning that into something that shipped."
         },
         {
             icon: <FaBolt />,
-            title: "Performance First",
-            desc: "Latency is the new downtime. I obsess over database indexing, query optimization, and minimizing client-side overhead."
+            title: "Ship, Then Sharpen",
+            desc: "A working prototype answers questions a document can't. I built the frontend for a cloud migration orchestrator to unblock a team's POC, then hardened it — validators, automation, the unglamorous parts — once the shape was proven."
+        },
+        {
+            icon: <FaCubes />,
+            title: "Primitives Over Abstractions",
+            desc: "I've built a distributed orchestrator on Linux namespaces, cgroups and gRPC — because understanding the substrate is what separates engineers who use platforms from engineers who build them."
         }
     ];
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.2
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { type: "spring", stiffness: 50, damping: 20 }
-        }
-    };
-
     return (
-        <section className="flex flex-col justify-center py-4 relative" style={{ minHeight: '45vh' }}>
-            <motion.div
-                className="container mx-auto px-6 max-w-screen-2xl"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={containerVariants}
-            >
+        <section className="py-16 relative">
+            <div className="container mx-auto px-6 max-w-screen-2xl">
 
                 {/* Header */}
-                <motion.div variants={itemVariants} className="flex flex-col md:flex-row justify-between items-center mb-4">
-                    <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight leading-none uppercase">
-                        Engineering Philosophy.
-                    </h2>
-                    <p className="text-gray-400 text-xs max-w-lg mt-2 md:mt-0 text-right md:text-left hidden md:block">
-                        Beyond code: Resilient, Efficient, Maintainable.
-                    </p>
-                </motion.div>
+                <div className="mb-6">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline">
+                        <h2 className="text-2xl md:text-3xl font-bold text-primary leading-none uppercase">
+                            Engineering Philosophy.
+                        </h2>
+                        <span className="font-mono text-[10px] tracking-[0.25em] text-muted uppercase hidden md:block">
+                            Embedded // Iterative // Deep
+                        </span>
+                    </div>
+                    <div className="h-px bg-hairline w-full mt-3" />
+                </div>
 
-                {/* Grid */}
-                <div className="grid md:grid-cols-3 gap-4">
+                {/* Rows */}
+                <div className="flex flex-col">
                     {pillars.map((pillar, idx) => (
-                        <motion.div
+                        <div
                             key={idx}
-                            variants={itemVariants}
-                            whileHover={{ y: -2 }}
-                            className="group p-4 border border-white/10 hover:border-electric-violet/50 bg-white/5 backdrop-blur-sm transition-all duration-300 rounded-sm"
+                            className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-3 py-8 border-b border-hairline"
                         >
-                            <div className="flex items-center gap-3 mb-2">
-                                <div className="text-lg text-electric-violet group-hover:scale-110 transition-transform duration-300">
+                            {/* Label column: index + icon */}
+                            <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-4">
+                                <span className="text-xl text-muted">
                                     {pillar.icon}
-                                </div>
-                                <h3 className="text-lg font-bold text-white">
+                                </span>
+                                <span className="font-mono text-[10px] tracking-[0.3em] text-faint">
+                                    {`0${idx + 1}`}
+                                </span>
+                            </div>
+
+                            {/* Value column: title + description */}
+                            <div>
+                                <h3 className="text-base font-bold text-primary mb-2 leading-snug">
                                     {pillar.title}
                                 </h3>
+                                <p className="text-secondary text-sm leading-relaxed measure">
+                                    {pillar.desc}
+                                </p>
                             </div>
-                            <p className="text-gray-400 text-xs leading-relaxed font-light">
-                                {pillar.desc}
-                            </p>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
-            </motion.div>
+            </div>
         </section>
     );
 };

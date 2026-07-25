@@ -3,9 +3,20 @@
 export const personalInfo = {
   name: "Athul Baburaj",
   title: "Cloud Solutions Engineer",
+  company: "American Express",
+  location: "Bengaluru",
   email: "athulbaburajp23@gmail.com",
   linkedin: "linkedin.com/in/athul-baburaj",
-  github: "athulbaburaj"
+  github: "athulbaburaj",
+
+  // Deliberately left blank: this repo is public, so filling these in would
+  // disclose the role before it is announced. `announced` gates every UI use —
+  // fill the strings and flip the flag together when it goes public.
+  incomingRole: {
+    title: "",
+    company: "",
+    announced: false
+  }
 };
 
 export const skills = {
@@ -76,13 +87,15 @@ export const projects = [
     title: "DC-DC Converter Reinforcement Learning",
     category: "Academic",
     featured: true,
-    description: "Engineered an RL controller for boost converters using DDPG to handle CPLs; improved voltage stability under load shifts.",
-    details: "This project focused on stabilizing DC-DC boost converters feeding Constant Power Loads (CPLs), which are notoriously unstable. I implemented a Deep Deterministic Policy Gradient (DDPG) agent in Python using PyTorch. The agent was trained to regulate output voltage dynamically against load transients, outperforming traditional PID controllers in simulation tests.",
+    archived: false,
+    year: "2023",
+    summary: "Engineered an RL controller for boost converters using DDPG to handle CPLs; improved voltage stability under load shifts.",
+    problem: "",
+    role: "",
+    approach: "This project focused on stabilizing DC-DC boost converters feeding Constant Power Loads (CPLs), which are notoriously unstable. I implemented a Deep Deterministic Policy Gradient (DDPG) agent in Python using PyTorch. The agent was trained to regulate output voltage dynamically against load transients, outperforming traditional PID controllers in simulation tests.",
+    outcome: "",
     tech: ["Python", "Reinforcement Learning", "DDPG", "PyTorch", "Power Electronics"],
     link: "#",
-    status: "CLASSIFIED // COMPLETED",
-    classification: "TOP SECRET",
-    date: "2023",
     images: [
       "/images/rl-dc-dc/rl-dc-dc-1-diagram.png",
       "/images/rl-dc-dc/rl-dc-dc-diagram.png"
@@ -92,93 +105,125 @@ export const projects = [
   {
     title: "Personal Finance Tracker",
     category: "Personal",
-    description: "Django-based application with data visualization for tracking personal expenses and budgeting.",
-    details: "Developed a comprehensive finance tracking application using Django. Features include expense categorization, monthly budget setting, and interactive charts for visualizing spending habits. Implemented user authentication and data persistence with PostgreSQL.",
+    archived: true,
+    year: "2020",
+    summary: "Django-based application with data visualization for tracking personal expenses and budgeting.",
+    problem: "",
+    role: "",
+    approach: "Developed a comprehensive finance tracking application using Django. Features include expense categorization, monthly budget setting, and interactive charts for visualizing spending habits. Implemented user authentication and data persistence with PostgreSQL.",
+    outcome: "",
     tech: ["Django", "Python", "PostgreSQL", "Chart.js", "Bootstrap"],
-    link: "https://github.com/athulbaburaj?tab=repositories",
-    status: "ARCHIVED // COMPLETED",
-    classification: "RESTRICTED",
-    date: "2020",
-    images: [
-      "https://placehold.co/600x400/05080f/00e5ff?text=Finance+Dashboard",
-      "https://placehold.co/600x400/05080f/00e5ff?text=Expense+Charts"
-    ]
+    link: ""
   },
   {
     title: "Distributed Orchestrator (Nomad-Zero)",
     category: "Personal",
     featured: true,
-    description: "A distributed OS-level process orchestrator using Linux Namespaces and Cgroups v2 for resource isolation.",
-    details: "Built 'Nomad-Zero', a custom orchestration engine from scratch in Go. Implements OS-level isolation using Linux namespaces (PID, Mount) and Cgroups v2 for memory limits. Features a gRPC-based control plane with a Leader-Worker architecture and 'Least-Loaded' scheduling logic, demonstrating eventual consistency in distributed systems.",
+    archived: false,
+    year: "2024",
+    summary: "A distributed OS-level process orchestrator using Linux Namespaces and Cgroups v2 for resource isolation.",
+    problem: "",
+    role: "",
+    approach: "Built 'Nomad-Zero', a custom orchestration engine from scratch in Go. Implements OS-level isolation using Linux namespaces (PID, Mount) and Cgroups v2 for memory limits. Features a gRPC-based control plane with a Leader-Worker architecture and 'Least-Loaded' scheduling logic, demonstrating eventual consistency in distributed systems.",
+    outcome: "",
     tech: ["Go", "gRPC", "Linux Kernel", "Protobuf", "Distributed Systems"],
     link: "https://github.com/athulbaburaj/distributed-computing",
-    status: "PROTOTYPE // ACTIVE",
-    classification: "OPEN SOURCE",
-    date: "2024",
     images: [
-      "/images/nomad/cover.jpg",
-      "/images/nomad/terminal-demo.png"
+      "/images/nomad/cover.jpg"
     ]
   },
   {
     title: "Decentralized Voting System",
     category: "Personal",
-    description: "Ethereum-based dApp using Solidity smart contracts for secure, transparent, and tamper-proof voting.",
-    details: "Built a decentralized application (dApp) for voting on the Ethereum blockchain. Wrote smart contracts in Solidity to handle vote casting and tallying, ensuring immutability and transparency. The frontend interacts with the blockchain via Web3.js.",
+    archived: true,
+    year: "2021",
+    summary: "Ethereum-based dApp using Solidity smart contracts for secure, transparent, and tamper-proof voting.",
+    problem: "",
+    role: "",
+    approach: "Built a decentralized application (dApp) for voting on the Ethereum blockchain. Wrote smart contracts in Solidity to handle vote casting and tallying, ensuring immutability and transparency. The frontend interacts with the blockchain via Web3.js.",
+    outcome: "",
     tech: ["Ethereum", "Solidity", "Web3.js", "React", "Blockchain"],
-    link: "https://github.com/athulbaburaj?tab=repositories",
-    status: "ARCHIVED // DEPLOYED",
-    classification: "CONFIDENTIAL",
-    date: "2021",
-    images: [
-      "https://placehold.co/600x400/05080f/00e5ff?text=Voting+Interface",
-      "https://placehold.co/600x400/05080f/00e5ff?text=Smart+Contract"
-    ]
+    link: ""
   },
   {
     title: "MUN Event Portal",
     category: "Personal",
-    description: "React & Node.js platform for managing Model United Nations events, handling registrations, and scheduling.",
-    details: "A full-stack web platform designed to streamline the organization of Model United Nations conferences. Features include delegate registration, committee allocation, dynamic scheduling, and an admin dashboard for event management.",
+    archived: true,
+    year: "2022",
+    summary: "React & Node.js platform for managing Model United Nations events, handling registrations, and scheduling.",
+    problem: "",
+    role: "",
+    approach: "A full-stack web platform designed to streamline the organization of Model United Nations conferences. Features include delegate registration, committee allocation, dynamic scheduling, and an admin dashboard for event management.",
+    outcome: "",
     tech: ["React", "Node.js", "Express", "MongoDB", "Redux"],
-    link: "https://github.com/athulbaburaj?tab=repositories",
-    status: "ARCHIVED // COMPLETED",
-    classification: "UNCLASSIFIED",
-    date: "2022",
-    images: [
-      "https://placehold.co/600x400/05080f/00e5ff?text=Event+Dashboard",
-      "https://placehold.co/600x400/05080f/00e5ff?text=Registration+Flow"
-    ]
+    link: ""
   },
   {
     title: "Arduino Smart Freshener (Tathva'19)",
     category: "Academic",
-    description: "Built IoT-based automation prototype featured at Tathva Expo; introduced custom sensor trigger logic.",
-    details: "An IoT prototype designed for smart home automation. Used Arduino Uno with ultrasonic and IR sensors to detect room occupancy and trigger air freshener sprays intelligently. The system included a custom delay logic to conserve refill usage and was showcased at the Tathva '19 technical exhibition.",
+    archived: true,
+    year: "2019",
+    summary: "Built IoT-based automation prototype featured at Tathva Expo; introduced custom sensor trigger logic.",
+    problem: "",
+    role: "",
+    approach: "An IoT prototype designed for smart home automation. Used Arduino Uno with ultrasonic and IR sensors to detect room occupancy and trigger air freshener sprays intelligently. The system included a custom delay logic to conserve refill usage and was showcased at the Tathva '19 technical exhibition.",
+    outcome: "",
     tech: ["Arduino", "IoT", "C++", "Sensors", "Prototyping"],
+    link: ""
+  },
+  {
+    title: "Vince OS",
+    category: "Personal",
+    featured: true,
+    archived: false,
+    year: "2025",
+    summary: "A locally-hosted agentic OS that acts as your Second Brain — AI memory, 3D knowledge graphs, task management, and content pipelines in one premium desktop app.",
+    problem: "",
+    role: "",
+    approach: "Vince is a hybrid desktop application built with React + Tauri (Rust shell) and a Python FastAPI backend. It integrates deep AI memory via ChromaDB vector store, an interactive 3D knowledge graph that syncs live with your Obsidian Vault, an agentic chat powered by Google Gemini + Pydantic AI, a 5-stage Idea Vault kanban, a Content Pipeline for tracking posts and videos, and a Focus mode with streak tracking. Everything runs locally — your data never leaves your machine except for encrypted LLM inference calls.",
+    outcome: "",
+    tech: ["React", "Tauri (Rust)", "Python", "FastAPI", "Google Gemini", "ChromaDB", "SQLite"],
+    // Intentionally unlinked: github.com/athulbaburaj/project-vince currently
+    // holds an earlier Streamlit prototype, not the Tauri/FastAPI build described
+    // here. Set this to that URL once the real code is pushed.
     link: "#",
-    status: "PROTOTYPE // DEMO",
-    classification: "INTERNAL",
-    date: "2019",
     images: [
-      "https://placehold.co/600x400/05080f/00e5ff?text=Hardware+Setup",
-      "https://placehold.co/600x400/05080f/00e5ff?text=Expo+Demo"
+      "/images/vince/dashboard.png"
+    ]
+  },
+  {
+    title: "Valorant Scout",
+    category: "Personal",
+    featured: false,
+    archived: false,
+    year: "2025",
+    summary: "Flask-powered Valorant scouting tool that pulls team performance data via the GRID Esports API and generates detailed PDF reports.",
+    problem: "",
+    role: "",
+    approach: "Valorant Scout is a web app that lets analysts generate comprehensive scouting reports for Valorant teams. It connects to the GRID Esports API to fetch match history and performance data, processes it through a Flask backend, and renders a clean report with Jinja2 templates and Tailwind CSS. Reports can be exported as PDFs for sharing with coaching staff or team managers.",
+    outcome: "",
+    tech: ["Python", "Flask", "GRID Esports API", "Tailwind CSS", "Jinja2", "PDF Generation"],
+    link: "https://github.com/athulbaburaj/haunt-py",
+    images: [
+      "/images/valorant-scout/dashboard.png"
     ]
   },
   {
     title: "Knight Day Fantasy (Retro Game)",
     category: "Professional",
-    featured: true,
-    description: "Designed and released a Unity-based platformer on itch.io with custom mechanics and retro pixel art; 2000+ plays recorded.",
-    details: "A 2D pixel-art platformer developed in Unity (C#). Features include a custom physics engine for tight movement controls, a dynamic day-night cycle that affects gameplay mechanics, and original sprite work. The game achieved over 2000 plays on itch.io and received positive community feedback for its level design.",
+    featured: false,
+    archived: false,
+    year: "2021",
+    summary: "Designed and released a Unity-based platformer on itch.io with custom mechanics and retro pixel art; 2,000+ views on itch.io.",
+    problem: "",
+    role: "",
+    approach: "A 2D pixel-art platformer developed in Unity (C#). Features include a custom physics engine for tight movement controls, a dynamic day-night cycle that affects gameplay mechanics, and original sprite work. The game drew over 2,000 views on itch.io and received positive community feedback for its level design.",
+    outcome: "",
     tech: ["Unity", "C#", "Game Development", "Pixel Art", "Aseprite"],
-    link: "YOUR_ITCH_IO_GAME_LINK_HERE",
-    status: "PUBLIC // DEPLOYED",
-    classification: "UNCLASSIFIED",
-    date: "2021",
+    link: "#",
+    liveLink: "https://godgb.itch.io/knightdayfantasy",
     images: [
-      "/images/knightday/cover-art.png",
-      "/images/knightday/level-design.png"
+      "/images/knightday/cover-art.png"
     ]
   }
 ];

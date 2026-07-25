@@ -4,12 +4,65 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#050505" />
     <meta
       name="description"
-      content="Athul Baburaj's Portfolio showcasing projects, skills, and experience in web development."
+      content="Athul Baburaj is a Cloud Solutions Engineer at American Express, working on distributed systems, cloud platform migration, and agentic AI systems. Portfolio, projects, and writing."
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <!--
+      Static site-level social tags. These exist because most link-preview
+      crawlers (X, LinkedIn, Slack, Discord, WhatsApp) do NOT execute
+      JavaScript, so the per-route tags rendered by src/components/Seo.js are
+      invisible to them. Search engines that render JS will use the per-route
+      tags; everything else falls back to these. Keep the two in sync.
+      TODO: replace the square logo with a purpose-made 1200x630 OG image.
+    -->
+    <meta property="og:site_name" content="Athul Baburaj" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://athulbaburaj.github.io/" />
+    <meta property="og:title" content="Athul Baburaj — Cloud Solutions Engineer" />
+    <meta
+      property="og:description"
+      content="I embed with the teams that own the problem, and build until it's in production. Distributed systems, cloud platform migration, and agentic AI."
+    />
+    <meta property="og:image" content="https://athulbaburaj.github.io/logo512.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Athul Baburaj — Cloud Solutions Engineer" />
+    <meta
+      name="twitter:description"
+      content="I embed with the teams that own the problem, and build until it's in production. Distributed systems, cloud platform migration, and agentic AI."
+    />
+    <meta name="twitter:image" content="https://athulbaburaj.github.io/logo512.png" />
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+      // ----------------------------------------------------------------------
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -26,7 +79,7 @@
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <title>Athul Baburaj's Portfolio</title>
   </head>
   <body>

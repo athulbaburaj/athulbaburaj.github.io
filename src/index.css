@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Fonts are loaded via <link> in public/index.html — a CSS @import here would
+   serialise behind this stylesheet and block render. */
 
 @tailwind base;
 @tailwind components;
@@ -20,9 +21,11 @@
     }
 
     body {
-        @apply bg-obsidian text-ghost-white font-sans antialiased selection:bg-electric-violet selection:text-white;
+        @apply bg-ground text-primary font-sans antialiased selection:bg-primary/20 selection:text-primary;
         scroll-behavior: smooth;
         overflow-x: hidden;
+        line-height: 1.8;
+        letter-spacing: 0.01em;
     }
 
     h1,
@@ -31,7 +34,14 @@
     h4,
     h5,
     h6 {
-        @apply font-bold tracking-tight text-white;
+        /* No negative tracking: monospace is built around a fixed advance
+           width, and tightening it breaks the character grid. */
+        @apply font-bold text-primary;
+    }
+
+    :focus-visible {
+        outline: 2px solid #8C7CDB;
+        outline-offset: 2px;
     }
 }
 
@@ -39,20 +49,19 @@
     .text-balance {
         text-wrap: balance;
     }
+
+    /* Measure for running prose — monospace glyphs are wider than proportional
+       type, so blocks of text need a tighter line length than the ~75ch that
+       works for a sans body font. */
+    .measure {
+        max-width: 62ch;
+    }
 }
 
-/* Subtle architectural grid */
-.bg-grid-architectural {
-    background-size: 80px 80px;
-    background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-}
-
-/* Utility for the "Hero" text weight */
+/* Hero display treatment. Weight and leading only — no negative tracking, for
+   the same reason as the heading rule above. */
 .font-hero {
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.05;
 }

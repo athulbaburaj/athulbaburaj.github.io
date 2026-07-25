@@ -1,7 +1,56 @@
 // src/pages/BlogPage.js
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FaMedium, FaExternalLinkAlt, FaCalendarAlt } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { FaExternalLinkAlt, FaCalendarAlt } from 'react-icons/fa';
+import Seo from '../components/Seo';
+
+const RSS_URL = 'https://medium.com/feed/@athulbaburajp23';
+const RSS2JSON_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+const ALLORIGINS_URL = `https://api.allorigins.win/get?url=${encodeURIComponent(RSS_URL)}`;
+const MAX_RETRIES = 2;
+const TIMEOUT_MS = 8000;
+
+// Safe HTML stripper — regex only, no innerHTML, no XSS risk
+const stripHtml = (html) => html.replace(/<[^>]*>/g, '').replace(/&[a-z]+;/gi, ' ').trim();
+
+const fetchWithTimeout = (url, ms) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), ms);
+    return fetch(url, { signal: controller.signal }).finally(() => clearTimeout(timer));
+};
+
+const parseRSSItems = (xmlText) => {
+    const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+    return Array.from(xml.querySelectorAll('item')).map(item => {
+        const getTag = (tag) => item.getElementsByTagName(tag)[0]?.textContent ?? '';
+        const descHtml = getTag('description');
+        const thumbMatch = descHtml.match(/<img[^>]+src="([^"]+)"/);
+        return {
+            guid:        getTag('guid') || getTag('link'),
+            title:       getTag('title'),
+            link:        getTag('link'),
+            pubDate:     getTag('pubDate'),
+            description: descHtml,
+            thumbnail:   thumbMatch ? thumbMatch[1] : null,
+        };
+    });
+};
+
+// Try rss2json first, fall back to allorigins + XML parse
+const fetchPosts = async () => {
+    try {
+        const res = await fetchWithTimeout(RSS2JSON_URL, TIMEOUT_MS);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (data.status !== 'ok' || !data.items) throw new Error(data.message || 'Feed error');
+        return data.items;
+    } catch {
+        const res = await fetchWithTimeout(ALLORIGINS_URL, TIMEOUT_MS);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (!data.contents) throw new Error('Empty feed response');
+        return parseRSSItems(data.contents);
+    }
+};
 
 const BlogPage = () => {
     const [posts, setPosts] = useState([]);
@@ -9,83 +58,89 @@ const BlogPage = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const RSS_URL = 'https://medium.com/@athulbaburajp23/feed';
-        const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+        let cancelled = false;
 
-        fetch(API_URL)
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'ok') {
-                    setPosts(data.items);
+        const load = async (attempt = 0) => {
+            try {
+                const items = await fetchPosts();
+                if (!cancelled) {
+                    setPosts(items);
                     setLoading(false);
-                } else {
-                    throw new Error(data.message || 'Failed to fetch blog posts');
                 }
-            })
-            .catch(err => {
-                console.error("Error fetching blog posts:", err);
-                setError("Unable to load latest articles.");
-                setLoading(false);
-            });
+            } catch (err) {
+                if (cancelled) return;
+                if (attempt < MAX_RETRIES) {
+                    load(attempt + 1);
+                } else {
+                    console.error('Blog fetch failed:', err);
+                    setError(err.name === 'AbortError'
+                        ? 'Request timed out. Check your connection.'
+                        : 'Unable to load articles. Try refreshing.');
+                    setLoading(false);
+                }
+            }
+        };
+
+        load();
+        return () => { cancelled = true; };
     }, []);
 
-    const stripHtml = (html) => {
-        const tmp = document.createElement("DIV");
-        tmp.innerHTML = html;
-        return tmp.textContent || tmp.innerText || "";
-    };
-
     return (
-        <div className="min-h-screen pt-20 pb-20">
-            <div className="container mx-auto px-6 max-w-screen-xl">
+        <div className="min-h-screen py-12">
+            <Seo
+                title="Writing"
+                description="Articles and technical writing from Athul Baburaj on cloud platforms, distributed systems, and solutions engineering practice."
+                path="/blog"
+            />
+            <div className="container mx-auto px-6 max-w-screen-2xl">
 
-                <h1 className="font-hero text-6xl md:text-8xl text-white tracking-tighter leading-[0.9] mb-20">
-                    WRITING.
-                </h1>
+                <div className="mb-12 pb-6 border-b border-hairline">
+                    <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
+                        Writing // Articles
+                    </p>
+                    <h1 className="text-5xl md:text-6xl font-hero text-primary leading-[0.85]">
+                        WRITING.
+                    </h1>
+                </div>
 
                 {loading ? (
-                    <div className="text-gray-500 text-xl font-light">Loading content...</div>
+                    <div className="flex items-center gap-3 text-muted text-sm font-mono">
+                        Fetching articles...
+                    </div>
                 ) : error ? (
-                    <div className="text-gray-500 text-xl font-light">{error}</div>
+                    <div className="border-t border-hairline pt-6 max-w-md">
+                        <p className="text-secondary text-sm">{error}</p>
+                        <a
+                            href="https://medium.com/@athulbaburajp23"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center mt-4 text-xs font-bold text-primary underline decoration-faint underline-offset-4 hover:text-secondary transition-colors uppercase tracking-widest"
+                        >
+                            Read on Medium <FaExternalLinkAlt className="ml-2" size={10} />
+                        </a>
+                    </div>
                 ) : posts.length === 0 ? (
-                    <div className="text-gray-500 text-xl font-light">No articles found.</div>
+                    <div className="text-muted text-xl font-normal">No articles found.</div>
                 ) : (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    <div className="flex flex-col">
                         {posts.map((post, index) => (
-                            <motion.article
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                className="group flex flex-col h-full"
+                            <article
+                                key={post.guid || index}
+                                className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-8 border-b border-hairline"
                             >
-                                <a href={post.link} target="_blank" rel="noopener noreferrer" className="block aspect-[16/10] bg-subtle-gray mb-6 overflow-hidden relative">
-                                    {post.thumbnail ? (
-                                        <img
-                                            src={post.thumbnail}
-                                            alt={post.title}
-                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full bg-subtle-gray flex items-center justify-center">
-                                            <FaMedium size={48} className="text-gray-700" />
-                                        </div>
-                                    )}
-                                </a>
+                                <div className="flex items-center gap-2 md:flex-col md:items-start text-xs font-bold text-muted tracking-widest uppercase">
+                                    <FaCalendarAlt />
+                                    {new Date(post.pubDate).toLocaleDateString()}
+                                </div>
 
-                                <div className="flex-grow flex flex-col">
-                                    <div className="flex items-center text-xs font-bold text-gray-500 tracking-widest uppercase mb-3">
-                                        <FaCalendarAlt className="mr-2" />
-                                        {new Date(post.pubDate).toLocaleDateString()}
-                                    </div>
-
-                                    <h2 className="text-2xl font-bold text-white mb-4 leading-tight group-hover:text-electric-violet transition-colors">
+                                <div>
+                                    <h2 className="text-lg font-bold text-primary mb-2 leading-snug">
                                         <a href={post.link} target="_blank" rel="noopener noreferrer">
                                             {post.title}
                                         </a>
                                     </h2>
 
-                                    <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
+                                    <p className="text-secondary text-sm leading-relaxed mb-3 measure">
                                         {stripHtml(post.description).substring(0, 150)}...
                                     </p>
 
@@ -93,12 +148,12 @@ const BlogPage = () => {
                                         href={post.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center text-sm font-bold text-white hover:text-electric-violet transition-colors uppercase tracking-widest"
+                                        className="inline-flex items-center text-xs font-bold text-secondary hover:text-primary transition-colors uppercase tracking-widest"
                                     >
                                         READ ARTICLE <FaExternalLinkAlt className="ml-2" size={10} />
                                     </a>
                                 </div>
-                            </motion.article>
+                            </article>
                         ))}
                     </div>
                 )}

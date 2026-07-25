@@ -1,34 +1,139 @@
 // src/pages/ProjectsPage.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { projects as projectsData } from '../data/resumeData';
-import { FaArrowRight } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
-import ProjectDetailsModal from '../components/ProjectDetailsModal';
+import ProjectArchive from '../components/ProjectArchive';
+import Seo from '../components/Seo';
+
+// `link` is the single-URL field used across resumeData; githubLink/liveLink
+// take precedence so a project can carry both once the data grows.
+const isUsable = (url) => Boolean(url) && url !== '#';
+
+const FIELDS = [
+  { key: 'problem', label: 'Problem' },
+  { key: 'role', label: 'Role' },
+  { key: 'approach', label: 'Approach' },
+  { key: 'outcome', label: 'Outcome' },
+];
+
+const ProjectEntry = ({ project }) => {
+  const repoLink = project.githubLink || project.link;
+  const liveLink = project.liveLink;
+  const hasActions = isUsable(repoLink) || isUsable(liveLink);
+  const image = project.images && project.images[0];
+
+  return (
+    <div className="py-10 border-b border-hairline">
+      {/* Meta line */}
+      <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
+        {`${project.year} // ${project.category}`}
+      </p>
+
+      {/* Title */}
+      <h2 className="text-2xl md:text-3xl font-bold text-primary leading-snug mb-3">
+        {project.title}
+      </h2>
+
+      {/* Summary */}
+      <p className="text-secondary text-base leading-relaxed mb-6 measure">
+        {project.summary}
+      </p>
+
+      {image && (
+        <div className="mb-6 max-w-xs">
+          <img
+            src={image}
+            alt={project.title}
+            loading="lazy"
+            decoding="async"
+            className="w-full object-cover"
+          />
+        </div>
+      )}
+
+      <div>
+        {FIELDS.some(({ key }) => typeof project[key] === 'string' && project[key].trim()) && (
+          <div className="flex flex-col mb-6">
+            {FIELDS.map(({ key, label }) => {
+              const value = project[key];
+              if (typeof value !== 'string' || !value.trim()) return null;
+              return (
+                <div key={key} className="grid md:grid-cols-[100px_1fr] gap-x-6 gap-y-1 py-3 border-t border-hairline first:border-t-0">
+                  <h3 className="font-mono text-[10px] font-bold text-muted uppercase tracking-widest">
+                    {label}
+                  </h3>
+                  <p className="text-secondary text-sm leading-relaxed measure">
+                    {value}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {project.tech && project.tech.length > 0 && (
+          <p className="font-mono text-[10px] text-muted tracking-widest mb-4">
+            {project.tech.join(' · ')}
+          </p>
+        )}
+
+        {hasActions && (
+          <div className="flex gap-6">
+            {isUsable(repoLink) && (
+              <a
+                href={repoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-accent transition-colors"
+              >
+                View source ↗
+              </a>
+            )}
+            {isUsable(liveLink) && (
+              <a
+                href={liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-accent transition-colors"
+              >
+                Live demo ↗
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const ProjectsPage = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
   const [activeTab, setActiveTab] = useState('All');
   const tabs = ['All', 'Professional', 'Academic', 'Personal'];
 
-  const filteredProjects = activeTab === 'All'
+  const tabFilteredProjects = activeTab === 'All'
     ? projectsData
     : projectsData.filter(project => project.category === activeTab);
 
-
+  const filteredProjects = tabFilteredProjects.filter(project => !project.archived);
+  const archivedProjects = tabFilteredProjects.filter(project => project.archived);
 
   return (
     <div className="min-h-screen py-12 relative">
+      <Seo
+        title="Projects"
+        description="A portfolio of professional, academic, and personal projects from Athul Baburaj, spanning distributed systems, cloud infrastructure, and applied AI."
+        path="/projects"
+      />
       <div className="container mx-auto px-6 max-w-screen-2xl">
 
         {/* Header */}
-        <div className="mb-12 border-b border-white/10 pb-6 flex flex-col md:flex-row justify-between items-end">
+        <div className="mb-4 pb-6 border-b border-hairline flex flex-col md:flex-row justify-between items-end">
           <div>
-            <h1 className="text-4xl md:text-5xl font-hero font-bold text-white tracking-tighter leading-[0.9] mb-2">
-              PROJECTS.
-            </h1>
-            <p className="text-gray-400 text-xs font-mono tracking-widest uppercase">
+            <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
               Portfolio // {activeTab}
             </p>
+            <h1 className="text-5xl md:text-6xl font-hero text-primary leading-[0.85]">
+              PROJECTS.
+            </h1>
           </div>
 
           {/* Tabs */}
@@ -37,10 +142,12 @@ const ProjectsPage = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`text-xs font-bold tracking-widest uppercase transition-all duration-300 pb-1 border-b-2 ${activeTab === tab
-                  ? 'text-white border-electric-violet'
-                  : 'text-gray-600 border-transparent hover:text-gray-400'
-                  }`}
+                className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300
+                            pb-1 border-b-2 ${
+                  activeTab === tab
+                    ? 'text-primary border-primary'
+                    : 'text-muted border-transparent hover:text-secondary hover:border-edge'
+                }`}
               >
                 {tab}
               </button>
@@ -48,72 +155,15 @@ const ProjectsPage = () => {
           </div>
         </div>
 
-        {/* Projects Grid */}
-        <motion.div
-          layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-                className="group cursor-pointer border border-white/5 bg-white/5 hover:border-electric-violet/50 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-                onClick={() => setSelectedProject(project)}
-              >
-                {/* Project Image Area */}
-                <div className="aspect-[16/8] bg-black/50 overflow-hidden relative border-b border-white/5">
-                  {project.images && project.images[0] ? (
-                    <img
-                      src={project.images[0]}
-                      alt={project.title}
-                      className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-gray-700 font-mono text-[10px] z-0">
-                      IMAGE: {project.title}
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-electric-violet/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
+        {/* Case studies */}
+        <div className="flex flex-col">
+          {filteredProjects.map((project) => (
+            <ProjectEntry key={project.title} project={project} />
+          ))}
+        </div>
 
-                <div className="p-5">
-                  <div className="flex justify-between items-start mb-3">
-                    <h2 className="text-xl font-bold text-white group-hover:text-electric-violet transition-colors">
-                      {project.title}
-                    </h2>
-                    <FaArrowRight className="text-gray-500 text-sm transform -rotate-45 group-hover:rotate-0 group-hover:text-electric-violet transition-all duration-300" />
-                  </div>
-
-                  <p className="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2 min-h-[2.5em]">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech && project.tech.slice(0, 3).map((tech, i) => (
-                      <span key={i} className="text-[10px] font-bold text-gray-500 uppercase tracking-wider border border-white/10 px-2 py-1 rounded-sm">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <ProjectArchive projects={archivedProjects} />
       </div>
-
-      {selectedProject && (
-        <ProjectDetailsModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-          isOpen={!!selectedProject}
-        />
-      )}
     </div>
   );
 };
