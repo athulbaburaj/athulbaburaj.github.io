@@ -37,10 +37,10 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-10">
-          <NavLink to="/about" className={linkClass('text-sm font-medium')}>ABOUT</NavLink>
-          <NavLink to="/projects" className={linkClass('text-sm font-medium')}>PROJECTS</NavLink>
-          <NavLink to="/blog" className={linkClass('text-sm font-medium')}>BLOG</NavLink>
-          <NavLink to="/contact" className={linkClass('text-sm font-medium')}>LET'S TALK</NavLink>
+          <NavLink to="/projects" className={linkClass('text-sm font-medium')}>WORK</NavLink>
+          <NavLink to="/resume" className={linkClass('text-sm font-medium')}>RESUME</NavLink>
+          <NavLink to="/blog" className={linkClass('text-sm font-medium')}>WRITING</NavLink>
+          <NavLink to="/contact" className={linkClass('text-sm font-medium')}>CONTACT</NavLink>
         </div>
 
         {/* Mobile Menu Button */}
@@ -66,10 +66,10 @@ const Navbar = () => {
             transition={{ duration: 0.2, ease: 'easeOut' }}
             className="fixed inset-0 z-40 bg-ground flex flex-col items-center justify-center space-y-8"
           >
-            <NavLink to="/about" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>ABOUT</NavLink>
-            <NavLink to="/projects" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>PROJECTS</NavLink>
-            <NavLink to="/blog" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>BLOG</NavLink>
-            <NavLink to="/contact" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>LET'S TALK</NavLink>
+            <NavLink to="/projects" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>WORK</NavLink>
+            <NavLink to="/resume" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>RESUME</NavLink>
+            <NavLink to="/blog" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>WRITING</NavLink>
+            <NavLink to="/contact" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>CONTACT</NavLink>
           </motion.div>
         )}
       </AnimatePresence>

@@ -16,11 +16,11 @@ const SecretDocPage = () => {
         <div className="flex flex-col items-center justify-center">
             <div className="w-full max-w-lg">
 
-                <h1 className="font-hero text-4xl md:text-5xl text-primary mb-8 leading-none">
+                <h1 className="font-hero text-4xl md:text-5xl text-primary mb-5 leading-none">
                     CONFIDENTIAL.
                 </h1>
 
-                <div className="border-t border-hairline pt-8 mb-8">
+                <div className="border-t border-hairline pt-8 mb-5">
                     <div className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2">
                         <FaFilePdf className="text-2xl text-muted" />
                         <div>

@@ -1,8 +1,6 @@
 // src/pages/HomePage.js
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
-import TechStack from '../components/TechStack';
-import Philosophy from '../components/Philosophy';
 import Seo from '../components/Seo';
 import { FaArrowRight } from 'react-icons/fa';
 import { projects } from '../data/resumeData';
@@ -22,7 +20,7 @@ const HomePage = () => {
       <Hero />
 
       {/* Featured Projects */}
-      <section className="flex flex-col justify-center pt-10 pb-16 relative">
+      <section className="flex flex-col justify-center pt-6 pb-8 relative">
         <div className="w-full">
           {/* Section header */}
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
@@ -51,7 +49,7 @@ const HomePage = () => {
               <Link
                 key={project.title}
                 to="/projects"
-                className="group grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-8 border-b border-hairline"
+                className="group grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-5 border-b border-hairline"
               >
                 {/* Label column: index + category */}
                 <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-2">
@@ -93,9 +91,6 @@ const HomePage = () => {
 
         </div>
       </section>
-
-      <Philosophy />
-      <TechStack />
 
     </div>
   );

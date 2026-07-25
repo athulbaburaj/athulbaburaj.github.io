@@ -6,12 +6,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 // Import your components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import ScrollProgress from './components/ScrollProgress';
 import ErrorBoundary from './components/ErrorBoundary';
 
 // Route pages are code-split — each becomes its own chunk, fetched on demand.
 const HomePage = lazy(() => import('./pages/HomePage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ResumePage = lazy(() => import('./pages/ResumePage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -60,7 +58,8 @@ const AppRoutes = () => {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<AnimatedPage><HomePage /></AnimatedPage>} />
-          <Route path="/about" element={<AnimatedPage><AboutPage /></AnimatedPage>} />
+          {/* /about was merged into /resume — redirect so existing links survive */}
+          <Route path="/about" element={<Navigate to="/resume" replace />} />
           <Route path="/resume" element={<AnimatedPage><ResumePage /></AnimatedPage>} />
           <Route path="/projects" element={<AnimatedPage><ProjectsPage /></AnimatedPage>} />
           <Route path="/blog" element={<AnimatedPage><BlogPage /></AnimatedPage>} />
@@ -78,8 +77,6 @@ const App = () => {
     <Router>
       <div className="flex flex-col min-h-screen bg-ground text-primary font-sans overflow-x-hidden">
 
-        <ScrollProgress />
-
         {/*
           Single content column. The width and horizontal padding live HERE and
           nowhere else — pages must not re-wrap themselves in a container, or the
@@ -89,7 +86,7 @@ const App = () => {
         <div className="relative z-10 flex flex-col flex-grow w-full max-w-4xl mx-auto px-6 md:px-8">
           <Navbar />
 
-          <main className="flex-grow flex flex-col pt-28 pb-24">
+          <main className="flex-grow flex flex-col pt-24 pb-16">
             <ErrorBoundary>
               <AppRoutes />
             </ErrorBoundary>

@@ -1,7 +1,7 @@
 // src/pages/ResumePage.js
-import { skills, certifications, experience, education } from '../data/resumeData';
+import { skills, certifications, experience, education, leadership } from '../data/resumeData';
 import Seo from '../components/Seo';
-import { FaDownload, FaBriefcase, FaGraduationCap, FaStar, FaTools } from 'react-icons/fa';
+import { FaDownload, FaBriefcase, FaGraduationCap, FaStar, FaTools, FaUsers } from 'react-icons/fa';
 
 const resumePdfPath = '/resume/Athul_Baburaj_Resume.pdf';
 
@@ -16,7 +16,7 @@ const ResumePage = () => {
       />
       <div className="w-full">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-hairline pb-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-6 border-b border-hairline pb-6">
           <div>
             <h1 className="text-4xl md:text-5xl font-hero font-bold text-primary leading-[0.9] mb-2">
               Professional <br /> History.
@@ -37,7 +37,7 @@ const ResumePage = () => {
 
         {/* Stacked, not a 3-column grid: inside a ~900px column the sidebar
             would be ~30 characters wide in monospace, which does not work. */}
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-8">
 
           {/* Experience */}
           <div>
@@ -96,6 +96,21 @@ const ResumePage = () => {
                 {certifications.map((cert, index) => (
                   <div key={index} className="text-xs text-secondary">
                     {cert}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Leadership — merged here when /about was removed */}
+            <div className="py-6 border-t border-hairline">
+              <h3 className="text-xs font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
+                <FaUsers className="text-muted" /> Leadership
+              </h3>
+              <div className="flex flex-col gap-4">
+                {leadership.map((item, index) => (
+                  <div key={index} className="grid md:grid-cols-[220px_1fr] gap-x-6 gap-y-1">
+                    <div className="text-xs font-bold text-primary">{item.role}</div>
+                    <div className="text-xs text-muted leading-relaxed measure">{item.description}</div>
                   </div>
                 ))}
               </div>

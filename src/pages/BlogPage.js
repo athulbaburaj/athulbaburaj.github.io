@@ -94,7 +94,7 @@ const BlogPage = () => {
             />
             <div className="w-full">
 
-                <div className="mb-12 pb-6 border-b border-hairline">
+                <div className="mb-6 pb-6 border-b border-hairline">
                     <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
                         Writing // Articles
                     </p>
@@ -126,7 +126,7 @@ const BlogPage = () => {
                         {posts.map((post, index) => (
                             <article
                                 key={post.guid || index}
-                                className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-8 border-b border-hairline"
+                                className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-5 border-b border-hairline"
                             >
                                 <div className="flex items-center gap-2 md:flex-col md:items-start text-xs font-bold text-muted tracking-widest uppercase">
                                     <FaCalendarAlt />

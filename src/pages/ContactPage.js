@@ -13,10 +13,10 @@ const ContactPage = () => {
       />
       <div className="w-full">
         <div className="max-w-xl">
-          <h1 className="text-4xl md:text-5xl font-hero font-bold text-primary leading-[0.9] mb-8">
+          <h1 className="text-4xl md:text-5xl font-hero font-bold text-primary leading-[0.9] mb-5">
             LET'S <br /> TALK.
           </h1>
-          <p className="text-lg text-secondary font-normal leading-relaxed mb-12 measure">
+          <p className="text-lg text-secondary font-normal leading-relaxed mb-6 measure">
             Open for high-performance architecture and AI system collaboration.
           </p>
 

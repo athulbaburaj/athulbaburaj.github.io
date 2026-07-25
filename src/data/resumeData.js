@@ -210,7 +210,7 @@ export const projects = [
   },
   {
     title: "Knight Day Fantasy (Retro Game)",
-    category: "Professional",
+    category: "Personal",
     featured: false,
     archived: false,
     year: "2021",

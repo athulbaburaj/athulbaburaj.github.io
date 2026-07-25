@@ -1,5 +1,4 @@
 // src/pages/ProjectsPage.js
-import { useState } from 'react';
 import { projects as projectsData } from '../data/resumeData';
 import ProjectArchive from '../components/ProjectArchive';
 import Seo from '../components/Seo';
@@ -22,7 +21,7 @@ const ProjectEntry = ({ project }) => {
   const image = project.images && project.images[0];
 
   return (
-    <div className="py-10 border-b border-hairline">
+    <div className="py-6 border-b border-hairline">
       {/* Meta line */}
       <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
         {`${project.year} // ${project.category}`}
@@ -106,15 +105,8 @@ const ProjectEntry = ({ project }) => {
 };
 
 const ProjectsPage = () => {
-  const [activeTab, setActiveTab] = useState('All');
-  const tabs = ['All', 'Professional', 'Academic', 'Personal'];
-
-  const tabFilteredProjects = activeTab === 'All'
-    ? projectsData
-    : projectsData.filter(project => project.category === activeTab);
-
-  const filteredProjects = tabFilteredProjects.filter(project => !project.archived);
-  const archivedProjects = tabFilteredProjects.filter(project => project.archived);
+  const filteredProjects = projectsData.filter(project => !project.archived);
+  const archivedProjects = projectsData.filter(project => project.archived);
 
   return (
     <div className="relative">
@@ -126,33 +118,13 @@ const ProjectsPage = () => {
       <div className="w-full">
 
         {/* Header */}
-        <div className="mb-4 pb-6 border-b border-hairline flex flex-col md:flex-row justify-between items-end">
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
-              Portfolio // {activeTab}
-            </p>
-            <h1 className="text-5xl md:text-6xl font-hero text-primary leading-[0.85]">
-              PROJECTS.
-            </h1>
-          </div>
-
-          {/* Tabs */}
-          <div className="flex gap-6 mt-6 md:mt-0">
-            {tabs.map(tab => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300
-                            pb-1 border-b-2 ${
-                  activeTab === tab
-                    ? 'text-primary border-primary'
-                    : 'text-muted border-transparent hover:text-secondary hover:border-edge'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+        <div className="mb-4 pb-6 border-b border-hairline">
+          <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
+            Selected Work
+          </p>
+          <h1 className="text-5xl md:text-6xl font-hero text-primary leading-[0.85]">
+            PROJECTS.
+          </h1>
         </div>
 
         {/* Case studies */}

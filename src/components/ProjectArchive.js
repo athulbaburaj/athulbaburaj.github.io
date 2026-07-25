@@ -3,7 +3,7 @@ const ProjectArchive = ({ projects = [] }) => {
     if (!projects || projects.length === 0) return null;
 
     return (
-        <section className="mt-16 pt-10 border-t border-hairline">
+        <section className="mt-8 pt-6 border-t border-hairline">
             {/* Header */}
             <div className="mb-6">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline">
