@@ -80,11 +80,16 @@ const App = () => {
 
         <ScrollProgress />
 
-        {/* Main Content Wrapper */}
-        <div className="relative z-10 flex flex-col min-h-screen max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24">
+        {/*
+          Single content column. The width and horizontal padding live HERE and
+          nowhere else — pages must not re-wrap themselves in a container, or the
+          padding applies twice. Navbar and Footer mirror these values so their
+          contents line up with the column.
+        */}
+        <div className="relative z-10 flex flex-col flex-grow w-full max-w-4xl mx-auto px-6 md:px-8">
           <Navbar />
 
-          <main className="flex-grow flex flex-col pt-20 pb-32">
+          <main className="flex-grow flex flex-col pt-28 pb-24">
             <ErrorBoundary>
               <AppRoutes />
             </ErrorBoundary>

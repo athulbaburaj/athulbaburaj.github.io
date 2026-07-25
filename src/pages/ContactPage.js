@@ -5,13 +5,13 @@ const REAL_EMAIL = 'athulbaburajp23@gmail.com';
 
 const ContactPage = () => {
   return (
-    <div className="min-h-screen py-12 flex flex-col justify-center">
+    <div className="flex flex-col">
       <Seo
         title="Contact"
         description="Get in touch with Athul Baburaj for solutions engineering collaboration, distributed systems architecture, cloud platform migration, or agentic AI systems work."
         path="/contact"
       />
-      <div className="container mx-auto px-6 max-w-screen-2xl">
+      <div className="w-full">
         <div className="max-w-xl">
           <h1 className="text-4xl md:text-5xl font-hero font-bold text-primary leading-[0.9] mb-8">
             LET'S <br /> TALK.

@@ -13,8 +13,8 @@ const SecretDocPage = () => {
     };
 
     return (
-        <div className="min-h-screen pt-20 pb-20 flex flex-col items-center justify-center">
-            <div className="container mx-auto px-6 max-w-lg">
+        <div className="flex flex-col items-center justify-center">
+            <div className="w-full max-w-lg">
 
                 <h1 className="font-hero text-4xl md:text-5xl text-primary mb-8 leading-none">
                     CONFIDENTIAL.

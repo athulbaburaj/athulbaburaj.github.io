@@ -86,13 +86,13 @@ const BlogPage = () => {
     }, []);
 
     return (
-        <div className="min-h-screen py-12">
+        <div>
             <Seo
                 title="Writing"
                 description="Articles and technical writing from Athul Baburaj on cloud platforms, distributed systems, and solutions engineering practice."
                 path="/blog"
             />
-            <div className="container mx-auto px-6 max-w-screen-2xl">
+            <div className="w-full">
 
                 <div className="mb-12 pb-6 border-b border-hairline">
                     <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">

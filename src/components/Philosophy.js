@@ -21,7 +21,7 @@ const Philosophy = () => {
 
     return (
         <section className="py-16 relative">
-            <div className="container mx-auto px-6 max-w-screen-2xl">
+            <div className="w-full">
 
                 {/* Header */}
                 <div className="mb-6">

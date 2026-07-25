@@ -8,13 +8,13 @@ const resumePdfPath = '/resume/Athul_Baburaj_Resume.pdf';
 const ResumePage = () => {
 
   return (
-    <div className="min-h-screen py-12 relative">
+    <div className="relative">
       <Seo
         title="Resume"
         description="Athul Baburaj's professional history: cloud platform migration, distributed systems, and solutions engineering at American Express, plus credentials, certifications, and a downloadable PDF."
         path="/resume"
       />
-      <div className="container mx-auto px-6 max-w-screen-2xl">
+      <div className="w-full">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-hairline pb-6">
           <div>
@@ -35,10 +35,12 @@ const ResumePage = () => {
           </a>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-x-12 gap-y-12">
+        {/* Stacked, not a 3-column grid: inside a ~900px column the sidebar
+            would be ~30 characters wide in monospace, which does not work. */}
+        <div className="flex flex-col gap-12">
 
-          {/* Left Col: Experience (Variable Width) */}
-          <div className="lg:col-span-2">
+          {/* Experience */}
+          <div>
             <h3 className="text-xs font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
               <FaBriefcase className="text-muted" /> Experience
             </h3>

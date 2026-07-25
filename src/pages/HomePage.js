@@ -11,7 +11,7 @@ const HomePage = () => {
   const featuredProjects = projects.filter(project => project.featured);
 
   return (
-    <div className="min-h-screen">
+    <div>
 
       <Seo
         title="Home"
@@ -23,7 +23,7 @@ const HomePage = () => {
 
       {/* Featured Projects */}
       <section className="flex flex-col justify-center pt-10 pb-16 relative">
-        <div className="container mx-auto px-6 max-w-screen-2xl">
+        <div className="w-full">
           {/* Section header */}
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
             <div>

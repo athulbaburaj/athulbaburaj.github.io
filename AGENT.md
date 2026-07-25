@@ -73,6 +73,24 @@ The main shell includes:
 
 Keep route-level composition in `src/pages/` and reusable visual or interactive pieces in `src/components/`.
 
+## Layout: one content column
+
+The site is a **single centred reading column**. Its width and horizontal padding are declared in exactly one place — the wrapper in `src/App.js`:
+
+```
+w-full max-w-4xl mx-auto px-6 md:px-8
+```
+
+`Navbar` mirrors those values in its inner div because it is `fixed` and therefore outside the wrapper; `Footer` sits inside the wrapper and so declares no width or padding of its own.
+
+Rules:
+
+- **Pages and sections must never re-wrap themselves** in `container`, `mx-auto`, `max-w-*`, or horizontal padding. Doing so applies padding twice and was previously leaving roughly 70% of a 1920px window empty. Page roots should be a plain `<div>` or `<div className="w-full">`.
+- **`min-h-screen` belongs only to the App root.** The root is a `min-h-screen flex flex-col` with a `flex-grow` main, which already pushes the footer down. Adding it to a page forces an extra viewport of empty space.
+- **Vertical rhythm lives on `main`** (`pt-28 pb-24`). Pages should not add their own large top/bottom padding on the page root.
+- **Do not assume a wide viewport in grids.** The column caps at 896px, so `lg:grid-cols-3` sidebars end up around 30 characters wide in monospace. Prefer stacked sections or two-column label/value grids.
+- Running prose carries the `.measure` utility (62ch). Structural elements may use the full column width — that contrast is intentional.
+
 ## Styling Conventions
 
 Prefer Tailwind utility classes for layout and visual styling.

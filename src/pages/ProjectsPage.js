@@ -117,13 +117,13 @@ const ProjectsPage = () => {
   const archivedProjects = tabFilteredProjects.filter(project => project.archived);
 
   return (
-    <div className="min-h-screen py-12 relative">
+    <div className="relative">
       <Seo
         title="Projects"
         description="A portfolio of professional, academic, and personal projects from Athul Baburaj, spanning distributed systems, cloud infrastructure, and applied AI."
         path="/projects"
       />
-      <div className="container mx-auto px-6 max-w-screen-2xl">
+      <div className="w-full">
 
         {/* Header */}
         <div className="mb-4 pb-6 border-b border-hairline flex flex-col md:flex-row justify-between items-end">

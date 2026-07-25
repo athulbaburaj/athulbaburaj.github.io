@@ -7,7 +7,7 @@ const skills = [
 
 const TechStack = () => (
     <section className="py-16 relative">
-        <div className="container mx-auto px-6 max-w-screen-2xl">
+        <div className="w-full">
             <div className="mb-6">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline">
                     <h2 className="text-2xl md:text-3xl font-bold text-primary leading-none uppercase">

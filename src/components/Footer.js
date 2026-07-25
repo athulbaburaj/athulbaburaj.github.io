@@ -1,10 +1,11 @@
 // src/components/Footer.js
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
+// Sits inside App.js's content column, so it carries no width or padding of its own.
 const Footer = () => {
   return (
-    <footer className="w-full py-12 bg-ground border-t border-hairline">
-      <div className="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between items-center">
+    <footer className="w-full py-10 border-t border-hairline">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 
         <div className="mb-6 md:mb-0">
           <p className="text-sm text-muted">

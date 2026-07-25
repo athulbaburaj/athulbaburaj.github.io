@@ -6,14 +6,14 @@ import { FaArrowRight } from 'react-icons/fa';
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen pt-24 pb-12 flex flex-col">
+    <div className="flex flex-col">
       <Seo
         title="About"
         description="How Athul Baburaj approaches solutions engineering: embedding with teams that own a hard problem, from distributed systems migrations to agentic AI, and shipping it to production."
         path="/about"
       />
 
-      <div className="container mx-auto px-6 max-w-screen-2xl">
+      <div className="w-full">
         {/* Header */}
         <div className="mb-12 pb-6 border-b border-hairline">
           <h1 className="text-4xl md:text-5xl font-hero font-bold text-primary leading-[0.9]">

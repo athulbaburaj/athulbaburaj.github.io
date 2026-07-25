@@ -27,7 +27,8 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-ground border-b border-hairline">
-      <div className="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24 h-20 flex items-center justify-between">
+      {/* Mirrors the content column in App.js so nav items align with the page */}
+      <div className="max-w-4xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between">
 
         {/* Logo / Brand */}
         <NavLink to="/" className="text-xl font-bold text-primary hover:text-secondary transition-colors">
