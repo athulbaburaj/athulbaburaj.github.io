@@ -52,14 +52,29 @@ const HomePage = () => {
                 className="group kv py-5 border-b border-hairline"
                 style={{ '--label': '7.5rem' }}
               >
-                {/* Label column: index + category */}
+                {/* Label column: thumbnail + index + category. The thumbnail
+                    sits in gutter space that was already reserved, so it costs
+                    no extra page height. Decorative — the title is adjacent. */}
                 <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-2">
-                  <span className="font-mono t-label text-muted">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="font-mono t-label tracking-[0.2em] text-muted uppercase">
-                    {project.category}
-                  </span>
+                  {project.images && project.images[0] && (
+                    <img
+                      src={project.images[0]}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-16 h-16 object-cover border border-hairline flex-shrink-0
+                                 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  )}
+                  <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-1">
+                    <span className="font-mono t-label text-muted">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="font-mono t-label tracking-[0.2em] text-muted uppercase">
+                      {project.category}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Value column: title + summary */}

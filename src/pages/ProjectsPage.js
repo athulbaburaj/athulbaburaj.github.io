@@ -41,23 +41,32 @@ const ProjectEntry = ({ project }) => {
         </p>
 
         <div>
+          {/* Case study collapses so the whole list is scannable in one screen.
+              Content stays in the DOM — it is indexed and Ctrl+F-able, unlike
+              the modal this replaced. */}
           {FIELDS.some(({ key }) => typeof project[key] === 'string' && project[key].trim()) && (
-            <div className="flex flex-col mb-6">
-              {FIELDS.map(({ key, label }) => {
-                const value = project[key];
-                if (typeof value !== 'string' || !value.trim()) return null;
-                return (
-                  <div key={key} className="kv py-3 border-t border-hairline first:border-t-0" style={{ '--label': '6rem' }}>
-                    <h3 className="font-mono t-label font-bold text-muted uppercase tracking-widest">
-                      {label}
-                    </h3>
-                    <p className="text-secondary t-body leading-relaxed measure">
-                      {value}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+            <details className="disclosure mb-6">
+              <summary className="font-mono t-label font-bold text-muted uppercase tracking-widest hover:text-primary transition-colors">
+                <span className="disclosure-closed">Read case study</span>
+                <span className="disclosure-open">Hide case study</span>
+              </summary>
+              <div className="flex flex-col mt-3">
+                {FIELDS.map(({ key, label }) => {
+                  const value = project[key];
+                  if (typeof value !== 'string' || !value.trim()) return null;
+                  return (
+                    <div key={key} className="kv py-3 border-t border-hairline first:border-t-0" style={{ '--label': '6rem' }}>
+                      <h3 className="font-mono t-label font-bold text-muted uppercase tracking-widest">
+                        {label}
+                      </h3>
+                      <p className="text-secondary t-body leading-relaxed measure">
+                        {value}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </details>
           )}
 
           {project.tech && project.tech.length > 0 && (
