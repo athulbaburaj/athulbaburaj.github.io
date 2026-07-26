@@ -66,36 +66,48 @@ Do not remove either half of this pair, and do not switch back to `HashRouter` w
 
 The main shell includes:
 
-- `ScrollProgress`
 - `Navbar`
 - animated route content wrapped in `ErrorBoundary`
 - `Footer`
 
 Keep route-level composition in `src/pages/` and reusable visual or interactive pieces in `src/components/`.
 
-## Layout: one content column
+## Layout: the intrinsic system
 
-The site is a **single centred reading column**. Its width and horizontal padding are declared in exactly one place — the wrapper in `src/App.js`:
+The layout responds to the space it is given, not to a fixed set of viewport breakpoints. **Do not use `md:grid-cols-*` or similar breakpoint classes for structural layout** — use the classes below, defined in the INTRINSIC LAYOUT SYSTEM block at the bottom of `src/index.css`.
 
-```
-w-full max-w-4xl mx-auto px-6 md:px-8
-```
+Two mechanisms:
 
-`Navbar` mirrors those values in its inner div because it is `fixed` and therefore outside the wrapper; `Footer` sits inside the wrapper and so declares no width or padding of its own.
+1. **Fluid scaling.** Type and spacing are `clamp()` expressions interpolating between a 20rem and 96rem viewport, so nothing jumps.
+2. **Container queries, not media queries.** Structural switches use `@container`, so a component re-arranges based on its own available width and keeps working wherever it is nested.
 
-Rules:
+### Classes
 
-- **Pages and sections must never re-wrap themselves** in `container`, `mx-auto`, `max-w-*`, or horizontal padding. Doing so applies padding twice and was previously leaving roughly 70% of a 1920px window empty. Page roots should be a plain `<div>` or `<div className="w-full">`.
-- **`min-h-screen` belongs only to the App root.** The root is a `min-h-screen flex flex-col` with a `flex-grow` main, which already pushes the footer down. Adding it to a page forces an extra viewport of empty space.
-- **Vertical rhythm lives on `main`** (`pt-28 pb-24`). Pages should not add their own large top/bottom padding on the page root.
-- **Do not assume a wide viewport in grids.** The column caps at 896px, so `lg:grid-cols-3` sidebars end up around 30 characters wide in monospace. Prefer stacked sections or two-column label/value grids.
-- Running prose carries the `.measure` utility (62ch). Structural elements may use the full column width — that contrast is intentional.
+- **`.shell`** — the page column. Declares width and horizontal padding, and is the *only* place they are declared. Used in `App.js` and mirrored in `Navbar` (which is `fixed`, so it sits outside the wrapper). Never add `max-w-*`, `mx-auto` or `px-*` to a page or section.
+- **`.flow`** — establishes `container-type: inline-size`. **Required** on each page wrapper: without a `.flow` ancestor, every `@container` query below silently never fires and the layout stays permanently single-column.
+- **`.kv`** — label/value row. Stacks when narrow, becomes a label gutter plus content at 34rem. Set the gutter per instance with `style={{ '--label': '8rem' }}`; default is `8rem`.
+- **`.entry`** — project entry, with children `.entry-meta`, `.entry-body` and `.entry-media`. One column when cramped; meta gutter plus body at 38rem; at 56rem a third track appears and the media moves beside the text so wide viewports gain density rather than margin.
+- **`.autogrid`** / **`.autogrid-wide`** — `auto-fit` grids whose column count derives from available width. For repeated short items (education, certifications).
+- **`.t-label` `.t-small` `.t-body` `.t-lead` `.t-h3` `.t-h2` `.t-h1`** — fluid type scale. Use these instead of Tailwind `text-*` sizes. Never apply both to one element; the cascade result is arbitrary.
+- **`.section`** / **`.section-tight`** — fluid block padding. Small per-row paddings (`py-3`, `py-5`) stay as Tailwind utilities; those are row rhythm, not section spacing.
+- **`.measure`** — 62ch cap for running prose.
+
+### Container query thresholds
+
+Keep the arithmetic in mind before changing a threshold. `.shell` caps at 76rem; minus padding that leaves roughly 70rem of container. A threshold above ~62rem is therefore unreachable and the state will never fire. This was a real bug: `.entry`'s widest state was originally set at 62rem against a 68rem shell, leaving an 8px window in which it could apply.
+
+### Other layout rules
+
+- `min-h-screen` belongs only to the App root. Adding it to a page forces an extra viewport of empty space.
+- Vertical rhythm lives on `main` (`pt-24`, which clears the fixed 80px navbar, plus fluid bottom padding).
+- The scrollbar is deliberately **visible** (styled thin and dark in `index.css`). It is the only scroll-position feedback on the site since the progress bar was removed. Do not hide it again.
+- There must be exactly **one `<h1>` per page**, and it must contain a complete phrase. The Hero previously split its headline across two `<h1>` elements, which made the homepage heading read as two meaningless fragments to crawlers and screen readers.
 
 ## Styling Conventions
 
 Prefer Tailwind utility classes for layout and visual styling.
 
-**Typography is all-monospace.** The site uses a single family — JetBrains Mono — for everything, loaded once in `public/index.html` (weights 400/500/700) and mapped onto both `fontFamily.sans` and `fontFamily.mono` in `tailwind.config.js`, so `font-sans` (the Tailwind default) and `font-mono` resolve identically. Inter has been removed entirely — do not reintroduce it or any other proportional/sans family. `fontSize` is a compressed, mono-appropriate scale (`tailwind.config.js`) — monospace reads oversized at the display sizes a sans display face would use, so the top end tops out around `text-7xl` (3.5rem) rather than the much larger scale a sans redesign might reach for. Body text sets `line-height: 1.8` and `letter-spacing: 0.01em` globally (`src/index.css`) — mono needs more leading and slightly looser tracking than proportional type at the same size.
+**Typography is all-monospace.** The site uses a single family — JetBrains Mono — for everything, loaded once in `public/index.html` (weights 400/500/700) and mapped onto both `fontFamily.sans` and `fontFamily.mono` in `tailwind.config.js`, so `font-sans` (the Tailwind default) and `font-mono` resolve identically. Inter has been removed entirely — do not reintroduce it or any other proportional/sans family. `fontSize` is a compressed, mono-appropriate scale (`tailwind.config.js`) — monospace reads oversized at the display sizes a sans display face would use, so the top end tops out around `text-7xl` (3.5rem) rather than the much larger scale a sans redesign might reach for. Body text sets `line-height: 1.6` and `letter-spacing: 0.01em` globally (`src/index.css`) — mono needs more leading and slightly looser tracking than proportional type at the same size.
 
 **The `.measure` utility (`max-width: 62ch`) caps running prose.** Apply it to any paragraph-length block of body copy. Monospace glyphs are wider than proportional glyphs, so the same character count reads as a wider block — 62ch keeps line length readable where a sans design might safely run to 75ch+.
 

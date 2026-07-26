@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="w-full py-6 border-t border-hairline">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 
-        <p className="text-sm text-muted">
+        <p className="t-body text-muted">
           &copy; {new Date().getFullYear()} Athul Baburaj
         </p>
 

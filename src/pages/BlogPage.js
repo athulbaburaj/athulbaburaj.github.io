@@ -92,55 +92,56 @@ const BlogPage = () => {
                 description="Articles and technical writing from Athul Baburaj on cloud platforms, distributed systems, and solutions engineering practice."
                 path="/blog"
             />
-            <div className="w-full">
+            <div className="w-full flow">
 
                 <div className="mb-6 pb-6 border-b border-hairline">
-                    <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
+                    <p className="font-mono t-label tracking-[0.3em] text-muted uppercase mb-2">
                         Writing // Articles
                     </p>
-                    <h1 className="text-5xl md:text-6xl font-hero text-primary leading-[0.85]">
+                    <h1 className="t-h1 font-hero text-primary leading-[0.85]">
                         WRITING.
                     </h1>
                 </div>
 
                 {loading ? (
-                    <div className="flex items-center gap-3 text-muted text-sm font-mono">
+                    <div className="flex items-center gap-3 text-muted t-body font-mono">
                         Fetching articles...
                     </div>
                 ) : error ? (
                     <div className="border-t border-hairline pt-6 max-w-md">
-                        <p className="text-secondary text-sm">{error}</p>
+                        <p className="text-secondary t-body">{error}</p>
                         <a
                             href="https://medium.com/@athulbaburajp23"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center mt-4 text-xs font-bold text-primary underline decoration-faint underline-offset-4 hover:text-secondary transition-colors uppercase tracking-widest"
+                            className="inline-flex items-center mt-4 t-small font-bold text-primary underline decoration-faint underline-offset-4 hover:text-secondary transition-colors uppercase tracking-widest"
                         >
                             Read on Medium <FaExternalLinkAlt className="ml-2" size={10} />
                         </a>
                     </div>
                 ) : posts.length === 0 ? (
-                    <div className="text-muted text-xl font-normal">No articles found.</div>
+                    <div className="text-muted t-h3 font-normal">No articles found.</div>
                 ) : (
                     <div className="flex flex-col">
                         {posts.map((post, index) => (
                             <article
                                 key={post.guid || index}
-                                className="grid md:grid-cols-[120px_1fr] gap-x-8 gap-y-2 py-5 border-b border-hairline"
+                                className="kv py-5 border-b border-hairline"
+                                style={{ '--label': '7.5rem' }}
                             >
-                                <div className="flex items-center gap-2 md:flex-col md:items-start text-xs font-bold text-muted tracking-widest uppercase">
+                                <div className="flex items-center gap-2 md:flex-col md:items-start t-small font-bold text-muted tracking-widest uppercase">
                                     <FaCalendarAlt />
                                     {new Date(post.pubDate).toLocaleDateString()}
                                 </div>
 
                                 <div>
-                                    <h2 className="text-lg font-bold text-primary mb-2 leading-snug">
+                                    <h2 className="t-h3 font-bold text-primary mb-2 leading-snug">
                                         <a href={post.link} target="_blank" rel="noopener noreferrer">
                                             {post.title}
                                         </a>
                                     </h2>
 
-                                    <p className="text-secondary text-sm leading-relaxed mb-3 measure">
+                                    <p className="text-secondary t-body leading-relaxed mb-3 measure">
                                         {stripHtml(post.description).substring(0, 150)}...
                                     </p>
 
@@ -148,7 +149,7 @@ const BlogPage = () => {
                                         href={post.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center text-xs font-bold text-secondary hover:text-primary transition-colors uppercase tracking-widest"
+                                        className="inline-flex items-center t-small font-bold text-secondary hover:text-primary transition-colors uppercase tracking-widest"
                                     >
                                         READ ARTICLE <FaExternalLinkAlt className="ml-2" size={10} />
                                     </a>

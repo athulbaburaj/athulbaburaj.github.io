@@ -7,17 +7,30 @@
 
 @layer base {
     html {
-        /* Critical Fix: Always allow scrolling but hide the bar to prevent layout shifts */
+        /* Always reserve the gutter so page-to-page transitions do not shift
+           horizontally. The bar itself stays VISIBLE: it is the only remaining
+           indication of scroll position now that the progress bar is gone, and
+           on a long page that feedback matters more than the cosmetic gain of
+           hiding it. Styled down to stay quiet. */
         overflow-y: scroll;
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* IE/Edge */
+        scrollbar-width: thin;
+        scrollbar-color: #2E2E2B #0B0B0B;
     }
 
     html::-webkit-scrollbar {
-        display: none;
-        /* Chrome, Safari, Opera */
+        width: 10px;
+    }
+
+    html::-webkit-scrollbar-track {
+        background: #0B0B0B;
+    }
+
+    html::-webkit-scrollbar-thumb {
+        background: #2E2E2B;
+    }
+
+    html::-webkit-scrollbar-thumb:hover {
+        background: #55554F;
     }
 
     body {
@@ -57,6 +70,140 @@
         max-width: 62ch;
     }
 }
+
+/* ==========================================================================
+   INTRINSIC LAYOUT SYSTEM
+
+   The layout responds to the space it is actually given, not to a handful of
+   viewport breakpoints. Two consequences worth understanding before editing:
+
+   1. Type and spacing interpolate with clamp(), so there are no jumps.
+   2. Structural switches use @container, not @media. A row re-arranges based
+      on ITS OWN width, so the same component behaves correctly whether it sits
+      in the full column or nested inside something narrow.
+   ========================================================================== */
+
+:root {
+    /* Fluid type. Each step interpolates between a 20rem and a 96rem viewport. */
+    --step-00: clamp(0.625rem, 0.61rem + 0.08vw, 0.6875rem);
+    --step-0: clamp(0.8125rem, 0.79rem + 0.11vw, 0.875rem);
+    --step-1: clamp(0.875rem, 0.85rem + 0.14vw, 0.9375rem);
+    --step-2: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --step-3: clamp(1.125rem, 1.03rem + 0.47vw, 1.4375rem);
+    --step-4: clamp(1.375rem, 1.16rem + 1.07vw, 2.0625rem);
+    --step-5: clamp(1.75rem, 1.34rem + 2.05vw, 3.0625rem);
+
+    /* Fluid spacing */
+    --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
+    --space-s: clamp(0.75rem, 0.65rem + 0.5vw, 1.25rem);
+    --space-m: clamp(1.25rem, 1rem + 1.25vw, 2.25rem);
+    --space-l: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+}
+
+/* The page column. Grows with the viewport instead of snapping at a breakpoint,
+   and stops before lines get unreadably long. */
+.shell {
+    width: 100%;
+    max-width: clamp(20rem, 94vw, 76rem);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 3.5vw, 2.75rem);
+}
+
+/* Establishes a containment context so descendants can query available width.
+   Every page root should carry this. */
+.flow {
+    container-type: inline-size;
+    width: 100%;
+}
+
+/* --- Label/value row ------------------------------------------------------
+   Stacks when narrow; becomes a label gutter plus content when there is room.
+   --label overrides the gutter width per instance. */
+.kv {
+    display: grid;
+    gap: var(--space-xs) var(--space-m);
+    align-items: baseline;
+}
+
+@container (min-width: 34rem) {
+    .kv {
+        grid-template-columns: var(--label, 8rem) minmax(0, 1fr);
+    }
+}
+
+/* --- Project entry --------------------------------------------------------
+   One column when cramped. Label gutter plus prose when there is room. At the
+   widest, a third track appears and the image moves into it, so wide viewports
+   gain information density rather than empty margin. */
+.entry {
+    display: grid;
+    gap: var(--space-s) var(--space-m);
+}
+
+@container (min-width: 38rem) {
+    .entry {
+        grid-template-columns: 9rem minmax(0, 1fr);
+    }
+
+    .entry > .entry-meta {
+        grid-column: 1;
+    }
+
+    .entry > .entry-body {
+        grid-column: 2;
+    }
+
+    .entry > .entry-media {
+        grid-column: 2;
+    }
+}
+
+/* Threshold maths, so this is not re-broken by guesswork:
+   .shell caps at 76rem, minus 2 x 2.75rem padding, leaves ~70rem of container.
+   This state needs 8rem (meta) + 10rem (media min) + ~4.5rem (gaps) = 22.5rem
+   of furniture, so at the 56rem trigger the prose track still gets ~33rem,
+   around 59 characters. Raising this threshold above ~62rem makes the state
+   unreachable, which is exactly what happened the first time. */
+@container (min-width: 56rem) {
+    .entry {
+        grid-template-columns: 8rem minmax(0, 62ch) minmax(10rem, 1fr);
+    }
+
+    .entry > .entry-media {
+        grid-column: 3;
+        grid-row: 1 / span 3;
+        align-self: start;
+    }
+}
+
+/* --- Auto-fitting list ----------------------------------------------------
+   Column count is derived from available width, so a set of short items fills
+   a wide column instead of running down one side of it. min() guards against
+   overflow on very narrow screens. */
+.autogrid {
+    display: grid;
+    gap: var(--space-s) var(--space-m);
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+
+.autogrid-wide {
+    display: grid;
+    gap: var(--space-s) var(--space-m);
+    grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr));
+}
+
+/* Fluid type utilities */
+.t-label { font-size: var(--step-00); }
+.t-small { font-size: var(--step-0); }
+.t-body  { font-size: var(--step-1); }
+.t-lead  { font-size: var(--step-2); }
+.t-h3    { font-size: var(--step-3); }
+.t-h2    { font-size: var(--step-4); }
+.t-h1    { font-size: var(--step-5); }
+
+/* Fluid block spacing */
+.section { padding-block: var(--space-l); }
+.section-tight { padding-block: var(--space-m); }
 
 /* Hero display treatment. Weight and leading only — no negative tracking, for
    the same reason as the heading rule above. */

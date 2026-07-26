@@ -28,19 +28,19 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-ground border-b border-hairline">
       {/* Mirrors the content column in App.js so nav items align with the page */}
-      <div className="max-w-4xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between">
+      <div className="shell h-20 flex items-center justify-between">
 
         {/* Logo / Brand */}
-        <NavLink to="/" className="text-xl font-bold text-primary hover:text-secondary transition-colors">
+        <NavLink to="/" className="t-h3 font-bold text-primary hover:text-secondary transition-colors">
           ATHUL BABURAJ.
         </NavLink>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-10">
-          <NavLink to="/projects" className={linkClass('text-sm font-medium')}>WORK</NavLink>
-          <NavLink to="/resume" className={linkClass('text-sm font-medium')}>RESUME</NavLink>
-          <NavLink to="/blog" className={linkClass('text-sm font-medium')}>WRITING</NavLink>
-          <NavLink to="/contact" className={linkClass('text-sm font-medium')}>CONTACT</NavLink>
+          <NavLink to="/projects" className={linkClass('t-body font-medium')}>WORK</NavLink>
+          <NavLink to="/resume" className={linkClass('t-body font-medium')}>RESUME</NavLink>
+          <NavLink to="/blog" className={linkClass('t-body font-medium')}>WRITING</NavLink>
+          <NavLink to="/contact" className={linkClass('t-body font-medium')}>CONTACT</NavLink>
         </div>
 
         {/* Mobile Menu Button */}
@@ -66,10 +66,10 @@ const Navbar = () => {
             transition={{ duration: 0.2, ease: 'easeOut' }}
             className="fixed inset-0 z-40 bg-ground flex flex-col items-center justify-center space-y-8"
           >
-            <NavLink to="/projects" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>WORK</NavLink>
-            <NavLink to="/resume" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>RESUME</NavLink>
-            <NavLink to="/blog" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>WRITING</NavLink>
-            <NavLink to="/contact" onClick={() => setIsOpen(false)} className={linkClass('text-2xl font-bold')}>CONTACT</NavLink>
+            <NavLink to="/projects" onClick={() => setIsOpen(false)} className={linkClass('t-h3 font-bold')}>WORK</NavLink>
+            <NavLink to="/resume" onClick={() => setIsOpen(false)} className={linkClass('t-h3 font-bold')}>RESUME</NavLink>
+            <NavLink to="/blog" onClick={() => setIsOpen(false)} className={linkClass('t-h3 font-bold')}>WRITING</NavLink>
+            <NavLink to="/contact" onClick={() => setIsOpen(false)} className={linkClass('t-h3 font-bold')}>CONTACT</NavLink>
           </motion.div>
         )}
       </AnimatePresence>

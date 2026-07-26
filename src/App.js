@@ -19,7 +19,7 @@ const SecretDocPage = lazy(() => import('./pages/SecretDocPage'));
 // Quiet, on-brand fallback shown while a route chunk loads
 const RouteFallback = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
-    <span className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase">
+    <span className="font-mono t-label tracking-[0.3em] text-muted uppercase">
       Loading
     </span>
   </div>
@@ -83,10 +83,10 @@ const App = () => {
           padding applies twice. Navbar and Footer mirror these values so their
           contents line up with the column.
         */}
-        <div className="relative z-10 flex flex-col flex-grow w-full max-w-4xl mx-auto px-6 md:px-8">
+        <div className="relative z-10 flex flex-col flex-grow shell">
           <Navbar />
 
-          <main className="flex-grow flex flex-col pt-24 pb-16">
+          <main className="flex-grow flex flex-col pt-24 pb-[var(--space-l)]">
             <ErrorBoundary>
               <AppRoutes />
             </ErrorBoundary>

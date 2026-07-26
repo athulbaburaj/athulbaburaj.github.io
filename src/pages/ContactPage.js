@@ -12,24 +12,24 @@ const ContactPage = () => {
         path="/contact"
       />
       <div className="w-full">
-        <div className="max-w-xl">
-          <h1 className="text-4xl md:text-5xl font-hero font-bold text-primary leading-[0.9] mb-5">
+        <div className="max-w-xl flow">
+          <h1 className="t-h1 font-hero font-bold text-primary leading-[0.9] mb-5">
             LET'S <br /> TALK.
           </h1>
-          <p className="text-lg text-secondary font-normal leading-relaxed mb-6 measure">
+          <p className="t-lead text-secondary font-normal leading-relaxed mb-6 measure">
             Open for high-performance architecture and AI system collaboration.
           </p>
 
           <div className="flex flex-col">
-            <div className="grid md:grid-cols-[100px_1fr] gap-x-6 gap-y-1 py-4 border-t border-hairline">
-              <div className="text-xs text-muted uppercase tracking-widest">Email</div>
-              <a href={`mailto:${REAL_EMAIL}`} className="text-xl md:text-2xl text-primary hover:text-accent transition-colors break-all w-fit">
+            <div className="kv py-4 border-t border-hairline">
+              <div className="t-small text-muted uppercase tracking-widest">Email</div>
+              <a href={`mailto:${REAL_EMAIL}`} className="t-h3 text-primary hover:text-accent transition-colors break-all w-fit">
                 {REAL_EMAIL}
               </a>
             </div>
 
-            <div className="grid md:grid-cols-[100px_1fr] gap-x-6 gap-y-2 py-4 border-t border-hairline">
-              <div className="text-xs text-muted uppercase tracking-widest">Elsewhere</div>
+            <div className="kv py-4 border-t border-hairline">
+              <div className="t-small text-muted uppercase tracking-widest">Elsewhere</div>
               <div className="flex space-x-6">
                 <a href="https://github.com/athulbaburaj" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-secondary hover:text-primary transition-colors"><FaGithub size={24} /></a>
                 <a href="https://linkedin.com/in/athul-baburaj" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-secondary hover:text-primary transition-colors"><FaLinkedin size={24} /></a>

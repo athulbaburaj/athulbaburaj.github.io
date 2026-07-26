@@ -3,14 +3,14 @@ const ProjectArchive = ({ projects = [] }) => {
     if (!projects || projects.length === 0) return null;
 
     return (
-        <section className="mt-8 pt-6 border-t border-hairline">
+        <section className="section-tight border-t border-hairline">
             {/* Header */}
             <div className="mb-6">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline">
-                    <h2 className="text-2xl md:text-3xl font-bold text-primary leading-none uppercase">
+                    <h2 className="t-h2 font-bold text-primary leading-none uppercase">
                         Archive.
                     </h2>
-                    <span className="font-mono text-[10px] tracking-[0.25em] text-muted uppercase hidden md:block">
+                    <span className="font-mono t-label tracking-[0.25em] text-muted uppercase hidden md:block">
                         Earlier // Inactive
                     </span>
                 </div>
@@ -22,17 +22,20 @@ const ProjectArchive = ({ projects = [] }) => {
                 {projects.map((project) => (
                     <div
                         key={project.title}
-                        className="grid md:grid-cols-[120px_1fr_auto] gap-1.5 md:gap-6 items-baseline py-4 border-b border-hairline"
+                        className="kv py-4 border-b border-hairline"
+                        style={{ '--label': '5rem' }}
                     >
-                        <span className="font-mono text-[10px] text-muted uppercase tracking-widest">
+                        <span className="font-mono t-label text-muted uppercase tracking-widest">
                             {project.year}
                         </span>
-                        <span className="text-sm text-secondary">
-                            {project.title}
-                        </span>
-                        <span className="text-[10px] text-muted tracking-wider md:text-right">
-                            {project.tech && project.tech.join(' · ')}
-                        </span>
+                        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                            <span className="t-body text-secondary">
+                                {project.title}
+                            </span>
+                            <span className="t-label text-muted tracking-wider">
+                                {project.tech && project.tech.join(' · ')}
+                            </span>
+                        </div>
                     </div>
                 ))}
             </div>

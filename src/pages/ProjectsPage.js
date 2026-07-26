@@ -21,85 +21,89 @@ const ProjectEntry = ({ project }) => {
   const image = project.images && project.images[0];
 
   return (
-    <div className="py-6 border-b border-hairline">
+    <div className="entry py-6 border-b border-hairline">
       {/* Meta line */}
-      <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
-        {`${project.year} // ${project.category}`}
-      </p>
+      <div className="entry-meta">
+        <p className="font-mono t-label tracking-[0.3em] text-muted uppercase">
+          {`${project.year} // ${project.category}`}
+        </p>
+      </div>
 
-      {/* Title */}
-      <h2 className="text-2xl md:text-3xl font-bold text-primary leading-snug mb-3">
-        {project.title}
-      </h2>
+      <div className="entry-body">
+        {/* Title */}
+        <h2 className="t-h3 font-bold text-primary leading-snug mb-3">
+          {project.title}
+        </h2>
 
-      {/* Summary */}
-      <p className="text-secondary text-base leading-relaxed mb-6 measure">
-        {project.summary}
-      </p>
+        {/* Summary */}
+        <p className="text-secondary t-lead leading-relaxed mb-6 measure">
+          {project.summary}
+        </p>
+
+        <div>
+          {FIELDS.some(({ key }) => typeof project[key] === 'string' && project[key].trim()) && (
+            <div className="flex flex-col mb-6">
+              {FIELDS.map(({ key, label }) => {
+                const value = project[key];
+                if (typeof value !== 'string' || !value.trim()) return null;
+                return (
+                  <div key={key} className="kv py-3 border-t border-hairline first:border-t-0" style={{ '--label': '6rem' }}>
+                    <h3 className="font-mono t-label font-bold text-muted uppercase tracking-widest">
+                      {label}
+                    </h3>
+                    <p className="text-secondary t-body leading-relaxed measure">
+                      {value}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {project.tech && project.tech.length > 0 && (
+            <p className="font-mono t-label text-muted tracking-widest mb-4">
+              {project.tech.join(' · ')}
+            </p>
+          )}
+
+          {hasActions && (
+            <div className="flex gap-6">
+              {isUsable(repoLink) && (
+                <a
+                  href={repoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="t-small font-bold uppercase tracking-widest text-secondary hover:text-accent transition-colors"
+                >
+                  View source ↗
+                </a>
+              )}
+              {isUsable(liveLink) && (
+                <a
+                  href={liveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="t-small font-bold uppercase tracking-widest text-secondary hover:text-accent transition-colors"
+                >
+                  Live demo ↗
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
 
       {image && (
-        <div className="mb-6 max-w-xs">
+        <div className="entry-media">
           <img
             src={image}
             alt={project.title}
             loading="lazy"
             decoding="async"
-            className="w-full object-cover"
+            className="w-full border border-hairline object-cover"
           />
         </div>
       )}
-
-      <div>
-        {FIELDS.some(({ key }) => typeof project[key] === 'string' && project[key].trim()) && (
-          <div className="flex flex-col mb-6">
-            {FIELDS.map(({ key, label }) => {
-              const value = project[key];
-              if (typeof value !== 'string' || !value.trim()) return null;
-              return (
-                <div key={key} className="grid md:grid-cols-[100px_1fr] gap-x-6 gap-y-1 py-3 border-t border-hairline first:border-t-0">
-                  <h3 className="font-mono text-[10px] font-bold text-muted uppercase tracking-widest">
-                    {label}
-                  </h3>
-                  <p className="text-secondary text-sm leading-relaxed measure">
-                    {value}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {project.tech && project.tech.length > 0 && (
-          <p className="font-mono text-[10px] text-muted tracking-widest mb-4">
-            {project.tech.join(' · ')}
-          </p>
-        )}
-
-        {hasActions && (
-          <div className="flex gap-6">
-            {isUsable(repoLink) && (
-              <a
-                href={repoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-accent transition-colors"
-              >
-                View source ↗
-              </a>
-            )}
-            {isUsable(liveLink) && (
-              <a
-                href={liveLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-accent transition-colors"
-              >
-                Live demo ↗
-              </a>
-            )}
-          </div>
-        )}
-      </div>
     </div>
   );
 };
@@ -115,14 +119,14 @@ const ProjectsPage = () => {
         description="A portfolio of professional, academic, and personal projects from Athul Baburaj, spanning distributed systems, cloud infrastructure, and applied AI."
         path="/projects"
       />
-      <div className="w-full">
+      <div className="w-full flow">
 
         {/* Header */}
         <div className="mb-4 pb-6 border-b border-hairline">
-          <p className="font-mono text-[10px] tracking-[0.3em] text-muted uppercase mb-2">
+          <p className="font-mono t-label tracking-[0.3em] text-muted uppercase mb-2">
             Selected Work
           </p>
-          <h1 className="text-5xl md:text-6xl font-hero text-primary leading-[0.85]">
+          <h1 className="t-h1 font-hero text-primary leading-[0.85]">
             PROJECTS.
           </h1>
         </div>

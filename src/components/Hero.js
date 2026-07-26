@@ -18,37 +18,44 @@ const Hero = () => {
       {/* Main heading block */}
       <div className="flex flex-col">
 
-        {/* Line 1 — clip reveal */}
-        <motion.div variants={itemVariants} className="overflow-hidden">
-          <motion.h1
-            initial={{ y: '110%' }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.85, ease: EXPO_OUT, delay: 0.05 }}
-            className="font-hero text-[clamp(1.5rem,3vw,2.5rem)] text-primary leading-[0.9]"
-          >
-            CLOSEST TO
-          </motion.h1>
-        </motion.div>
+        {/* Identity line — the first thing a cold visitor needs, and it puts the
+            name and role in the crawler's path before the positioning statement. */}
+        <motion.p
+          variants={itemVariants}
+          className="t-label font-medium tracking-[0.28em] uppercase text-muted mb-4"
+        >
+          Athul Baburaj · Cloud Solutions Engineer
+        </motion.p>
 
-        {/* Line 2 — clip reveal */}
-        <motion.div variants={itemVariants} className="overflow-hidden flex items-baseline gap-3">
-          <motion.h1
-            initial={{ y: '110%' }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.85, ease: EXPO_OUT, delay: 0.15 }}
-            className="font-hero text-[clamp(1.5rem,3vw,2.5rem)] text-primary leading-[0.9]"
-          >
-            THE PROBLEM
-          </motion.h1>
-          <motion.span
-            initial={{ y: '110%' }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.85, ease: EXPO_OUT, delay: 0.22 }}
-            className="font-hero text-[clamp(1.5rem,3vw,2.5rem)] text-muted leading-[0.9]"
-          >
-            .
+        {/*
+          ONE h1 for the whole statement. It previously split across two <h1>
+          elements, so the page's heading read as the fragments "CLOSEST TO" and
+          "THE PROBLEM". The clip reveal now animates inner spans instead, which
+          keeps the effect identical while leaving a single semantic heading.
+        */}
+        <h1 className="font-hero t-h1 text-primary leading-[0.9]">
+          <motion.span variants={itemVariants} className="block overflow-hidden">
+            <motion.span
+              initial={{ y: '110%' }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.85, ease: EXPO_OUT, delay: 0.05 }}
+              className="block"
+            >
+              CLOSEST TO
+            </motion.span>
           </motion.span>
-        </motion.div>
+
+          <motion.span variants={itemVariants} className="block overflow-hidden">
+            <motion.span
+              initial={{ y: '110%' }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.85, ease: EXPO_OUT, delay: 0.15 }}
+              className="block"
+            >
+              THE PROBLEM<span className="text-muted">.</span>
+            </motion.span>
+          </motion.span>
+        </h1>
 
         {/* Identity stripe */}
         <motion.div
@@ -61,7 +68,7 @@ const Hero = () => {
 
           {/* Description */}
           <motion.div variants={itemVariants} className="max-w-md measure">
-            <p className="text-base text-secondary font-normal leading-relaxed">
+            <p className="t-lead text-secondary font-normal leading-relaxed">
               I embed with the teams that{' '}
               <span className="text-primary font-bold">own the problem</span>
               {' '}— and build until it's{' '}
@@ -74,7 +81,7 @@ const Hero = () => {
           <motion.div variants={itemVariants} className="flex flex-col gap-3 min-w-[200px]">
             <Link
               to="/projects"
-              className="group inline-flex w-fit items-center gap-2 text-sm font-bold tracking-widest uppercase
+              className="group inline-flex w-fit items-center gap-2 t-body font-bold tracking-widest uppercase
                          text-primary underline decoration-faint underline-offset-4
                          hover:text-accent hover:decoration-accent transition-colors duration-300"
             >
@@ -83,7 +90,7 @@ const Hero = () => {
             </Link>
             <Link
               to="/contact"
-              className="group inline-flex w-fit items-center gap-2 text-sm font-bold tracking-widest uppercase
+              className="group inline-flex w-fit items-center gap-2 t-body font-bold tracking-widest uppercase
                          text-secondary underline decoration-faint underline-offset-4
                          hover:text-accent hover:decoration-accent transition-colors duration-300"
             >
