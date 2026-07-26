@@ -49,7 +49,7 @@ const HomePage = () => {
               <Link
                 key={project.title}
                 to="/projects"
-                className="group kv py-5 border-b border-hairline"
+                className="group thumb-row kv py-5 border-b border-hairline"
                 style={{ '--label': '7.5rem' }}
               >
                 {/* Label column: thumbnail + index + category. The thumbnail
@@ -57,15 +57,15 @@ const HomePage = () => {
                     no extra page height. Decorative — the title is adjacent. */}
                 <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-2">
                   {project.images && project.images[0] && (
-                    <img
-                      src={project.images[0]}
-                      alt=""
-                      aria-hidden="true"
-                      loading="lazy"
-                      decoding="async"
-                      className="w-16 h-16 object-cover border border-hairline flex-shrink-0
-                                 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-                    />
+                    <span className="thumb">
+                      <img
+                        src={project.images[0]}
+                        alt=""
+                        aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </span>
                   )}
                   <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-1">
                     <span className="font-mono t-label text-muted">
