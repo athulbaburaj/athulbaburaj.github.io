@@ -49,32 +49,20 @@ const HomePage = () => {
               <Link
                 key={project.title}
                 to="/projects"
-                className="group thumb-row kv kv-start py-5 border-b border-hairline"
-                style={{ '--label': '8rem' }}
+                className="group kv py-5 border-b border-hairline"
+                style={{ '--label': '7.5rem' }}
               >
-                {/* Label column: thumbnail, then index and category beneath it.
-                    kv-start on the row stops the image baseline-aligning against
-                    the title. Decorative — the title sits right beside it. */}
+                {/* Label column: index + category. Deliberately text-only —
+                    thumbnails were tried and removed: these projects' images are
+                    diagrams and dashboards, which carry no meaning at thumbnail
+                    size. They render properly at full width on /projects. */}
                 <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-2">
-                  {project.images && project.images[0] && (
-                    <span className="thumb">
-                      <img
-                        src={project.images[0]}
-                        alt=""
-                        aria-hidden="true"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </span>
-                  )}
-                  <div className="flex items-center gap-3 md:flex-col md:items-start md:gap-1">
-                    <span className="font-mono t-label text-muted">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="font-mono t-label tracking-[0.2em] text-muted uppercase">
-                      {project.category}
-                    </span>
-                  </div>
+                  <span className="font-mono t-label text-muted">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-mono t-label tracking-[0.2em] text-muted uppercase">
+                    {project.category}
+                  </span>
                 </div>
 
                 {/* Value column: title + summary */}

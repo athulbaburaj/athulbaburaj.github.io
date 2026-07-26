@@ -118,7 +118,13 @@
 
 /* --- Label/value row ------------------------------------------------------
    Stacks when narrow; becomes a label gutter plus content when there is room.
-   --label overrides the gutter width per instance. */
+   --label overrides the gutter width per instance.
+
+   WARNING if you ever put an image in one of these cells: baseline alignment
+   is correct for text-to-text rows, but a replaced element's baseline is its
+   BOTTOM edge. The row will align the bottom of the image with the first line
+   of the adjacent text, leaving the image floating above everything it belongs
+   to. Add `align-items: start` to that row. */
 .kv {
     display: grid;
     gap: var(--space-xs) var(--space-m);
@@ -129,15 +135,6 @@
     .kv {
         grid-template-columns: var(--label, 8rem) minmax(0, 1fr);
     }
-}
-
-/* Baseline alignment is right for text-to-text rows, but a replaced element's
-   baseline is its BOTTOM edge — so a row containing an image ends up aligning
-   the bottom of that image with the first line of the adjacent text, leaving
-   the image floating above everything it belongs to. Any .kv row holding an
-   image needs this. */
-.kv-start {
-    align-items: start;
 }
 
 /* --- Project entry --------------------------------------------------------
@@ -199,71 +196,6 @@
     display: grid;
     gap: var(--space-s) var(--space-m);
     grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr));
-}
-
-/* --- Thumbnail -----------------------------------------------------------
-   Rests at the full width of the label gutter (8rem) rather than a token 64px,
-   so it is reasonably legible with no interaction at all. Hover doubles it.
-
-   The image is rendered at the LARGE size and scaled down by default, then
-   scaled back to 1 on hover: animating transform stays off the layout path and
-   the expanded state is sharp, where animating width/height would rasterise
-   blurry mid-transition.
-
-   Absolutely positioned inside a fixed box, so expanding never reflows the row;
-   the row lifts its own z-index so the preview paints above later rows.
-   NOTE: the row must also carry .kv-start, or the image baseline-aligns
-   against the title and floats above it. */
-.thumb-row {
-    position: relative;
-}
-
-.thumb-row:hover,
-.thumb-row:focus-within {
-    z-index: 30;
-}
-
-.thumb {
-    position: relative;
-    display: block;
-    width: 8rem;
-    height: 8rem;
-    flex: none;
-}
-
-.thumb img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 16rem;
-    height: 16rem;
-    object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    background: #131313;
-    transform: scale(0.5); /* 8rem / 16rem */
-    transform-origin: top left;
-    opacity: 0.75;
-    transition: transform 0.28s ease, opacity 0.28s ease;
-}
-
-.thumb-row:hover .thumb img,
-.thumb-row:focus-within .thumb img {
-    transform: scale(1);
-    opacity: 1;
-}
-
-/* Pointer-less devices never fire hover, so leave the thumbnail at its
-   resting size at full opacity rather than dimmed and waiting. */
-@media (hover: none) {
-    .thumb img {
-        opacity: 1;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .thumb img {
-        transition: none;
-    }
 }
 
 /* --- Disclosure ----------------------------------------------------------
