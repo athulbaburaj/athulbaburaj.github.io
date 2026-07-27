@@ -35,6 +35,9 @@ export const certifications = [
   "Game Dev (Michigan)"
 ];
 
+// `points` carry a `highlight` flag: every point renders on the Resume page,
+// but only highlighted ones surface in Proof of Work on the homepage. Flip the
+// boolean to change what leads — there is no second list to keep in sync.
 export const experience = [
   {
     role: "Cloud Solutions Engineer",
@@ -42,10 +45,10 @@ export const experience = [
     location: "Bengaluru, India",
     period: "Aug 2023 - Present",
     points: [
-      "Spearheaded migration of 70+ services from OCP 3.11 to 4.12, improving uptime by 20% and streamlining performance.",
-      "Built and maintained Python automation services, including Code/Helm Validators and a Code Migration Automation tool, enhancing deployment workflows and operational efficiency.",
-      "Took ownership of One Solutions audit services (batch and API), tracking Public Cloud onboardings and ensuring compliance.",
-      "Served as Solutions Architect for multiple internal service mergers, aligning platforms and streamlining integration across teams."
+      { text: "Spearheaded migration of 70+ services from OCP 3.11 to 4.12, improving uptime by 20% and streamlining performance.", highlight: true },
+      { text: "Built and maintained Python automation services, including Code/Helm Validators and a Code Migration Automation tool, enhancing deployment workflows and operational efficiency.", highlight: true },
+      { text: "Took ownership of One Solutions audit services (batch and API), tracking Public Cloud onboardings and ensuring compliance.", highlight: false },
+      { text: "Served as Solutions Architect for multiple internal service mergers, aligning platforms and streamlining integration across teams.", highlight: true }
     ]
   },
   {
@@ -54,10 +57,19 @@ export const experience = [
     location: "Bengaluru, India",
     period: "May 2022 - Jun 2022",
     points: [
-      "Built frontend for Cloud Migration Orchestrator on AWS; accelerated team POC delivery and tool integration.",
-      "Optimized Cassandra data modeling in real use cases; reduced latency by 30% in query-intensive apps."
+      { text: "Built frontend for Cloud Migration Orchestrator on AWS; accelerated team POC delivery and tool integration.", highlight: false },
+      { text: "Optimized Cassandra data modeling in real use cases; reduced latency by 30% in query-intensive apps.", highlight: true }
     ]
   }
+];
+
+// The proof strip. Every figure here is already stated elsewhere in this file —
+// do not add one that is not backed by an experience point or a certification.
+export const metrics = [
+  { value: "70+", label: "services migrated" },
+  { value: "20%", label: "uptime improvement" },
+  { value: "30%", label: "latency reduction" },
+  { value: "2", label: "GCP certifications" }
 ];
 
 export const education = [

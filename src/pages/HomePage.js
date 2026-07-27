@@ -1,6 +1,8 @@
 // src/pages/HomePage.js
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import ProofOfWork from '../components/ProofOfWork';
+import Timeline from '../components/Timeline';
 import Seo from '../components/Seo';
 import { FaArrowRight } from 'react-icons/fa';
 import { projects } from '../data/resumeData';
@@ -19,17 +21,19 @@ const HomePage = () => {
 
       <Hero />
 
-      {/* Featured Projects */}
+      <ProofOfWork />
+
+      {/* Personal projects — curated with the `featured` flag in resumeData */}
       <section className="flex flex-col justify-center section-tight relative">
         <div className="w-full flow">
           {/* Section header */}
           <div className="flex flex-col md:flex-row justify-between items-end mb-6">
             <div>
               <p className="font-mono t-label tracking-[0.3em] text-muted uppercase mb-2">
-                Selected Work
+                Built On My Own
               </p>
               <h2 className="t-h2 font-bold text-primary leading-none">
-                FEATURED PROJECTS.
+                PROJECTS.
               </h2>
             </div>
             <Link
@@ -86,7 +90,7 @@ const HomePage = () => {
           </div>
 
           {/* Mobile "view all" */}
-          <div className="mt-8 md:hidden">
+          <div className="mt-6 md:hidden">
             <Link to="/projects" className="flex items-center t-small font-bold tracking-widest text-muted hover:text-primary transition-colors">
               VIEW ALL
               <FaArrowRight className="ml-2" />
@@ -95,6 +99,8 @@ const HomePage = () => {
 
         </div>
       </section>
+
+      <Timeline />
 
     </div>
   );

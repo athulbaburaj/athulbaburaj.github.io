@@ -57,7 +57,7 @@ const ResumePage = () => {
                     {exp.points.map((point, i) => (
                       <li key={i} className="t-body text-muted leading-relaxed flex items-start measure">
                         <span className="mr-2 text-faint">-</span>
-                        {point}
+                        {point.text}
                       </li>
                     ))}
                   </ul>
