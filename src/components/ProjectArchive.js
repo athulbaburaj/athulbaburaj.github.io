@@ -32,7 +32,7 @@ const ProjectArchive = ({ projects = [] }) => {
                             <span className="t-body text-secondary">
                                 {project.title}
                             </span>
-                            <span className="t-label text-muted tracking-wider">
+                            <span className="font-mono t-label text-muted tracking-wider">
                                 {project.tech && project.tech.join(' · ')}
                             </span>
                         </div>

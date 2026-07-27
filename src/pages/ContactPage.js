@@ -22,14 +22,14 @@ const ContactPage = () => {
 
           <div className="flex flex-col">
             <div className="kv py-4 border-t border-hairline">
-              <div className="t-small text-muted uppercase tracking-widest">Email</div>
-              <a href={`mailto:${REAL_EMAIL}`} className="t-h3 text-primary hover:text-accent transition-colors break-all w-fit">
+              <div className="font-mono t-small text-muted uppercase tracking-widest">Email</div>
+              <a href={`mailto:${REAL_EMAIL}`} className="font-mono t-h3 text-primary hover:text-accent transition-colors break-all w-fit">
                 {REAL_EMAIL}
               </a>
             </div>
 
             <div className="kv py-4 border-t border-hairline">
-              <div className="t-small text-muted uppercase tracking-widest">Elsewhere</div>
+              <div className="font-mono t-small text-muted uppercase tracking-widest">Elsewhere</div>
               <div className="flex space-x-6">
                 <a href="https://github.com/athulbaburaj" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-secondary hover:text-primary transition-colors"><FaGithub size={24} /></a>
                 <a href="https://linkedin.com/in/athul-baburaj" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-secondary hover:text-primary transition-colors"><FaLinkedin size={24} /></a>

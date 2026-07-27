@@ -90,7 +90,7 @@ Two mechanisms:
 - **`.autogrid`** / **`.autogrid-wide`** — `auto-fit` grids whose column count derives from available width. For repeated short items (education, certifications).
 - **`.t-label` `.t-small` `.t-body` `.t-lead` `.t-h3` `.t-h2` `.t-h1`** — fluid type scale. Use these instead of Tailwind `text-*` sizes. Never apply both to one element; the cascade result is arbitrary.
 - **`.section`** / **`.section-tight`** — fluid block padding. Small per-row paddings (`py-3`, `py-5`) stay as Tailwind utilities; those are row rhythm, not section spacing.
-- **`.measure`** — 62ch cap for running prose.
+- **`.measure`** — 68ch cap for running prose.
 
 ### Container query thresholds
 
@@ -107,9 +107,9 @@ Keep the arithmetic in mind before changing a threshold. `.shell` caps at 76rem;
 
 Prefer Tailwind utility classes for layout and visual styling.
 
-**Typography is all-monospace.** The site uses a single family — JetBrains Mono — for everything, loaded once in `public/index.html` (weights 400/500/700) and mapped onto both `fontFamily.sans` and `fontFamily.mono` in `tailwind.config.js`, so `font-sans` (the Tailwind default) and `font-mono` resolve identically. Inter has been removed entirely — do not reintroduce it or any other proportional/sans family. `fontSize` is a compressed, mono-appropriate scale (`tailwind.config.js`) — monospace reads oversized at the display sizes a sans display face would use, so the top end tops out around `text-7xl` (3.5rem) rather than the much larger scale a sans redesign might reach for. Body text sets `line-height: 1.6` and `letter-spacing: 0.01em` globally (`src/index.css`) — mono needs more leading and slightly looser tracking than proportional type at the same size.
+**Typography is a deliberate two-family system.** Headings and prose use Instrument Sans, a proportional display/text face; JetBrains Mono is reserved for metadata — eyebrows/kickers, small uppercase labels, case-study field labels, disclosure summaries, years, dates, periods, grades, tech lists, and identifiers like the email address. Both are loaded from a single combined Google Fonts `<link>` in `public/index.html` (Instrument Sans variable 400–700 plus italic; JetBrains Mono 400/500). `tailwind.config.js` maps `fontFamily.sans` to the Instrument Sans stack and `fontFamily.mono` to the JetBrains Mono stack, so `font-sans` (the Tailwind default — applied once, on `body`) renders the proportional face everywhere, and `font-mono` is the explicit opt-in class used only on metadata elements. Monospace is no longer the default; it's a signal, and it should read as one — do not add `font-mono` to headings, titles, prose, CTAs, nav links, or case-study field values. `fontSize` (`tailwind.config.js`) is sized for the proportional face's larger apparent size at the same pixel value, topping out at `text-7xl` (3.5rem); the fluid `--step-*` scale in `src/index.css` was raised roughly 10–12% over its mono-era values for the same reason — proportional type reads smaller than monospace at a given size, so the steps compensate rather than looking undersized. Body text sets `line-height: 1.65` globally (`src/index.css`) and carries no explicit `letter-spacing` — the `letter-spacing: 0.01em` mono accommodation was removed because proportional type doesn't need the extra tracking monospace does at body sizes.
 
-**The `.measure` utility (`max-width: 62ch`) caps running prose.** Apply it to any paragraph-length block of body copy. Monospace glyphs are wider than proportional glyphs, so the same character count reads as a wider block — 62ch keeps line length readable where a sans design might safely run to 75ch+.
+**The `.measure` utility (`max-width: 68ch`) caps running prose.** Apply it to any paragraph-length block of body copy. Proportional glyphs are narrower than monospace's fixed advance width, so the same character count reads as a narrower block — 68ch is comfortable where the old monospace design needed a tighter 62ch cap to stay readable.
 
 Use the project theme tokens from `tailwind.config.js` instead of hardcoded near-equivalents:
 
@@ -143,8 +143,8 @@ The site has no rounded corners. Do not add `rounded-sm`/`rounded-md`/`rounded-l
 Global utilities that still exist in `src/index.css`:
 
 - `.accent-underline` — underline treatment for emphasized text links (accent-colored decoration; keep its use scoped to actual links, per the accent-discipline rule above).
-- `.measure` — `max-width: 62ch`, for running prose.
-- `.font-hero` — `font-weight: 700; letter-spacing: -0.02em; line-height: 1.05;`, used on the large headline treatment (Hero, and page `<h1>`s that mirror it). Monospace has no true bold display cut, so this leans on tight tracking rather than extra weight.
+- `.measure` — `max-width: 68ch`, for running prose.
+- `.font-hero` — `font-weight: 700; letter-spacing: -0.02em; line-height: 1.05;`, used on the large headline treatment (Hero, and page `<h1>`s that mirror it). The negative tracking is standard practice for a proportional display face at large sizes; it would break monospace's fixed advance width, which is why body/heading text elsewhere is left untracked and only this display treatment gets it.
 - `.text-balance`
 
 Reuse these when they match the design. Add new global CSS only when Tailwind utilities would be awkward or when the behavior is intentionally shared across components.

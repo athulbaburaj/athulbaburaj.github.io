@@ -40,7 +40,7 @@ const SecretDocPage = () => {
                     </div>
                 </div>
 
-                <p className="t-small text-muted uppercase tracking-widest">
+                <p className="font-mono t-small text-muted uppercase tracking-widest">
                     Restricted Access // Admissions Committee
                 </p>
             </div>

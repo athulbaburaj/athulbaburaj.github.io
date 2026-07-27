@@ -37,8 +37,7 @@
         @apply bg-ground text-primary font-sans antialiased selection:bg-primary/20 selection:text-primary;
         scroll-behavior: smooth;
         overflow-x: hidden;
-        line-height: 1.6;
-        letter-spacing: 0.01em;
+        line-height: 1.65;
     }
 
     h1,
@@ -47,8 +46,8 @@
     h4,
     h5,
     h6 {
-        /* No negative tracking: monospace is built around a fixed advance
-           width, and tightening it breaks the character grid. */
+        /* Tracking is left at the browser default here; .font-hero applies the
+           tightened display tracking where it's wanted. */
         @apply font-bold text-primary;
     }
 
@@ -63,11 +62,12 @@
         text-wrap: balance;
     }
 
-    /* Measure for running prose — monospace glyphs are wider than proportional
-       type, so blocks of text need a tighter line length than the ~75ch that
-       works for a sans body font. */
+    /* Measure for running prose. Proportional glyphs are narrower than
+       monospace's fixed advance width, so the same line length holds more
+       comfortable reading — hence 68ch rather than the tighter cap a
+       monospace body font would need. */
     .measure {
-        max-width: 62ch;
+        max-width: 68ch;
     }
 }
 
@@ -84,14 +84,17 @@
    ========================================================================== */
 
 :root {
-    /* Fluid type. Each step interpolates between a 20rem and a 96rem viewport. */
-    --step-00: clamp(0.625rem, 0.61rem + 0.08vw, 0.6875rem);
+    /* Fluid type. Each step interpolates between a 20rem and a 96rem viewport.
+       Proportional type reads visually smaller than monospace at the same
+       pixel size, so these steps run ~10-12% larger than a monospace scale
+       would need to land at the same apparent size. */
+    --step-00: clamp(0.6875rem, 0.67rem + 0.09vw, 0.75rem);
     --step-0: clamp(0.8125rem, 0.79rem + 0.11vw, 0.875rem);
-    --step-1: clamp(0.875rem, 0.85rem + 0.14vw, 0.9375rem);
-    --step-2: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-    --step-3: clamp(1.125rem, 1.03rem + 0.47vw, 1.4375rem);
-    --step-4: clamp(1.375rem, 1.16rem + 1.07vw, 2.0625rem);
-    --step-5: clamp(1.75rem, 1.34rem + 2.05vw, 3.0625rem);
+    --step-1: clamp(0.9375rem, 0.91rem + 0.15vw, 1rem);
+    --step-2: clamp(1.0625rem, 1.01rem + 0.27vw, 1.25rem);
+    --step-3: clamp(1.25rem, 1.14rem + 0.53vw, 1.625rem);
+    --step-4: clamp(1.5rem, 1.26rem + 1.2vw, 2.25rem);
+    --step-5: clamp(1.9375rem, 1.48rem + 2.28vw, 3.4375rem);
 
     /* Fluid spacing */
     --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
@@ -248,10 +251,13 @@
 .section { padding-block: var(--space-l); }
 .section-tight { padding-block: var(--space-m); }
 
-/* Hero display treatment. Weight and leading only — no negative tracking, for
-   the same reason as the heading rule above. */
+/* Hero display treatment. The "no negative tracking" rule elsewhere in this
+   file is specific to monospace's fixed advance width, where tightening
+   breaks the character grid — it does not apply here. This is the
+   proportional display face, so a small negative tracking value is safe and
+   standard practice at display sizes. */
 .font-hero {
     font-weight: 700;
-    letter-spacing: 0;
+    letter-spacing: -0.02em;
     line-height: 1.05;
 }

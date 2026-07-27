@@ -22,7 +22,7 @@ const Hero = () => {
             name and role in the crawler's path before the positioning statement. */}
         <motion.p
           variants={itemVariants}
-          className="t-label font-medium tracking-[0.28em] uppercase text-muted mb-4"
+          className="font-mono t-label font-medium tracking-[0.28em] uppercase text-muted mb-4"
         >
           Athul Baburaj · Cloud Solutions Engineer
         </motion.p>

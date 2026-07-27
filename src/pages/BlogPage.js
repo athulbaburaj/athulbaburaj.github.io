@@ -129,7 +129,7 @@ const BlogPage = () => {
                                 className="kv py-5 border-b border-hairline"
                                 style={{ '--label': '7.5rem' }}
                             >
-                                <div className="flex items-center gap-2 md:flex-col md:items-start t-small font-bold text-muted tracking-widest uppercase">
+                                <div className="font-mono flex items-center gap-2 md:flex-col md:items-start t-small font-bold text-muted tracking-widest uppercase">
                                     <FaCalendarAlt />
                                     {new Date(post.pubDate).toLocaleDateString()}
                                 </div>

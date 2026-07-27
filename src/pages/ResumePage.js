@@ -41,7 +41,7 @@ const ResumePage = () => {
 
           {/* Experience */}
           <div>
-            <h3 className="t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
+            <h3 className="font-mono t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
               <FaBriefcase className="text-muted" /> Experience
             </h3>
 
@@ -70,7 +70,7 @@ const ResumePage = () => {
           <div className="flex flex-col">
             {/* Education */}
             <div className="py-6 border-t border-hairline first:border-t-0 first:pt-0">
-              <h3 className="t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
+              <h3 className="font-mono t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
                 <FaGraduationCap className="text-muted" /> Education
               </h3>
               <div className="autogrid">
@@ -89,7 +89,7 @@ const ResumePage = () => {
 
             {/* Certs */}
             <div className="py-6 border-t border-hairline">
-              <h3 className="t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
+              <h3 className="font-mono t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
                 <FaStar className="text-muted" /> Certifications
               </h3>
               <div className="autogrid">
@@ -103,7 +103,7 @@ const ResumePage = () => {
 
             {/* Leadership — merged here when /about was removed */}
             <div className="py-6 border-t border-hairline">
-              <h3 className="t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
+              <h3 className="font-mono t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
                 <FaUsers className="text-muted" /> Leadership
               </h3>
               <div className="flex flex-col gap-4">
@@ -118,14 +118,14 @@ const ResumePage = () => {
 
             {/* Technical Skills Condensed */}
             <div className="py-6 border-t border-hairline">
-              <h3 className="t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
+              <h3 className="font-mono t-small font-bold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
                 <FaTools className="text-muted" /> Tech Arsenal
               </h3>
               <div className="flex flex-col gap-3">
                 {Object.entries(skills).map(([key, list]) => (
                   <div key={key} className="kv" style={{ '--label': '8rem' }}>
-                    <div className="t-label text-muted uppercase tracking-wider">{key.replace(/([A-Z])/g, ' $1').trim()}</div>
-                    <div className="t-small text-secondary leading-relaxed">
+                    <div className="font-mono t-label text-muted uppercase tracking-wider">{key.replace(/([A-Z])/g, ' $1').trim()}</div>
+                    <div className="font-mono t-small text-secondary leading-relaxed">
                       {list.slice(0, 8).join(' · ')}
                     </div>
                   </div>
